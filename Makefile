@@ -1,11 +1,22 @@
-ProjetoSo : Cliente/cliente.o Servidor/servidor.o 
-	gcc Cliente/cliente.o Servidor/servidor.o -o Build/build
+all : buildCliente buildServidor
 
-cliente.o : Cliente/cliente.c Cliente/cliente.h
-	gcc -c Cliente/cliente.c
+buildCliente : Cliente/socketsCliente.o Cliente/utilsCliente.o 
+	gcc -o Build/buildCliente Cliente/socketsCliente.o Cliente/utilsCliente.o
 
-servidor.o : Servidor/servidor.c Servidor/servidor.h include/uthash.h
-	gcc -c Servidor/servidor.c
+buildServidor : Servidor/socketsServidor.o Servidor/utilsServidor.o 
+	gcc -o Build/buildServidor Servidor/socketsServidor.o Servidor/utilsServidor.o
+
+Servidor/socketsServidor.o : Servidor/socketsServidor.c Servidor/utilsServidor.h unix.h
+	gcc -c Servidor/socketsServidor.c -o Servidor/socketsServidor.o
+
+Servidor/utilsServidor.o : Servidor/utilsServidor.c Servidor/utilsServidor.h
+	gcc -c Servidor/utilsServidor.c -o Servidor/utilsServidor.o
+
+Cliente/socketsCliente.o : Cliente/socketsCliente.c Cliente/utilsCliente.h unix.h
+	gcc -c Cliente/socketsCliente.c -o Cliente/socketsCliente.o
+
+Cliente/utilsCliente.o : Cliente/utilsCliente.c Cliente/utilsCliente.h
+	gcc -c Cliente/utilsCliente.c -o Cliente/utilsCliente.o
 
 clean :
-	rm -f Cliente/*.o Servidor/*.o Build/build
+	rm -f Cliente/*.o Servidor/*.o Build/buildCliente Build/buildServidor

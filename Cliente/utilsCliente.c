@@ -1,5 +1,4 @@
-#include "cliente.h"
-#include "../Servidor/servidor.h"
+#include "utilsCliente.h"
 
 // --------------------------------------------------------------
 // Obter respostas possíveis para uma célula específica do Sudoku
@@ -281,48 +280,4 @@ void printCSV(const char* filename) {
     }
 
     fclose(file);
-}
-
-int main() {
-    srand(time(NULL));
-    readGamesFromCSV();
-
-    int continuar = 1; // controla o loop do programa
-
-    while(continuar) {
-        int escolha;
-        do {
-            printf("\nEscolha uma opcao:\n");
-            printf("0 = Jogar\n");
-            printf("1 = Digitalizar jogos do ficheiro jogos.csv\n");
-            printf("2 = Sair\n");
-            printf("Opcao: ");
-            scanf("%d", &escolha);
-        } while(escolha != 0 && escolha != 1 && escolha != 2);
-
-        if(escolha == 1) {
-            printf("\n--- Digitalizando jogos de jogos.csv ---\n");
-            printCSV("Servidor/jogos.csv");
-        }
-        else if(escolha == 0) {
-            // Jogar um jogo
-            gameData* game = sendGameToClient(1); // id do cliente
-            displaySudokuWithCoords(game->partialSolution);
-
-            LogJogo logAtual;
-            registerGameStart(&logAtual, game->id);
-
-            fillSudoku(game->partialSolution, game->id, &logAtual);
-
-            registerGameEndWithLog(&logAtual);
-
-            free(game);
-        }
-        else if(escolha == 2) {
-            continuar = 0;
-            printf("Programa terminado.\n");
-        }
-    }
-
-    return 0;
 }

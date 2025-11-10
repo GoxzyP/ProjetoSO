@@ -17,15 +17,11 @@ typedef struct {
     int failedAttempts;
 } LogJogo;
 
-
-// Retorna um array dinâmico com os possíveis valores válidos para uma célula do Sudoku
-int* getPossibleAnswers(int partialSolution[9][9], int rowSelected, int columnSelected, int *size);
-
 // Mostra o Sudoku no ecrã com coordenadas (x, y)
 void displaySudokuWithCoords(int sudoku[9][9]);
 
 // Permite ao utilizador preencher manualmente o Sudoku
-void manualFillSudoku(int sudoku[9][9]);
+void fillSudoku(int sudoku[9][9]);
 
 // Fornece a hora atual ( inicio ou fim do jogo )
 static void currentTime(char *buffer, size_t size);

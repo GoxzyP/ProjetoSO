@@ -15,7 +15,6 @@ typedef struct gamedata{
 } gameData;
 
 // Funções implementadas em servidor.c
-void stringToBidimensionalArray(int array[9][9],char *string);
 void readGamesFromCSV();
 char* verifyClientSudokuAnswer(int clientID , int gameId , int rowSelected , int columnSelected , int clientAnswer);
 gameData* sendGameToClient(int clientId);

@@ -24,7 +24,7 @@ int lerSocket(int socket , char *buffer , int numeroBytes)
 	return (numeroBytes - bytesPorLer);
 }
 
-int escreverSocker(int socket , char *buffer , int numeroBytes)
+int escreveSocket(int socket , char *buffer , int numeroBytes)
 {
 	int bytesPorEscrever = numeroBytes; 
     int bytesEscritos;

@@ -1,5 +1,6 @@
 #include "../unix.h"
 #include "socketsUtilsCliente.h"
+#include "../log.h"
 
 int main(void)
 {
@@ -47,6 +48,7 @@ int main(void)
             char partialSolution[81];
 
             printf("O cliente escolheu o numero 0\n");
+            writeLogf("../Cliente/log_cliente.csv","O cliente escolheu o numero 0");
             requestGame(socketServidor , &gameId , partialSolution);
             displaySudokuWithCoords(partialSolution);
             fillSudoku(socketServidor , partialSolution , gameId);
@@ -54,6 +56,7 @@ int main(void)
         else if(escolha == 2) {
             continuar = 0;
             printf("Programa terminado.\n");
+            writeLogf("../Cliente/log_cliente.csv","Programa terminado");
         }
     }
     

@@ -4,10 +4,13 @@
 
 #include "../util.h"
 #include "socketsUtilsCliente.h"
+#include "../log.h"
 
 // --------------------------------------------------------------
 // Obter respostas possíveis para uma célula específica do Sudoku
 // --------------------------------------------------------------
+
+
 int* getPossibleAnswers(char partialSolution[81], int rowSelected, int columnSelected , int *size)
 {   
     printf("Entrou na função que consegue as respostas possíveis\n");
@@ -141,14 +144,23 @@ void shufflePositionsInArray(int positions[][2] , int count) // funcao para bara
 }
 
 // ------------------------------------------------------------------
-// Preencher o sudoku
+// Preenche o sudoku
 // ------------------------------------------------------------------
 void fillSudoku(int socket , char sudoku[81] , int gameId) 
 {   
     printf("Entrou na função de preencher o sudoku\n");
 
+    char horaInicioJogo[20]; // buffer para armazenar uma cadeia de carareteres com o tempo em horas, minutos e segundos
+    char horaFimJogo[20];
+    char tempoJogo[20];
+
     int positionsToFill[81][2];
     int emptyCount = 0;
+    int tentativas_falhadas = 0;
+
+    registerGameTimeLive(horaInicioJogo,sizeof(horaInicioJogo));
+
+    writeLogf("../Cliente/log_cliente.csv", "Hora Inicio Jogo -> %s", horaInicioJogo);
 
     for(int row = 0 ; row < 9 ; row++)
     {
@@ -163,31 +175,39 @@ void fillSudoku(int socket , char sudoku[81] , int gameId)
         }
     }
 
-    shufflePositionsInArray(positionsToFill , emptyCount); // esta funcao faz com que os valores no array ( coordenadas vazias ) sejam baralhados
+    shufflePositionsInArray(positionsToFill , emptyCount);
 
     printf("Fez o shuffle do array de posições por preencher\n");
-    printf("Empty count inical -> %d\n" , emptyCount);
+    printf("Empty count inicial -> %d\n", emptyCount);
+
+    writeLogf("../Cliente/log_cliente.csv", "Fez o shuffle do array de posições por preencher");
+    writeLogf("../Cliente/log_cliente.csv", "Empty count inicial -> %d", emptyCount);
 
     for(int i = 0 ; i < emptyCount ; i++)
     {   
         printf("Empty left: %d\n", emptyCount - i - 1);
+        writeLogf("../Cliente/log_cliente.csv", "Empty left -> %d", emptyCount - i - 1);
+
         int rowSelected = positionsToFill[i][0];
         int columnSelected = positionsToFill[i][1];
 
         int size = 0; 
-        int* possibleAnswers = getPossibleAnswers(sudoku, rowSelected , columnSelected , &size); //valor de size (número de respostas válidas) vem da função getPossibleAnswers 
+        int* possibleAnswers = getPossibleAnswers(sudoku, rowSelected , columnSelected , &size);
 
         printf("Possiveis valores para (%d,%d): ", rowSelected, columnSelected);
-        for(int j = 0; j < size; j++) {printf("%d ", possibleAnswers[j] , " ");}//imprime valores possíveis para uma certa posição na célula
+        writeLogf("../Cliente/log_cliente.csv", "Possiveis valores para (%d,%d): ", rowSelected, columnSelected);
+
+        for(int j = 0; j < size; j++) { printf("%d ", possibleAnswers[j]); }
         printf("\n");
-    
+
         for(int j = 0 ; j < size ; j++)
         {   
             char messageToServer[512];
             int codeVerifyAnswer = 2;
-            sprintf(messageToServer , "%d,%d,%d,%d,%d\n" , codeVerifyAnswer , gameId , rowSelected , columnSelected , possibleAnswers[j]);
+            sprintf(messageToServer , "%d,%d,%d,%d,%d\n", codeVerifyAnswer, gameId, rowSelected, columnSelected, possibleAnswers[j]);
 
-            printf("Foi enviado para o server o numero %d na posicao : %d %d \n" , possibleAnswers[j] , rowSelected , columnSelected);
+            printf("Foi enviado para o server o numero %d na posicao : %d %d \n", possibleAnswers[j], rowSelected, columnSelected);
+            writeLogf("../Cliente/log_cliente.csv", "Foi enviado para o server o numero %d na posicao : %d %d", possibleAnswers[j], rowSelected, columnSelected);
 
             if((escreveSocket(socket , messageToServer , strlen(messageToServer))) != strlen(messageToServer))
             {
@@ -195,7 +215,8 @@ void fillSudoku(int socket , char sudoku[81] , int gameId)
                 exit(1);
             }
 
-            printf("O envio para o server do numero %d na posicao : %d %d foi feito com sucesso\n" , possibleAnswers[j] , rowSelected , columnSelected);
+            printf("O envio para o server do numero %d na posicao : %d %d foi feito com sucesso\n", possibleAnswers[j], rowSelected, columnSelected);
+            writeLogf("../Cliente/log_cliente.csv", "O envio para o server do numero %d na posicao : %d %d foi feito com sucesso", possibleAnswers[j], rowSelected, columnSelected);
 
             char serverAnswer[512];
             int bytesReceived = lerLinha(socket , serverAnswer , sizeof(serverAnswer));
@@ -211,16 +232,29 @@ void fillSudoku(int socket , char sudoku[81] , int gameId)
             if(strcmp(serverAnswer,"Correct") == 0)
             {   
                 printf("A resposta enviada para o servidor estava correta\n");
+                writeLogf("../Cliente/log_cliente.csv", "A resposta enviada para o servidor estava correta");
                 sudoku[rowSelected * 9 + columnSelected] = possibleAnswers[j] + '0';
                 displaySudokuWithCoords(sudoku);
                 break;
             }
-            else
+            else {
                 printf("A resposta enviada para o servidor estava errada\n");
+                writeLogf("../Cliente/log_cliente.csv", "A resposta enviada para o servidor estava errada");
+                tentativas_falhadas++;
+            }
         }
 
         free(possibleAnswers);
     }
+
+    printf("Número total de tentativas falhadas: %d\n", tentativas_falhadas);
+    writeLogf("../Cliente/log_cliente.csv", "Tentativas falhadas -> %d", tentativas_falhadas);
+
+    registerGameTimeLive(horaFimJogo,sizeof(horaFimJogo));
+    writeLogf("../Cliente/log_cliente.csv", "Hora Fim Jogo -> %s", horaFimJogo);
+
+    registerGameTime(horaInicioJogo,horaFimJogo,tempoJogo,sizeof(tempoJogo));
+    writeLogf("../Cliente/log_cliente.csv", "Tempo Jogo -> %s", tempoJogo);
 }
 
 void requestGame(int socket , int* gameId , char partialSolution[81])
@@ -239,6 +273,7 @@ void requestGame(int socket , int* gameId , char partialSolution[81])
     }
 
     printf("Escreveu com sucesso o pedido de request do jogo\n");
+    writeLogf("../Cliente/log_cliente.csv", "Escreveu com sucesso o pedido de request do jogo");
 
     char serverAnswer[512];
     int bytesReceived = lerLinha(socket , serverAnswer , sizeof(serverAnswer));
@@ -250,6 +285,7 @@ void requestGame(int socket , int* gameId , char partialSolution[81])
     }
 
     printf("Received a response from server about the game request\n");
+    writeLogf("../Cliente/log_cliente.csv", "Received a response from server about the game request");
 
     char *dividedLine = strtok(serverAnswer , ",");
 
@@ -262,7 +298,8 @@ void requestGame(int socket , int* gameId , char partialSolution[81])
     *gameId = atoi(dividedLine);
 
     printf("O game id recebido foi %d\n" , *gameId);
-
+    writeLogf("../Cliente/log_cliente.csv", "Id de jogo recebido = %d", *gameId);
+    
     dividedLine = strtok(NULL , ",");
 
     if(dividedLine == NULL)
@@ -282,4 +319,5 @@ void requestGame(int socket , int* gameId , char partialSolution[81])
     strcpy(partialSolution , dividedLine);
 
     printf("Recebeu o jogo perfeitamente\n");
+    writeLogf("../Cliente/log_cliente.csv", "Recebeu o jogo perfeitamente");
 }

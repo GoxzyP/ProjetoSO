@@ -24,13 +24,13 @@ SERVER_DIR = Servidor
 # Inclui:
 #   - Configuração e utilitários do socket (Cliente)
 #   - util.c (ficheiro comum partilhado)
-CLIENT_SRCS = $(CLIENT_DIR)/socketsSetupCliente.c $(CLIENT_DIR)/socketsUtilsCliente.c util.c
+CLIENT_SRCS = $(CLIENT_DIR)/socketsSetupCliente.c $(CLIENT_DIR)/socketsUtilsCliente.c util.c log.c
 
 # Lista de ficheiros fonte do servidor
 # Inclui:
 #   - Configuração e utilitários do socket (Servidor)
 #   - util.c (ficheiro comum partilhado)
-SERVER_SRCS = $(SERVER_DIR)/socketsSetupServidor.c $(SERVER_DIR)/socketsUtilsServidor.c util.c
+SERVER_SRCS = $(SERVER_DIR)/socketsSetupServidor.c $(SERVER_DIR)/socketsUtilsServidor.c util.c log.c
 
 # Converte cada ficheiro .c numa versão .o dentro da pasta Build/
 # Exemplo: Cliente/socketsSetupCliente.c → Build/Cliente/socketsSetupCliente.o

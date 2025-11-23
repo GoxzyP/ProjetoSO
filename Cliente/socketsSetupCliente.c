@@ -1,11 +1,13 @@
 #include "../unix.h"
 #include "socketsUtilsCliente.h"
+#include "../util.h"
 #include "../log.h"
 
 int main(void)
 {
     int socketServidor;
-    int tamanhoEnderecoServidor; 
+    int tamanhoEnderecoServidor;
+    int idCliente = getpid();
     struct sockaddr_un enderecoServidor;
 
     srand(time(NULL));
@@ -29,6 +31,22 @@ int main(void)
 
     int continuar = 1;
 
+    char logPath[512];
+    snprintf(logPath, sizeof(logPath), "../Cliente/log_cliente%d.csv", idCliente);
+
+    char messageToServer[512];
+    int positionInMessageToServer= sprintf(messageToServer, "%d,", idCliente);
+    messageToServer[positionInMessageToServer++] = '\n';
+
+    if((escreveSocket(socketServidor , messageToServer , strlen(messageToServer))) != strlen(messageToServer))
+    {
+        perror("Erro : Não foi possível enviar o id do cliente para o servidor");
+        writeLogf(logPath,"Não foi possível enviar o id do cliente para o servidor");
+        exit(1);
+    }
+
+    writeLogf(logPath,"O id do cliente foi enviado para o servidor");
+
     while(continuar) 
     {
         int escolha;
@@ -47,16 +65,15 @@ int main(void)
             int gameId;
             char partialSolution[81];
 
-            printf("O cliente escolheu o numero 0\n");
-            writeLogf("../Cliente/log_cliente.csv","O cliente escolheu o numero 0");
-            requestGame(socketServidor , &gameId , partialSolution);
+            writeLogf(logPath,"O cliente comecou a jogar");
+            requestGame(socketServidor , &gameId , partialSolution , logPath);
             displaySudokuWithCoords(partialSolution);
-            fillSudoku(socketServidor , partialSolution , gameId);
+            fillSudoku(socketServidor , partialSolution , gameId , logPath);
         }
         else if(escolha == 2) {
             continuar = 0;
             printf("Programa terminado.\n");
-            writeLogf("../Cliente/log_cliente.csv","Programa terminado");
+            writeLogf(logPath,"Programa terminado");
         }
     }
     

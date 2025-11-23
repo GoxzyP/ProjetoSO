@@ -13,7 +13,6 @@
 
 int* getPossibleAnswers(char partialSolution[81], int rowSelected, int columnSelected , int *size)
 {   
-    printf("Entrou na função que consegue as respostas possíveis\n");
     // Inicializa array com todos os possíveis valores numa celula (1 a 9)
     int allPossibleAnswers[] = {1,2,3,4,5,6,7,8,9};
     int arraySize = 9; // contador do número de possíveis respostas validas restantes
@@ -62,7 +61,7 @@ int* getPossibleAnswers(char partialSolution[81], int rowSelected, int columnSel
     int *possibleAnswersBasedOnPlacement = malloc(arraySize * sizeof(int)); 
     if (!possibleAnswersBasedOnPlacement) 
     {
-        perror("Error: Could not allocate memory for the dynamic array storing possible answers");
+        perror("Erro : Não foi possível alocar memória no array dinâmico onde fica armazenado as respostas possíveis");
         exit(1); // termina programa se falhar a alocação
     }
 
@@ -75,8 +74,6 @@ int* getPossibleAnswers(char partialSolution[81], int rowSelected, int columnSel
     }
     *size = arraySize;  // armazena no endereço apontado por 'size' o número de respostas válidas encontradas
 
-    printf("Finalizou a função que consegue as respostas possíveis\n");
-
     return possibleAnswersBasedOnPlacement; // retorna ponteiro para array dinâmico
 }
 
@@ -86,7 +83,7 @@ int* getPossibleAnswers(char partialSolution[81], int rowSelected, int columnSel
 void displaySudokuWithCoords(char sudoku[81]) 
 {
     // Cabeçalho com coordenadas das colunas (X)
-    printf("xy "); // marcador no canto superior esquerdo
+    printf("\n\nxy "); // marcador no canto superior esquerdo
     for (int col = 0; col < 9; col++) {
         printf("%d", col); // imprime o número da coluna
         if ((col + 1) % 3 == 0 && col != 8)
@@ -146,10 +143,8 @@ void shufflePositionsInArray(int positions[][2] , int count) // funcao para bara
 // ------------------------------------------------------------------
 // Preenche o sudoku
 // ------------------------------------------------------------------
-void fillSudoku(int socket , char sudoku[81] , int gameId) 
+void fillSudoku(int socket , char sudoku[81] , int gameId , char logPath[256]) 
 {   
-    printf("Entrou na função de preencher o sudoku\n");
-
     char horaInicioJogo[20]; // buffer para armazenar uma cadeia de carareteres com o tempo em horas, minutos e segundos
     char horaFimJogo[20];
     char tempoJogo[20];
@@ -160,7 +155,7 @@ void fillSudoku(int socket , char sudoku[81] , int gameId)
 
     registerGameTimeLive(horaInicioJogo,sizeof(horaInicioJogo));
 
-    writeLogf("../Cliente/log_cliente.csv", "Hora Inicio Jogo -> %s", horaInicioJogo);
+    writeLogf(logPath, "Hora Inicio Jogo -> %s", horaInicioJogo);
 
     for(int row = 0 ; row < 9 ; row++)
     {
@@ -177,28 +172,25 @@ void fillSudoku(int socket , char sudoku[81] , int gameId)
 
     shufflePositionsInArray(positionsToFill , emptyCount);
 
-    printf("Fez o shuffle do array de posições por preencher\n");
-    printf("Empty count inicial -> %d\n", emptyCount);
-
-    writeLogf("../Cliente/log_cliente.csv", "Fez o shuffle do array de posições por preencher");
-    writeLogf("../Cliente/log_cliente.csv", "Empty count inicial -> %d", emptyCount);
+    writeLogf(logPath, "Fez o shuffle do array de posições por preencher");
+    writeLogf(logPath, "Número de posições inicialmente por preencher -> %d", emptyCount);
 
     for(int i = 0 ; i < emptyCount ; i++)
     {   
-        printf("Empty left: %d\n", emptyCount - i - 1);
-        writeLogf("../Cliente/log_cliente.csv", "Empty left -> %d", emptyCount - i - 1);
+        writeLogf(logPath, "Numero de posições por preencher restantes -> %d", emptyCount - i - 1);
 
         int rowSelected = positionsToFill[i][0];
         int columnSelected = positionsToFill[i][1];
 
         int size = 0; 
         int* possibleAnswers = getPossibleAnswers(sudoku, rowSelected , columnSelected , &size);
+        char answers[256] = "";
 
-        printf("Possiveis valores para (%d,%d): ", rowSelected, columnSelected);
-        writeLogf("../Cliente/log_cliente.csv", "Possiveis valores para (%d,%d): ", rowSelected, columnSelected);
 
-        for(int j = 0; j < size; j++) { printf("%d ", possibleAnswers[j]); }
-        printf("\n");
+        for (int j = 0; j < size; j++) 
+            sprintf(answers + strlen(answers), "%d ", possibleAnswers[j]);
+        
+        writeLogf(logPath, "Possiveis valores para (%d,%d): %s", rowSelected, columnSelected , answers);
 
         for(int j = 0 ; j < size ; j++)
         {   
@@ -206,24 +198,24 @@ void fillSudoku(int socket , char sudoku[81] , int gameId)
             int codeVerifyAnswer = 2;
             sprintf(messageToServer , "%d,%d,%d,%d,%d\n", codeVerifyAnswer, gameId, rowSelected, columnSelected, possibleAnswers[j]);
 
-            printf("Foi enviado para o server o numero %d na posicao : %d %d \n", possibleAnswers[j], rowSelected, columnSelected);
-            writeLogf("../Cliente/log_cliente.csv", "Foi enviado para o server o numero %d na posicao : %d %d", possibleAnswers[j], rowSelected, columnSelected);
+            writeLogf(logPath, "Foi enviado para o server o numero %d na posicao : %d %d", possibleAnswers[j], rowSelected, columnSelected);
 
             if((escreveSocket(socket , messageToServer , strlen(messageToServer))) != strlen(messageToServer))
             {
-                perror("Error : Could not send possible answer to server");
+                perror("Erro : Não foi possível enviar a solução para o servidor");
+                writeLogf(logPath, "Não foi possível enviar a solução para o servidor");
                 exit(1);
             }
 
-            printf("O envio para o server do numero %d na posicao : %d %d foi feito com sucesso\n", possibleAnswers[j], rowSelected, columnSelected);
-            writeLogf("../Cliente/log_cliente.csv", "O envio para o server do numero %d na posicao : %d %d foi feito com sucesso", possibleAnswers[j], rowSelected, columnSelected);
+            writeLogf(logPath, "O envio para o server do numero %d na posicao : %d %d foi feito com sucesso", possibleAnswers[j], rowSelected, columnSelected);
 
             char serverAnswer[512];
             int bytesReceived = lerLinha(socket , serverAnswer , sizeof(serverAnswer));
 
             if(bytesReceived  < 0)
             {
-                perror("Error : Could not receive response from server about possible answer");
+                perror("Erro : Não foi possível receber a resposta do servidor sobre uma possível solução");
+                writeLogf(logPath, "Não foi possível receber a resposta do servidor sobre uma possível solução");
                 exit(1);
             }
 
@@ -231,15 +223,14 @@ void fillSudoku(int socket , char sudoku[81] , int gameId)
 
             if(strcmp(serverAnswer,"Correct") == 0)
             {   
-                printf("A resposta enviada para o servidor estava correta\n");
-                writeLogf("../Cliente/log_cliente.csv", "A resposta enviada para o servidor estava correta");
+                writeLogf(logPath, "A resposta enviada para o servidor estava correta");
                 sudoku[rowSelected * 9 + columnSelected] = possibleAnswers[j] + '0';
                 displaySudokuWithCoords(sudoku);
                 break;
             }
-            else {
-                printf("A resposta enviada para o servidor estava errada\n");
-                writeLogf("../Cliente/log_cliente.csv", "A resposta enviada para o servidor estava errada");
+            else 
+            {
+                writeLogf(logPath, "A resposta enviada para o servidor estava errada");
                 tentativas_falhadas++;
             }
         }
@@ -247,20 +238,17 @@ void fillSudoku(int socket , char sudoku[81] , int gameId)
         free(possibleAnswers);
     }
 
-    printf("Número total de tentativas falhadas: %d\n", tentativas_falhadas);
-    writeLogf("../Cliente/log_cliente.csv", "Tentativas falhadas -> %d", tentativas_falhadas);
+    writeLogf(logPath, "Tentativas falhadas -> %d", tentativas_falhadas);
 
     registerGameTimeLive(horaFimJogo,sizeof(horaFimJogo));
-    writeLogf("../Cliente/log_cliente.csv", "Hora Fim Jogo -> %s", horaFimJogo);
+    writeLogf(logPath, "Hora Fim Jogo -> %s", horaFimJogo);
 
     registerGameTime(horaInicioJogo,horaFimJogo,tempoJogo,sizeof(tempoJogo));
-    writeLogf("../Cliente/log_cliente.csv", "Tempo Jogo -> %s", tempoJogo);
+    writeLogf(logPath, "Tempo Jogo -> %s", tempoJogo);
 }
 
-void requestGame(int socket , int* gameId , char partialSolution[81])
+void requestGame(int socket , int* gameId , char partialSolution[81] , char logPath[256])
 {   
-    printf("Entrou na função de pedido de jogo ao servidor\n");
-
     char messageToServer[512];
     int codeRequestGame = 1;
 
@@ -268,43 +256,44 @@ void requestGame(int socket , int* gameId , char partialSolution[81])
 
     if((escreveSocket(socket , messageToServer , strlen(messageToServer))) != strlen(messageToServer))
     {
-        perror("Error : Could not send a game request to server");
+        perror("Erro : Não foi possível enviar ao servidor um pedido de jogo");
+        writeLogf(logPath, "Não foi possível enviar ao servidor um pedido de jogo");
         exit(1);
     }
 
-    printf("Escreveu com sucesso o pedido de request do jogo\n");
-    writeLogf("../Cliente/log_cliente.csv", "Escreveu com sucesso o pedido de request do jogo");
+    writeLogf(logPath, "Escreveu com sucesso o pedido do jogo");
 
     char serverAnswer[512];
     int bytesReceived = lerLinha(socket , serverAnswer , sizeof(serverAnswer));
 
     if(bytesReceived  < 0 )
     {
-        perror("Error : Could not receive response from server about a game request");
+        perror("Erro : Não foi possível obter resposta do servidor sobre o pedido de jogo");
+        writeLogf(logPath, "Não foi possível obter resposta do servidor sobre o pedido de jogo");
         exit(1);
     }
 
-    printf("Received a response from server about the game request\n");
-    writeLogf("../Cliente/log_cliente.csv", "Received a response from server about the game request");
+    writeLogf(logPath, "Foi recebida a resposta do servidor sobre o pedido de jogo");
 
     char *dividedLine = strtok(serverAnswer , ",");
 
     if(dividedLine == NULL)
     {
-        perror("Error : Invalid server response format in id");
+        perror("Erro : Formato incorreto na resposta do servidor com relação ao pedido do jogo -> id");
+        writeLogf(logPath, "Formato incorreto na resposta do servidor com relação ao pedido do jogo -> id");
         exit(1);
     }
 
     *gameId = atoi(dividedLine);
 
-    printf("O game id recebido foi %d\n" , *gameId);
-    writeLogf("../Cliente/log_cliente.csv", "Id de jogo recebido = %d", *gameId);
+    writeLogf(logPath, "Id de jogo recebido -> %d", *gameId);
     
     dividedLine = strtok(NULL , ",");
 
     if(dividedLine == NULL)
     {
-        perror("Error : Invalid server response format in partial solution");
+        perror("Erro : Formato incorreto na resposta do servidor com relação ao pedido do jogo -> solução parcial");
+        writeLogf(logPath, "Formato incorreto na resposta do servidor com relação ao pedido do jogo -> solução parcial");
         exit(1);
     }
 
@@ -312,12 +301,12 @@ void requestGame(int socket , int* gameId , char partialSolution[81])
 
     if(strlen(dividedLine) != 81)
     {
-        perror("Error: partialSolution received from server has invalid length");
+        perror("Erro : Formato incorreto na resposta do servidor com relação ao pedido do jogo -> tamanho da solução parcial");
+        writeLogf(logPath, "Formato incorreto na resposta do servidor com relação ao pedido do jogo -> tamanho da solução parcial");
         exit(1);
     }
 
     strcpy(partialSolution , dividedLine);
 
-    printf("Recebeu o jogo perfeitamente\n");
-    writeLogf("../Cliente/log_cliente.csv", "Recebeu o jogo perfeitamente");
+    writeLogf(logPath, "Recebeu o jogo perfeitamente");
 }

@@ -21,7 +21,8 @@ void readGamesFromCSV()
 
     if (file == NULL)
     {
-        printf("Error opening file jogos.csv");
+        printf("Erro : Não foi possível abrir o ficheiro onde estão armazenados os jogos\n");
+        writeLogf("../Servidor/log_servidor.csv","Não foi possível abrir o ficheiro onde estão armazenados os jogos");
         return;
     }
 
@@ -52,80 +53,69 @@ void readGamesFromCSV()
 // --------------------------------------------------------------
 // Verifica as respostas do cliente em relação ao sudoku
 // --------------------------------------------------------------
-void verifyClientSudokuAnswer(int socket, int gameId, int rowSelected, int columnSelected, int clientAnswer)
+void verifyClientSudokuAnswer(int socket, int gameId, int rowSelected, int columnSelected, int clientAnswer , int clientId)
 {
-    printf("Entrou na função de verificar a resposta do cliente\n");
-    writeLogf("../Servidor/log_servidor.csv","Entrou na função de verificar a resposta do cliente");
-
     gameData *gameSentToClient;
     HASH_FIND_INT(gamesHashTable, &gameId, gameSentToClient);
 
     if (!gameSentToClient)
     {
-        perror("Error: Server could not find the game for the given gameId");
+        perror("Erro : O servidor não conseguiu encontar o jogo com o id enviado pelo cliente");
+        writeLogf("../Servidor/log_servidor.csv","O servidor não conseguiu encontar o jogo com o id enviado pelo cliente %d" , clientId);
         exit(1);
     }
 
     if (rowSelected < 0 || rowSelected > 8 || columnSelected < 0 || columnSelected > 8)
     {
-        perror("Error: Coordinates sent to the server are invalid");
+        perror("Erro: Coordenadas enviadas pelo cliente eram inválidas");
+        writeLogf("../Servidor/log_servidor.csv","Coordenadas enviadas pelo cliente %d eram inválidas" , clientId);
         exit(1);
     }
-    printf("O jogo do cliente e a sua resposta são válidos\n");
-    writeLogf("../Servidor/log_servidor.csv","O jogo do cliente e a sua resposta são válidos");
+
+    writeLogf("../Servidor/log_servidor.csv","O id do jogo enviado pelo cliente %d e a sua resposta são válidos" , clientId);
 
     char serverResponse[50];
 
-    printf("O id do jogo do cliente é %d\n", gameId);
+    writeLogf("../Servidor/log_servidor.csv","Id do jogo do cliente %d -> %d", clientId , gameId);
 
-    writeLogf("../Servidor/log_servidor.csv","Id do jogo -> %d", gameId);
+    writeLogf("../Servidor/log_servidor.csv","Resposta do cliente %d -> %d", clientId , clientAnswer);
 
-    printf("A resposta do cliente foi %d\n", clientAnswer);
-
-    writeLogf("../Servidor/log_servidor.csv","Resposta do cliente -> %d", clientAnswer);
-
-    printf("The solution is number %d\n",
-             gameSentToClient->totalSolution[(rowSelected * 9) + columnSelected]);
-
-    writeLogf("../Servidor/log_servidor.csv", "A solucao é o número -> %d",
-             gameSentToClient->totalSolution[(rowSelected * 9) + columnSelected]);
+    writeLogf("../Servidor/log_servidor.csv", "A solucao para a linha %d e coluna %d é o número -> %d",rowSelected,columnSelected,gameSentToClient->totalSolution[(rowSelected * 9) + columnSelected] - '0');
 
     if (gameSentToClient->totalSolution[(rowSelected * 9) + columnSelected] == clientAnswer + '0')
     {
         strcpy(serverResponse, "Correct\n");
-        printf("A resposta do cliente estava correta\n");
-        writeLogf( "../Servidor/log_servidor.csv","A resposta do cliente estava correta");
+        writeLogf( "../Servidor/log_servidor.csv","A resposta enviada pelo cliente %d está correta" , clientId);
     }
     else
     {
         strcpy(serverResponse, "Wrong\n");
-        printf("A resposta do cliente estava errada\n");
-        writeLogf("../Servidor/log_servidor.csv","A resposta do cliente estava errada");
+        writeLogf("../Servidor/log_servidor.csv","A resposta enviada pelo cliente %d está errada" , clientId);
     }
 
     int responseLength = strlen(serverResponse);
 
     if (escreveSocket(socket, serverResponse, responseLength) != responseLength)
     {
-        perror("Error: Server could not send Sudoku response to client");
+        perror("Erro: O servidor não conseguiu enviar a resposta à solução do cliente");
+        writeLogf("../Servidor/log_servidor.csv","O servidor não conseguiu enviar a resposta à solução do cliente %d" , clientId);
         exit(1);
     }
 
-    printf("Foi enviado para o cliente o resultado da sua resposta com sucesso\n");
-    writeLogf("../Servidor/log_servidor.csv","Foi enviado para o cliente o resultado da sua resposta com sucesso");
+    writeLogf("../Servidor/log_servidor.csv","Foi enviado para o cliente %d o resultado da sua resposta com sucesso" , clientId);
 }
 
 // --------------------------------------------------------------
 // Envia um jogo aleatório para o cliente
 // --------------------------------------------------------------
-void sendGameToClient(int socket)
+void sendGameToClient(int socket , int clientId)
 {
-    printf("Entrou na função sendGameToClient\n");
-
     int count = HASH_COUNT(gamesHashTable);
+
     if (count == 0)
     {
-        perror("Error: No games found in the database to send to the client");
+        perror("Erro : Nenhum jogo encontrado na base de dados");
+        writeLogf("../Servidor/log_servidor.csv","Nenhum jogo encontrado na base de dados");
         exit(1);
     }
 
@@ -147,18 +137,16 @@ void sendGameToClient(int socket)
 
             serverResponse[positionInServerResponse++] = '\n';
 
-            for (int i = 0; i < positionInServerResponse; i++)
-                printf("%d\n", serverResponse[i]);
-
             if (escreveSocket(socket, serverResponse, positionInServerResponse) != positionInServerResponse)
             {
-                perror("Error: Could not send partial solution to client");
+                perror("Erro : O servidor não conseguiu enviar um jogo ao cliente");
+                writeLogf("../Servidor/log_servidor.csv","O servidor não conseguiu enviar um jogo ao cliente");
                 exit(1);
             }
             
-            printf("Enviou o jogo para o cliente\n");
-            writeLogf("../Servidor/log_servidor.csv","Enviou o jogo para o cliente");
+            writeLogf("../Servidor/log_servidor.csv","Enviou para o cliente %d o jogo com o id -> %d" , clientId , game->id);
         }
+
         i++;
     }
 }

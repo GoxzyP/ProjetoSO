@@ -10,9 +10,11 @@
 // -------------------------------------------------------------------------------------------------
 void writeLogf(const char *filePath, const char *format, ...) { 
     FILE *file = fopen(filePath, "a");
-    if (!file) {
+    
+    if (!file) 
+    {
         perror("Error opening/creating log file");
-        exit(1);
+        return;
     }
 
     va_list args;

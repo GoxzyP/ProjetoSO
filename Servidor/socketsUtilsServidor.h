@@ -11,7 +11,7 @@ typedef struct gamedata{
 
 // Funções implementadas em socketUtils.c
 void readGamesFromCSV();
-void verifyClientSudokuAnswer(int socket , int gameId , int rowSelected , int columnSelected , int clientAnswer); 
-void sendGameToClient(int socket);
+void verifyClientSudokuAnswer(int socket, int gameId, int rowSelected, int columnSelected, int clientAnswer , int clientId);
+void sendGameToClient(int socket , int clientId);
 
 #endif

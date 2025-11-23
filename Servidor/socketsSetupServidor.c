@@ -56,35 +56,42 @@ int main(void)
             writeLogf("../Servidor/log_servidor.csv","Erro ao criar processo filho");
             exit(1);
         }
+
         else if (pidFilho == 0)
         {
             close(socketServidor);
+
+            int idCliente = -1;
 
             while (1)
             {
                 char clientRequest[512];
 
-                printf("Está a preparar para ler a linha\n");
-                writeLogf("../Servidor/log_servidor.csv","Está a preparar para ler a linha");
+                writeLogf("../Servidor/log_servidor.csv","Está a preparar para ler o pedido do cliente");
 
                 int bytesReceived = lerLinha(socketCliente, clientRequest, sizeof(clientRequest));
 
-                printf("Conseguiu ler o request do cliente\n");
-                writeLogf("../Servidor/log_servidor.csv","Conseguiu ler o request do cliente");
+                writeLogf("../Servidor/log_servidor.csv","Pedido do cliente foi lido com sucesso");
 
                 if (bytesReceived < 0 || bytesReceived == 0)
                 {
-                    perror("Error : Server could not receive request from client");
+                    perror("Error : Servidor não conseguiu receber o pedido do cliente");
+                    writeLogf("../Servidor/log_servidor.csv","Servidor não conseguiu receber o pedido do cliente");
                     exit(1);
                 }
-                printf("Request do cliente era válido\n");
-                writeLogf("../Servidor/log_servidor.csv","Request do cliente era válido");
+                
+                writeLogf("../Servidor/log_servidor.csv","Pedido do cliente era válido");
+
+                if (idCliente == -1)
+                {
+                    idCliente = atoi(clientRequest);
+                    writeLogf("../Servidor/log_servidor.csv","Cliente ligado com ID: %d", idCliente);
+                    continue;
+                }
 
                 int codeRequest = atoi(clientRequest);
 
-                writeLogf("../Servidor/log_servidor.csv","O codigo enviado do cliente era -> %d", codeRequest);
-
-                printf("O codigo enviado do cliente era%d\n", codeRequest);
+                writeLogf("../Servidor/log_servidor.csv","O codigo do pedido enviado pelo cliente %d é -> %d", idCliente , codeRequest);
 
                 char *restOfClientRequest = strchr(clientRequest, ',');
                 restOfClientRequest++;
@@ -92,30 +99,27 @@ int main(void)
                 switch (codeRequest)
                 {
                     case 1:
-                        printf("Entrou no case 1\n");
-                        writeLogf("../Servidor/log_servidor.csv","Entrou no case 1");
-                        sendGameToClient(socketCliente);
+                        writeLogf("../Servidor/log_servidor.csv","O pedido do cliente %d é sobre o envio de um novo jogo" , idCliente);
+                        sendGameToClient(socketCliente , idCliente);
                         break;
 
                     case 2:
                     {
-                        printf("Entrou no case 2\n");
-                        writeLogf( "../Servidor/log_servidor.csv","Entrou no case 2");
+                        writeLogf( "../Servidor/log_servidor.csv","O pedido do cliente %d é sobre a verificação de uma resposta" , idCliente);
 
                         int gameId, rowSelected, columnSelected, clientAnswer;
 
                         if (sscanf(restOfClientRequest, "%d,%d,%d,%d",
                                    &gameId, &rowSelected, &columnSelected, &clientAnswer) != 4)
                         {
-                            perror("Error : Failed to parse client request");
-                            writeLogf("Error : Failed to parse client request", "../Servidor/log_servidor.csv");
+                            perror("Error : O servidor não conseguiu receber os parâmetros necessários para realizar a verificação");
+                            writeLogf("../Servidor/log_servidor.csv","O servidor não conseguiu receber os parâmetros necessários para realizar a verificação");
                             exit(1);
                         }
 
-                        printf("Conseguiu receber os parametros para verificar erro direitinhos\n");
-                        writeLogf("../Servidor/log_servidor.csv","Conseguiu receber os parametros para verificar erro direitinhos");
+                        writeLogf("../Servidor/log_servidor.csv","O pedido do cliente %d enviou os pârametros de verificação válidos" , idCliente);
 
-                        verifyClientSudokuAnswer(socketCliente, gameId, rowSelected, columnSelected, clientAnswer);
+                        verifyClientSudokuAnswer(socketCliente, gameId, rowSelected, columnSelected, clientAnswer , idCliente);
                         break;
                     }
 

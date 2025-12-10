@@ -1,6 +1,11 @@
+#include "unix.h"
 #include <pthread.h>
 
+#include <stdio.h>
 #include <string.h>
+
+#define BUFFER_PRODUCER_CONSUMER_SIZE 5
+#define BUFFER_SOCKET_MESSAGE_SIZE 512
 
 enum cellState 
 {
@@ -12,10 +17,25 @@ enum cellState
 typedef struct SudokuCell 
 {
     int value;
+    pthread_t producer;
     pthread_mutex_t mutex;
-    pthread_cond_t condAnswer;
+    pthread_cond_t conditionVariable;
     enum cellState state;
 }sudokuCell;
+
+typedef struct ProducerConsumerBuffer
+{
+    int rowSelected;
+    int columnSelected;
+    int clientAnswer;
+}producerConsumerBuffer;
+
+
+producerConsumerBuffer buffer[BUFFER_PRODUCER_CONSUMER_SIZE];
+int bufferProducerIndex = 0 ; int bufferConsumerIndex = 0 ; int numberOfItemsInsideBuffer = 0;
+
+pthread_mutex_t mutexBuffer;
+pthread_cond_t producerBufferConditionVariable ; pthread_cond_t consumerBufferConditionVariable;
 
 // --------------------------------------------------------------
 // Obter respostas possíveis para uma célula específica do Sudoku
@@ -111,8 +131,8 @@ void inicializeSudoku(sudokuCell *sudoku[9][9] , char partialSolution[81])
         //e definimos o estado , se o valor seja 0 significa que ainda precisa ser preenchido logo vai para idle caso contrário assume que a célula já veio preenchida
         cell->value = partialSolution[i] - '0';
         pthread_mutex_init(&cell->mutex , NULL);
-        pthread_cond_init(&cell->condAnswer , NULL);
         cell->state = cell->value == 0 ? IDLE : FINISHED;
+        cell->producer = 0;
 
         //Incrementa a coluna
         cellColumn++;
@@ -126,10 +146,58 @@ void inicializeSudoku(sudokuCell *sudoku[9][9] , char partialSolution[81])
     }
 }
 
-void producer(sudokuCell *sudoku[9][9] , char partialSolution[81] , int emptyPosition[][])
+void producer(sudokuCell *sudoku[9][9] , int emptyPositions[][2] , int emptyPositionsSize)
 {
-    while(1)
-    {
-        
-    }
+    for(int i = 0 ; i < emptyPositionsSize ; i++)
+    {   
+        int size = 0;
+        int rowSelected = emptyPositions[i][0];
+        int columnSelected = emptyPositions[i][1];
+
+        sudokuCell *cell = sudoku[rowSelected][columnSelected];
+
+        if(pthread_mutex_trylock(&cell->mutex) != 0)
+            continue;
+
+        if(cell->producer != 0)
+        {
+            pthread_mutex_unlock(&cell->mutex);
+            continue;
+        }
+
+        int* possibleAnswers = getPossibleAnswers(sudoku , rowSelected , columnSelected , &size);//Adaptar função
+
+        for(int j = 0 ; j < size ; i++)
+        {
+            producerConsumerBuffer bufferEntry;
+            
+            bufferEntry.rowSelected = rowSelected;
+            bufferEntry.columnSelected = columnSelected;
+            bufferEntry.clientAnswer = possibleAnswers[j];
+
+            pthread_mutex_lock(&mutexBuffer);
+
+            while(numberOfItemsInsideBuffer == BUFFER_PRODUCER_CONSUMER_SIZE)
+                pthread_cond_wait(&producerBufferConditionVariable , &mutexBuffer);
+            
+            cell->producer = pthread_self();
+            cell->state = WAITING;
+
+            buffer[bufferProducerIndex] = bufferEntry;
+            bufferProducerIndex = (bufferProducerIndex + 1) % BUFFER_PRODUCER_CONSUMER_SIZE;
+            numberOfItemsInsideBuffer++;
+
+            pthread_cond_signal(&consumerBufferConditionVariable);
+            pthread_mutex_unlock(&mutexBuffer);
+
+            while(cell->state == WAITING)
+                pthread_cond_wait(&cell->conditionVariable , &cell->mutex);
+
+            if(cell->state == FINISHED)
+            {   
+                pthread_mutex_unlock(&cell->mutex);
+                break;
+            }
+        }
+    }   
 }

@@ -11,6 +11,7 @@ enum cellState
 {
     IDLE ,
     WAITING ,
+    FAILED ,
     FINISHED
 };
 
@@ -34,13 +35,13 @@ typedef struct ProducerConsumerBuffer
 producerConsumerBuffer buffer[BUFFER_PRODUCER_CONSUMER_SIZE];
 int bufferProducerIndex = 0 ; int bufferConsumerIndex = 0 ; int numberOfItemsInsideBuffer = 0;
 
-pthread_mutex_t mutexBuffer;
-pthread_cond_t producerBufferConditionVariable ; pthread_cond_t consumerBufferConditionVariable;
+pthread_mutex_t mutexProducerConsumerBuffer;
+pthread_cond_t producerBufferConditionVariable ; pthread_cond_t consumerBufferConditionVariable;//Não esquecer de inicializer estas variaveis e o mutex do buffer
 
 // --------------------------------------------------------------
 // Obter respostas possíveis para uma célula específica do Sudoku
 // --------------------------------------------------------------
-int* getPossibleAnswers(char partialSolution[81], int rowSelected, int columnSelected , int *size)
+int* getPossibleAnswers(sudokuCell *sudoku[9][9] , int rowSelected, int columnSelected , int *size)
 {   
     // Inicializa array com todos os possíveis valores numa celula (1 a 9)
     int allPossibleAnswers[] = {1,2,3,4,5,6,7,8,9};
@@ -49,20 +50,17 @@ int* getPossibleAnswers(char partialSolution[81], int rowSelected, int columnSel
     // Remove valores já presentes na mesma linha e coluna
     for(int i = 0 ; i < 9 ; i++)
     {   
-        int rowIndex = rowSelected * 9 + i;
-        int columnIndex = i * 9 + columnSelected;
-
         // Se a linha já contém o número, remove da lista de possíveis
-        if(partialSolution[rowIndex] != '0' && allPossibleAnswers[partialSolution[rowIndex] - '1'] != 0)
+        if(sudoku[rowSelected][i]->value != 0 && allPossibleAnswers[sudoku[rowSelected][i]->value - 1] != 0)
         {
-            allPossibleAnswers[partialSolution[rowIndex] - '1'] = 0; //põe o valor repetido a zeros no array de respostas possíveis
+            allPossibleAnswers[sudoku[rowSelected][i]->value - 1] = 0; //põe o valor repetido a zeros no array de respostas possíveis
             arraySize--; //diminui o tamanho do array que contém o número das respostas válidas
         }
 
         // Se a coluna já contém o número, remove da lista de possíveis
-        if(partialSolution[columnIndex] != '0' && allPossibleAnswers[partialSolution[columnIndex] - '1'] != 0)
+        if(sudoku[i][columnSelected]->value != 0 && allPossibleAnswers[sudoku[i][columnSelected]->value - 1] != 0)
         {
-            allPossibleAnswers[partialSolution[columnIndex] - '1'] = 0; // lógica igual às linhas
+            allPossibleAnswers[sudoku[i][columnSelected]->value - 1] = 0; // lógica igual às linhas
             arraySize--;
         }
     }
@@ -76,11 +74,9 @@ int* getPossibleAnswers(char partialSolution[81], int rowSelected, int columnSel
     {
         for(int j = 0 ; j < 3 ; j++)
         {   
-            int index = (startRow + i) * 9 + (startColumn + j);
-
-            if(partialSolution[index] != '0' && allPossibleAnswers[partialSolution[index] - '1'] != 0) // verifica se o valor da célula não é zero e se não é um valor repetido
+            if(sudoku[startRow + i][startColumn + j]->value != 0 && allPossibleAnswers[sudoku[startRow + i][startColumn + j]->value - 1] != 0) // verifica se o valor da célula não é zero e se não é um valor repetido
             {   
-                allPossibleAnswers[partialSolution[index] - '1'] = 0;  // põe o valor (referente à posicao no bloco) a 0 no array das respostas válidas
+                allPossibleAnswers[sudoku[startRow + i][startColumn + j]->value - 1] = 0;  // põe o valor (referente à posicao no bloco) a 0 no array das respostas válidas
                 arraySize--;                     // decrementa o número de respostas válidas
             }
         }
@@ -167,37 +163,98 @@ void producer(sudokuCell *sudoku[9][9] , int emptyPositions[][2] , int emptyPosi
 
         int* possibleAnswers = getPossibleAnswers(sudoku , rowSelected , columnSelected , &size);//Adaptar função
 
-        for(int j = 0 ; j < size ; i++)
-        {
+        for(int j = 0 ; j < size ; j++)
+        {   
+            int operationSucess = 0;
+            cell->producer = pthread_self();
+
             producerConsumerBuffer bufferEntry;
-            
             bufferEntry.rowSelected = rowSelected;
             bufferEntry.columnSelected = columnSelected;
             bufferEntry.clientAnswer = possibleAnswers[j];
 
-            pthread_mutex_lock(&mutexBuffer);
+            while(operationSucess == 0)
+            {
+                pthread_mutex_lock(&mutexProducerConsumerBuffer);
 
-            while(numberOfItemsInsideBuffer == BUFFER_PRODUCER_CONSUMER_SIZE)
-                pthread_cond_wait(&producerBufferConditionVariable , &mutexBuffer);
-            
-            cell->producer = pthread_self();
-            cell->state = WAITING;
+                while(numberOfItemsInsideBuffer == BUFFER_PRODUCER_CONSUMER_SIZE)
+                    pthread_cond_wait(&producerBufferConditionVariable , &mutexProducerConsumerBuffer);
+                
+                cell->state = WAITING;
 
-            buffer[bufferProducerIndex] = bufferEntry;
-            bufferProducerIndex = (bufferProducerIndex + 1) % BUFFER_PRODUCER_CONSUMER_SIZE;
-            numberOfItemsInsideBuffer++;
+                buffer[bufferProducerIndex] = bufferEntry;
+                bufferProducerIndex = (bufferProducerIndex + 1) % BUFFER_PRODUCER_CONSUMER_SIZE;
+                numberOfItemsInsideBuffer++;
 
-            pthread_cond_signal(&consumerBufferConditionVariable);
-            pthread_mutex_unlock(&mutexBuffer);
+                pthread_cond_signal(&consumerBufferConditionVariable);
+                pthread_mutex_unlock(&mutexProducerConsumerBuffer);
 
-            while(cell->state == WAITING)
-                pthread_cond_wait(&cell->conditionVariable , &cell->mutex);
+                while(cell->state == WAITING)
+                    pthread_cond_wait(&cell->conditionVariable , &cell->mutex);
+
+                if(cell->state == FINISHED || cell->state == IDLE)
+                    operationSucess = 1;
+            }
 
             if(cell->state == FINISHED)
-            {   
+            {
                 pthread_mutex_unlock(&cell->mutex);
                 break;
             }
         }
+
+        free(possibleAnswers);
     }   
+}
+
+void consumer(int socket , sudokuCell *sudoku[9][9] , int gameId)
+{   
+    int codeToVerifyAnswer = 2;
+
+    while(1)
+    {
+        pthread_mutex_lock(&mutexProducerConsumerBuffer);
+
+        while(numberOfItemsInsideBuffer == 0)
+            pthread_cond_wait(&consumerBufferConditionVariable , &mutexProducerConsumerBuffer);
+
+        producerConsumerBuffer bufferEntry = buffer[bufferConsumerIndex];
+        bufferConsumerIndex = (bufferConsumerIndex + 1) % BUFFER_PRODUCER_CONSUMER_SIZE;
+        numberOfItemsInsideBuffer--;
+
+        pthread_cond_signal(&producerBufferConditionVariable);
+        pthread_mutex_unlock(&mutexProducerConsumerBuffer);
+
+        char messageToServer[BUFFER_SOCKET_MESSAGE_SIZE];
+        sprintf(messageToServer , "%d,%d,%d,%d,%d\n" , codeToVerifyAnswer , gameId , bufferEntry.rowSelected , bufferEntry.columnSelected , bufferEntry.clientAnswer);
+
+        sudokuCell *cell = sudoku[bufferEntry.rowSelected][bufferEntry.columnSelected];
+        pthread_mutex_lock(&cell->mutex);
+
+        if(writeSocket(socket , messageToServer , strlen(messageToServer)) != srtlen(messageToServer))
+        {
+            cell->state = FAILED;
+            pthread_cond_signal(&sudoku[bufferEntry.rowSelected][bufferEntry.columnSelected]->conditionVariable);
+            pthread_mutex_unlock(&cell->mutex);
+            continue;
+        }
+
+        char responseFromServer[BUFFER_SOCKET_MESSAGE_SIZE];
+        int bytesReceived = readSocket(socket , responseFromServer , sizeof(responseFromServer));
+
+        if(bytesReceived < 0)
+        {
+            cell->state = FAILED;
+            pthread_cond_signal(&sudoku[bufferEntry.rowSelected][bufferEntry.columnSelected]->conditionVariable);
+            pthread_mutex_unlock(&cell->mutex);
+            continue;
+        }
+
+        responseFromServer[bytesReceived - 1] = '\0';
+
+        cell->state = strcmp(responseFromServer , "Correct") == 0 ? FINISHED : IDLE;
+        cell->value = strcmp(responseFromServer , "Correct") == 0 ? bufferEntry.clientAnswer : cell->value;
+        pthread_cond_signal(&sudoku[bufferEntry.rowSelected][bufferEntry.columnSelected]->conditionVariable);
+        pthread_mutex_unlock(&cell->mutex);
+    }
 }

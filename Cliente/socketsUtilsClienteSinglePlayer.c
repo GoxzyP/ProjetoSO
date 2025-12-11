@@ -1,3 +1,5 @@
+//Por fazer - Pegar todas as empty positions para passar para os producers
+
 #include "unix.h"
 #include <pthread.h>
 
@@ -105,18 +107,19 @@ int* getPossibleAnswers(sudokuCell *sudoku[9][9] , int rowSelected, int columnSe
 // -----------------------------------------------------------------------------------
 // Função que inicializa o sudoku onde cada célula tem o seu valor,estado,mutex e cond 
 // -----------------------------------------------------------------------------------
-void inicializeSudoku(sudokuCell *sudoku[9][9] , char partialSolution[81])
+int inicializeSudoku(sudokuCell *sudoku[9][9] , char partialSolution[81] , int emptyPositionsToFill[81][2])
 {   
     //Recebe o tamanho do array de caracteres
     int partialSolutionSize = strlen(partialSolution);
 
     //Se o array de caracteres não for igual a 81 significa que o jogo foi mal passado
     if(partialSolutionSize != 81)
-        return;
+        return 0;
 
     //Inicializa as variáveis que iremos usar como indexes para o array bidimensional
     int cellLine = 0;
     int cellColumn = 0;
+    int emptyPositionCount = 0;
 
     for(int i = 0 ; i < partialSolutionSize ; i++)
     {   
@@ -127,8 +130,16 @@ void inicializeSudoku(sudokuCell *sudoku[9][9] , char partialSolution[81])
         //e definimos o estado , se o valor seja 0 significa que ainda precisa ser preenchido logo vai para idle caso contrário assume que a célula já veio preenchida
         cell->value = partialSolution[i] - '0';
         pthread_mutex_init(&cell->mutex , NULL);
+        pthread_cond_init(&cell->conditionVariable , NULL);
         cell->state = cell->value == 0 ? IDLE : FINISHED;
         cell->producer = 0;
+
+        if(cell->value == 0)
+        {
+            emptyPositionsToFill[emptyPositionCount][0] = cellLine;
+            emptyPositionsToFill[emptyPositionCount][1] = cellColumn;
+            emptyPositionCount++;
+        }
 
         //Incrementa a coluna
         cellColumn++;
@@ -140,6 +151,8 @@ void inicializeSudoku(sudokuCell *sudoku[9][9] , char partialSolution[81])
             cellColumn = 0;
         }
     }
+
+    return emptyPositionCount;
 }
 
 void producer(sudokuCell *sudoku[9][9] , int emptyPositions[][2] , int emptyPositionsSize)
@@ -231,12 +244,10 @@ void consumer(int socket , sudokuCell *sudoku[9][9] , int gameId)
         sudokuCell *cell = sudoku[bufferEntry.rowSelected][bufferEntry.columnSelected];
         pthread_mutex_lock(&cell->mutex);
 
-        if(writeSocket(socket , messageToServer , strlen(messageToServer)) != srtlen(messageToServer))
+        if(writeSocket(socket , messageToServer , strlen(messageToServer)) != strlen(messageToServer))
         {
-            cell->state = FAILED;
-            pthread_cond_signal(&sudoku[bufferEntry.rowSelected][bufferEntry.columnSelected]->conditionVariable);
-            pthread_mutex_unlock(&cell->mutex);
-            continue;
+            perror("Error : Client could not write the answer to the server or the server disconnected from the socket");
+            exit(1);
         }
 
         char responseFromServer[BUFFER_SOCKET_MESSAGE_SIZE];
@@ -244,16 +255,20 @@ void consumer(int socket , sudokuCell *sudoku[9][9] , int gameId)
 
         if(bytesReceived < 0)
         {
-            cell->state = FAILED;
-            pthread_cond_signal(&sudoku[bufferEntry.rowSelected][bufferEntry.columnSelected]->conditionVariable);
-            pthread_mutex_unlock(&cell->mutex);
-            continue;
+            perror("Error : Client could not read the answer from the server or the server disconnected from the socket");
+            exit(1);
         }
 
         responseFromServer[bytesReceived - 1] = '\0';
 
-        cell->state = strcmp(responseFromServer , "Correct") == 0 ? FINISHED : IDLE;
-        cell->value = strcmp(responseFromServer , "Correct") == 0 ? bufferEntry.clientAnswer : cell->value;
+        if(strncmp(responseFromServer , "Error" , 5) == 0)
+            cell->state = FAILED;
+        else
+        {
+            cell->state = strcmp(responseFromServer , "Correct") == 0 ? FINISHED : IDLE;
+            cell->value = strcmp(responseFromServer , "Correct") == 0 ? bufferEntry.clientAnswer : cell->value;
+        }
+
         pthread_cond_signal(&sudoku[bufferEntry.rowSelected][bufferEntry.columnSelected]->conditionVariable);
         pthread_mutex_unlock(&cell->mutex);
     }

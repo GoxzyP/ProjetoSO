@@ -55,7 +55,7 @@ void addItemToQueue(queueFifo *queue , queueEntry item)
     queue->numberOfItemsInQueue++;
 }
 
-queueEntry removerItemFromQueue(queueFifo *queue)
+queueEntry removeItemFromQueue(queueFifo *queue)
 {
     queueEntry itemRemoved = queue->items[queue->front];
     queue->front = (queue->front + 1) % BUFFER_PRODUCER_CONSUMER_SIZE;
@@ -175,7 +175,7 @@ void consumer(int socket , queueFifo *queue)
         while(isQueueEmpty(queue) == true)
             pthread_cond_wait(&consumerQueueFifoConditionVariable , &mutexProducerConsumerQueueFifo);
 
-        queueEntry item = removerItemFromQueue(queue);
+        queueEntry item = removeItemFromQueue(queue);
 
         pthread_cond_signal(&producerQueueFifoConditionVariable);
         pthread_mutex_unlock(&mutexProducerConsumerQueueFifo);

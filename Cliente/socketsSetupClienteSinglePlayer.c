@@ -30,11 +30,15 @@ int main(void)
     while(1) 
     {
         int gameId;
-        char partialSolution[81];
+        char partialSolution[82];
 
         requestGame(serverSocket , &gameId , partialSolution);
-        inicializeGame(serverSocket , partialSolution , gameId);
-        break;
+
+        printf("Recebeu o jogo com o id -> %d\n" , gameId);
+        printf("Recebeu o jogo com a solução parcial %s\n" , partialSolution);
+
+        
+        inicializeGame(serverSocket , gameId , partialSolution);
     }
     
     close(serverSocket);

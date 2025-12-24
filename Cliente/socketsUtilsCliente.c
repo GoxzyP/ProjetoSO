@@ -1,5 +1,5 @@
-#include <util.h>
-#include <socketsUtilsCliente.h>
+#include "../util.h"
+#include "socketsUtilsCliente.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,10 +30,10 @@ void displaySudokuWithCoords(sudokuCell (*sudoku)[9][9])
 
         // Itera sobre cada coluna da linha
         for (int col = 0; col < 9; col++) {
-            if (sudoku[row][col]->value == 0)
+            if ((*sudoku)[row][col].value == 0)
                 printf("-");  // se for 0 então não há valor ainda, substituimos por "-"
             else
-                printf("%c", sudoku[row][col]->value); // imprime o número presente na célula
+                printf("%d", (*sudoku)[row][col].value); // imprime o número presente na célula
 
             if ((col + 1) % 3 == 0 && col != 8)
                 printf(" |"); // separador entre blocos 3x3
@@ -73,6 +73,8 @@ void shufflePositionsInArray(int positions[][2] , int count) // funcao para bara
 // --------------------------------------------------------------
 int* getPossibleAnswers(sudokuCell (*sudoku)[9][9] , int rowSelected, int columnSelected , int *size)
 {   
+    printf("A thread produtora %d entrou com sucesso na função responsável por pegar as respostas possíveis para a célula %d %d \n" , pthread_self() , rowSelected , columnSelected);
+
     // Inicializa array com todos os possíveis valores numa celula (1 a 9)
     int allPossibleAnswers[] = {1,2,3,4,5,6,7,8,9};
     int arraySize = 9; // contador do número de possíveis respostas validas restantes
@@ -81,16 +83,16 @@ int* getPossibleAnswers(sudokuCell (*sudoku)[9][9] , int rowSelected, int column
     for(int i = 0 ; i < 9 ; i++)
     {   
         // Se a linha já contém o número, remove da lista de possíveis
-        if(sudoku[rowSelected][i]->value != 0 && allPossibleAnswers[sudoku[rowSelected][i]->value - 1] != 0)
+        if((*sudoku)[rowSelected][i].value != 0 && allPossibleAnswers[(*sudoku)[rowSelected][i].value - 1] != 0)
         {
-            allPossibleAnswers[sudoku[rowSelected][i]->value - 1] = 0; //põe o valor repetido a zeros no array de respostas possíveis
+            allPossibleAnswers[(*sudoku)[rowSelected][i].value - 1] = 0; //põe o valor repetido a zeros no array de respostas possíveis
             arraySize--; //diminui o tamanho do array que contém o número das respostas válidas
         }
 
         // Se a coluna já contém o número, remove da lista de possíveis
-        if(sudoku[i][columnSelected]->value != 0 && allPossibleAnswers[sudoku[i][columnSelected]->value - 1] != 0)
+        if((*sudoku)[i][columnSelected].value != 0 && allPossibleAnswers[(*sudoku)[i][columnSelected].value - 1] != 0)
         {
-            allPossibleAnswers[sudoku[i][columnSelected]->value - 1] = 0; // lógica igual às linhas
+            allPossibleAnswers[(*sudoku)[i][columnSelected].value - 1] = 0; // lógica igual às linhas
             arraySize--;
         }
     }
@@ -104,9 +106,9 @@ int* getPossibleAnswers(sudokuCell (*sudoku)[9][9] , int rowSelected, int column
     {
         for(int j = 0 ; j < 3 ; j++)
         {   
-            if(sudoku[startRow + i][startColumn + j]->value != 0 && allPossibleAnswers[sudoku[startRow + i][startColumn + j]->value - 1] != 0) // verifica se o valor da célula não é zero e se não é um valor repetido
+            if((*sudoku)[startRow + i][startColumn + j].value != 0 && allPossibleAnswers[(*sudoku)[startRow + i][startColumn + j].value - 1] != 0) // verifica se o valor da célula não é zero e se não é um valor repetido
             {   
-                allPossibleAnswers[sudoku[startRow + i][startColumn + j]->value - 1] = 0;  // põe o valor (referente à posicao no bloco) a 0 no array das respostas válidas
+                allPossibleAnswers[(*sudoku)[startRow + i][startColumn + j].value - 1] = 0;  // põe o valor (referente à posicao no bloco) a 0 no array das respostas válidas
                 arraySize--;                     // decrementa o número de respostas válidas
             }
         }
@@ -132,8 +134,10 @@ int* getPossibleAnswers(sudokuCell (*sudoku)[9][9] , int rowSelected, int column
     return possibleAnswersBasedOnPlacement; // retorna ponteiro para array dinâmico
 }
 
-void requestGame(int socket , int *gameId , char partialSolution[81])
+void requestGame(int socket , int *gameId , char partialSolution[82])
 {   
+    printf("Entrou na função que irá pedir o jogo ao server\n");
+
     int operationSuccesss = 0;
     int codeRequestGame = 1;
 
@@ -142,6 +146,8 @@ void requestGame(int socket , int *gameId , char partialSolution[81])
         char messageToServer[BUFFER_SOCKET_MESSAGE_SIZE];
 
         sprintf(messageToServer , "%d,\n" , codeRequestGame);
+
+        printf("Escreveu o pedido do jogo ao servidor\n");
 
         if(writeSocket(socket , messageToServer , strlen(messageToServer)) != strlen(messageToServer))
         {
@@ -152,11 +158,15 @@ void requestGame(int socket , int *gameId , char partialSolution[81])
         char messageFromServer[BUFFER_SOCKET_MESSAGE_SIZE];
         int bytesReceived = readSocket(socket , messageFromServer , sizeof(messageFromServer));
 
+        printf("Leu a mensagem do servidor em relação ao pedido do jogo\n");
+
         if(bytesReceived <= 0)
         {
             perror("Error : Client could not read the game sent from the server or the server disconnected from the socket");
             exit(1);
         }
+
+        printf("Mensagem recebida do servidor -> %s\n" , messageFromServer);
 
         char *dividedLine = strtok(messageFromServer , ",");
 
@@ -181,10 +191,13 @@ void requestGame(int socket , int *gameId , char partialSolution[81])
         if(strlen(dividedLine) != 81)
         {
             perror("Error : Wrong size in the partial solution sent from the server");
-            exit(1);
+            continue;
         }
 
         strcpy(partialSolution , dividedLine);
+
+        printf("Finalizou a função responsável por receber o jogo do servidor\n");
+        operationSuccesss = 1;
     }
 }
 

@@ -3,6 +3,8 @@
 #include "../util.h"
 #include "../log.h"
 
+// Adicionei o id do cliente nos logs
+
 int main(void)
 {
     int socketServidor;
@@ -45,7 +47,7 @@ int main(void)
         exit(1);
     }
 
-    writeLogf(logPath,"O id do cliente foi enviado para o servidor");
+    writeLogf(logPath,"O id do cliente %d foi enviado para o servidor",idCliente);
 
     while(continuar) 
     {
@@ -65,7 +67,7 @@ int main(void)
             int gameId;
             char partialSolution[81];
 
-            writeLogf(logPath,"O cliente comecou a jogar");
+            writeLogf(logPath,"O cliente %d comecou a jogar",idCliente);
             requestGame(socketServidor , &gameId , partialSolution , logPath);
             displaySudokuWithCoords(partialSolution);
             fillSudoku(socketServidor , partialSolution , gameId , logPath);
@@ -73,7 +75,7 @@ int main(void)
         else if(escolha == 2) {
             continuar = 0;
             printf("Programa terminado.\n");
-            writeLogf(logPath,"Programa terminado");
+            writeLogf(logPath,"O cliente %d terminou o programa",idCliente);
         }
     }
     

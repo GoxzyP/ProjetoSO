@@ -1,0 +1,667 @@
+O id do cliente 70852 foi enviado para o servidor
+O cliente 70852 comecou a jogar
+Escreveu com sucesso o pedido do jogo
+Foi recebida a resposta do servidor sobre o pedido de jogo
+Id de jogo recebido -> 4
+Recebeu o jogo perfeitamente
+Hora Inicio Jogo -> 2025-12-25 23:22:13
+Fez o shuffle do array de posições por preencher
+Número de posições inicialmente por preencher -> 51
+Numero de posições por preencher restantes -> 50
+Possiveis valores para (6,3): 1 6 8 
+Foi enviado para o server o numero 1 na posicao : 6 3
+O envio para o server do numero 1 na posicao : 6 3 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 6 na posicao : 6 3
+O envio para o server do numero 6 na posicao : 6 3 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 8 na posicao : 6 3
+O envio para o server do numero 8 na posicao : 6 3 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 49
+Possiveis valores para (7,6): 6 9 
+Foi enviado para o server o numero 6 na posicao : 7 6
+O envio para o server do numero 6 na posicao : 7 6 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 9 na posicao : 7 6
+O envio para o server do numero 9 na posicao : 7 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 48
+Possiveis valores para (3,5): 1 4 7 
+Foi enviado para o server o numero 1 na posicao : 3 5
+O envio para o server do numero 1 na posicao : 3 5 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 4 na posicao : 3 5
+O envio para o server do numero 4 na posicao : 3 5 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 47
+Possiveis valores para (5,6): 2 3 7 8 
+Foi enviado para o server o numero 2 na posicao : 5 6
+O envio para o server do numero 2 na posicao : 5 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 46
+Possiveis valores para (2,6): 1 4 6 7 8 
+Foi enviado para o server o numero 1 na posicao : 2 6
+O envio para o server do numero 1 na posicao : 2 6 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 4 na posicao : 2 6
+O envio para o server do numero 4 na posicao : 2 6 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 6 na posicao : 2 6
+O envio para o server do numero 6 na posicao : 2 6 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 7 na posicao : 2 6
+O envio para o server do numero 7 na posicao : 2 6 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 8 na posicao : 2 6
+O envio para o server do numero 8 na posicao : 2 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 45
+Possiveis valores para (3,7): 3 5 7 8 
+Foi enviado para o server o numero 3 na posicao : 3 7
+O envio para o server do numero 3 na posicao : 3 7 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 5 na posicao : 3 7
+O envio para o server do numero 5 na posicao : 3 7 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 44
+Possiveis valores para (1,7): 6 7 
+Foi enviado para o server o numero 6 na posicao : 1 7
+O envio para o server do numero 6 na posicao : 1 7 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 7 na posicao : 1 7
+O envio para o server do numero 7 na posicao : 1 7 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 43
+Possiveis valores para (8,5): 5 9 
+Foi enviado para o server o numero 5 na posicao : 8 5
+O envio para o server do numero 5 na posicao : 8 5 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 9 na posicao : 8 5
+O envio para o server do numero 9 na posicao : 8 5 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 42
+Possiveis valores para (0,7): 3 4 
+Foi enviado para o server o numero 3 na posicao : 0 7
+O envio para o server do numero 3 na posicao : 0 7 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 4 na posicao : 0 7
+O envio para o server do numero 4 na posicao : 0 7 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 41
+Possiveis valores para (5,1): 4 8 
+Foi enviado para o server o numero 4 na posicao : 5 1
+O envio para o server do numero 4 na posicao : 5 1 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 40
+Possiveis valores para (3,1): 8 
+Foi enviado para o server o numero 8 na posicao : 3 1
+O envio para o server do numero 8 na posicao : 3 1 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 39
+Possiveis valores para (6,2): 1 3 4 6 7 
+Foi enviado para o server o numero 1 na posicao : 6 2
+O envio para o server do numero 1 na posicao : 6 2 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 3 na posicao : 6 2
+O envio para o server do numero 3 na posicao : 6 2 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 4 na posicao : 6 2
+O envio para o server do numero 4 na posicao : 6 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 38
+Possiveis valores para (4,4): 8 
+Foi enviado para o server o numero 8 na posicao : 4 4
+O envio para o server do numero 8 na posicao : 4 4 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 37
+Possiveis valores para (1,2): 1 5 
+Foi enviado para o server o numero 1 na posicao : 1 2
+O envio para o server do numero 1 na posicao : 1 2 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 5 na posicao : 1 2
+O envio para o server do numero 5 na posicao : 1 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 36
+Possiveis valores para (2,8): 1 5 
+Foi enviado para o server o numero 1 na posicao : 2 8
+O envio para o server do numero 1 na posicao : 2 8 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 35
+Possiveis valores para (4,6): 1 3 
+Foi enviado para o server o numero 1 na posicao : 4 6
+O envio para o server do numero 1 na posicao : 4 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 34
+Possiveis valores para (4,1): 5 
+Foi enviado para o server o numero 5 na posicao : 4 1
+O envio para o server do numero 5 na posicao : 4 1 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 33
+Possiveis valores para (1,8): 2 
+Foi enviado para o server o numero 2 na posicao : 1 8
+O envio para o server do numero 2 na posicao : 1 8 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 32
+Possiveis valores para (6,0): 3 6 
+Foi enviado para o server o numero 3 na posicao : 6 0
+O envio para o server do numero 3 na posicao : 6 0 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 31
+Possiveis valores para (0,8): 5 
+Foi enviado para o server o numero 5 na posicao : 0 8
+O envio para o server do numero 5 na posicao : 0 8 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 30
+Possiveis valores para (5,5): 7 
+Foi enviado para o server o numero 7 na posicao : 5 5
+O envio para o server do numero 7 na posicao : 5 5 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 29
+Possiveis valores para (1,1): 1 
+Foi enviado para o server o numero 1 na posicao : 1 1
+O envio para o server do numero 1 na posicao : 1 1 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 28
+Possiveis valores para (3,6): 3 7 
+Foi enviado para o server o numero 3 na posicao : 3 6
+O envio para o server do numero 3 na posicao : 3 6 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 7 na posicao : 3 6
+O envio para o server do numero 7 na posicao : 3 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 27
+Possiveis valores para (4,2): 3 9 
+Foi enviado para o server o numero 3 na posicao : 4 2
+O envio para o server do numero 3 na posicao : 4 2 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 9 na posicao : 4 2
+O envio para o server do numero 9 na posicao : 4 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 26
+Possiveis valores para (2,0): 4 
+Foi enviado para o server o numero 4 na posicao : 2 0
+O envio para o server do numero 4 na posicao : 2 0 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 25
+Possiveis valores para (7,2): 1 6 
+Foi enviado para o server o numero 1 na posicao : 7 2
+O envio para o server do numero 1 na posicao : 7 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 24
+Possiveis valores para (0,6): 3 
+Foi enviado para o server o numero 3 na posicao : 0 6
+O envio para o server do numero 3 na posicao : 0 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 23
+Possiveis valores para (2,4): 6 7 
+Foi enviado para o server o numero 6 na posicao : 2 4
+O envio para o server do numero 6 na posicao : 2 4 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 7 na posicao : 2 4
+O envio para o server do numero 7 na posicao : 2 4 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 22
+Possiveis valores para (2,3): 5 6 
+Foi enviado para o server o numero 5 na posicao : 2 3
+O envio para o server do numero 5 na posicao : 2 3 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 6 na posicao : 2 3
+O envio para o server do numero 6 na posicao : 2 3 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 21
+Possiveis valores para (3,3): 1 3 
+Foi enviado para o server o numero 1 na posicao : 3 3
+O envio para o server do numero 1 na posicao : 3 3 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 20
+Possiveis valores para (0,5): 2 
+Foi enviado para o server o numero 2 na posicao : 0 5
+O envio para o server do numero 2 na posicao : 0 5 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 19
+Possiveis valores para (6,4): 6 
+Foi enviado para o server o numero 6 na posicao : 6 4
+O envio para o server do numero 6 na posicao : 6 4 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 18
+Possiveis valores para (1,6): 6 
+Foi enviado para o server o numero 6 na posicao : 1 6
+O envio para o server do numero 6 na posicao : 1 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 17
+Possiveis valores para (8,0): 5 6 
+Foi enviado para o server o numero 5 na posicao : 8 0
+O envio para o server do numero 5 na posicao : 8 0 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 6 na posicao : 8 0
+O envio para o server do numero 6 na posicao : 8 0 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 16
+Possiveis valores para (7,1): 2 
+Foi enviado para o server o numero 2 na posicao : 7 1
+O envio para o server do numero 2 na posicao : 7 1 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 15
+Possiveis valores para (7,7): 6 
+Foi enviado para o server o numero 6 na posicao : 7 7
+O envio para o server do numero 6 na posicao : 7 7 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 14
+Possiveis valores para (5,2): 3 6 
+Foi enviado para o server o numero 3 na posicao : 5 2
+O envio para o server do numero 3 na posicao : 5 2 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 6 na posicao : 5 2
+O envio para o server do numero 6 na posicao : 5 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 13
+Possiveis valores para (5,7): 3 8 
+Foi enviado para o server o numero 3 na posicao : 5 7
+O envio para o server do numero 3 na posicao : 5 7 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 8 na posicao : 5 7
+O envio para o server do numero 8 na posicao : 5 7 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 12
+Possiveis valores para (8,2): 7 8 
+Foi enviado para o server o numero 7 na posicao : 8 2
+O envio para o server do numero 7 na posicao : 8 2 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 8 na posicao : 8 2
+O envio para o server do numero 8 na posicao : 8 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 11
+Possiveis valores para (6,5): 1 
+Foi enviado para o server o numero 1 na posicao : 6 5
+O envio para o server do numero 1 na posicao : 6 5 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 10
+Possiveis valores para (0,3): 9 
+Foi enviado para o server o numero 9 na posicao : 0 3
+O envio para o server do numero 9 na posicao : 0 3 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 9
+Possiveis valores para (3,2): 3 
+Foi enviado para o server o numero 3 na posicao : 3 2
+O envio para o server do numero 3 na posicao : 3 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 8
+Possiveis valores para (4,7): 3 
+Foi enviado para o server o numero 3 na posicao : 4 7
+O envio para o server do numero 3 na posicao : 4 7 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 7
+Possiveis valores para (7,0): 5 
+Foi enviado para o server o numero 5 na posicao : 7 0
+O envio para o server do numero 5 na posicao : 7 0 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 6
+Possiveis valores para (8,3): 5 
+Foi enviado para o server o numero 5 na posicao : 8 3
+O envio para o server do numero 5 na posicao : 8 3 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 5
+Possiveis valores para (2,5): 5 
+Foi enviado para o server o numero 5 na posicao : 2 5
+O envio para o server do numero 5 na posicao : 2 5 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 4
+Possiveis valores para (8,6): 4 
+Foi enviado para o server o numero 4 na posicao : 8 6
+O envio para o server do numero 4 na posicao : 8 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 3
+Possiveis valores para (6,8): 7 
+Foi enviado para o server o numero 7 na posicao : 6 8
+O envio para o server do numero 7 na posicao : 6 8 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 2
+Possiveis valores para (8,1): 7 
+Foi enviado para o server o numero 7 na posicao : 8 1
+O envio para o server do numero 7 na posicao : 8 1 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 1
+Possiveis valores para (0,2): 7 
+Foi enviado para o server o numero 7 na posicao : 0 2
+O envio para o server do numero 7 na posicao : 0 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 0
+Possiveis valores para (5,3): 3 
+Foi enviado para o server o numero 3 na posicao : 5 3
+O envio para o server do numero 3 na posicao : 5 3 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Tentativas falhadas -> 23
+Score final -> 28
+Hora Fim Jogo -> 2025-12-25 23:22:21
+Tempo Jogo -> 00:00:08
+O cliente 70852 comecou a jogar
+Escreveu com sucesso o pedido do jogo
+Foi recebida a resposta do servidor sobre o pedido de jogo
+Id de jogo recebido -> 3
+Recebeu o jogo perfeitamente
+Hora Inicio Jogo -> 2025-12-25 23:23:02
+Fez o shuffle do array de posições por preencher
+Número de posições inicialmente por preencher -> 51
+Numero de posições por preencher restantes -> 50
+Possiveis valores para (6,4): 5 7 
+Foi enviado para o server o numero 5 na posicao : 6 4
+O envio para o server do numero 5 na posicao : 6 4 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 49
+Possiveis valores para (2,0): 3 4 
+Foi enviado para o server o numero 3 na posicao : 2 0
+O envio para o server do numero 3 na posicao : 2 0 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 48
+Possiveis valores para (3,3): 2 7 9 
+Foi enviado para o server o numero 2 na posicao : 3 3
+O envio para o server do numero 2 na posicao : 3 3 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 7 na posicao : 3 3
+O envio para o server do numero 7 na posicao : 3 3 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 9 na posicao : 3 3
+O envio para o server do numero 9 na posicao : 3 3 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 47
+Possiveis valores para (2,4): 6 
+Foi enviado para o server o numero 6 na posicao : 2 4
+O envio para o server do numero 6 na posicao : 2 4 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 46
+Possiveis valores para (3,6): 2 6 7 
+Foi enviado para o server o numero 2 na posicao : 3 6
+O envio para o server do numero 2 na posicao : 3 6 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 6 na posicao : 3 6
+O envio para o server do numero 6 na posicao : 3 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 45
+Possiveis valores para (8,0): 4 5 
+Foi enviado para o server o numero 4 na posicao : 8 0
+O envio para o server do numero 4 na posicao : 8 0 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 5 na posicao : 8 0
+O envio para o server do numero 5 na posicao : 8 0 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 44
+Possiveis valores para (5,5): 3 6 
+Foi enviado para o server o numero 3 na posicao : 5 5
+O envio para o server do numero 3 na posicao : 5 5 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 6 na posicao : 5 5
+O envio para o server do numero 6 na posicao : 5 5 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 43
+Possiveis valores para (4,6): 2 7 9 
+Foi enviado para o server o numero 2 na posicao : 4 6
+O envio para o server do numero 2 na posicao : 4 6 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 7 na posicao : 4 6
+O envio para o server do numero 7 na posicao : 4 6 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 9 na posicao : 4 6
+O envio para o server do numero 9 na posicao : 4 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 42
+Possiveis valores para (8,3): 4 7 8 
+Foi enviado para o server o numero 4 na posicao : 8 3
+O envio para o server do numero 4 na posicao : 8 3 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 41
+Possiveis valores para (8,6): 3 8 
+Foi enviado para o server o numero 3 na posicao : 8 6
+O envio para o server do numero 3 na posicao : 8 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 40
+Possiveis valores para (5,7): 2 7 
+Foi enviado para o server o numero 2 na posicao : 5 7
+O envio para o server do numero 2 na posicao : 5 7 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 7 na posicao : 5 7
+O envio para o server do numero 7 na posicao : 5 7 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 39
+Possiveis valores para (3,1): 3 4 7 
+Foi enviado para o server o numero 3 na posicao : 3 1
+O envio para o server do numero 3 na posicao : 3 1 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 4 na posicao : 3 1
+O envio para o server do numero 4 na posicao : 3 1 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 7 na posicao : 3 1
+O envio para o server do numero 7 na posicao : 3 1 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 38
+Possiveis valores para (2,3): 5 
+Foi enviado para o server o numero 5 na posicao : 2 3
+O envio para o server do numero 5 na posicao : 2 3 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 37
+Possiveis valores para (7,1): 1 4 9 
+Foi enviado para o server o numero 1 na posicao : 7 1
+O envio para o server do numero 1 na posicao : 7 1 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 36
+Possiveis valores para (6,8): 6 
+Foi enviado para o server o numero 6 na posicao : 6 8
+O envio para o server do numero 6 na posicao : 6 8 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 35
+Possiveis valores para (5,2): 2 3 5 
+Foi enviado para o server o numero 2 na posicao : 5 2
+O envio para o server do numero 2 na posicao : 5 2 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 3 na posicao : 5 2
+O envio para o server do numero 3 na posicao : 5 2 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 5 na posicao : 5 2
+O envio para o server do numero 5 na posicao : 5 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 34
+Possiveis valores para (1,6): 1 5 
+Foi enviado para o server o numero 1 na posicao : 1 6
+O envio para o server do numero 1 na posicao : 1 6 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 5 na posicao : 1 6
+O envio para o server do numero 5 na posicao : 1 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 33
+Possiveis valores para (0,3): 8 
+Foi enviado para o server o numero 8 na posicao : 0 3
+O envio para o server do numero 8 na posicao : 0 3 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 32
+Possiveis valores para (8,2): 6 7 
+Foi enviado para o server o numero 6 na posicao : 8 2
+O envio para o server do numero 6 na posicao : 8 2 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 7 na posicao : 8 2
+O envio para o server do numero 7 na posicao : 8 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 31
+Possiveis valores para (7,6): 8 
+Foi enviado para o server o numero 8 na posicao : 7 6
+O envio para o server do numero 8 na posicao : 7 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 30
+Possiveis valores para (1,7): 4 6 
+Foi enviado para o server o numero 4 na posicao : 1 7
+O envio para o server do numero 4 na posicao : 1 7 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 6 na posicao : 1 7
+O envio para o server do numero 6 na posicao : 1 7 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 29
+Possiveis valores para (0,8): 1 4 
+Foi enviado para o server o numero 1 na posicao : 0 8
+O envio para o server do numero 1 na posicao : 0 8 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 4 na posicao : 0 8
+O envio para o server do numero 4 na posicao : 0 8 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 28
+Possiveis valores para (8,1): 6 
+Foi enviado para o server o numero 6 na posicao : 8 1
+O envio para o server do numero 6 na posicao : 8 1 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 27
+Possiveis valores para (7,7): 5 
+Foi enviado para o server o numero 5 na posicao : 7 7
+O envio para o server do numero 5 na posicao : 7 7 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 26
+Possiveis valores para (6,2): 2 3 9 
+Foi enviado para o server o numero 2 na posicao : 6 2
+O envio para o server do numero 2 na posicao : 6 2 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 3 na posicao : 6 2
+O envio para o server do numero 3 na posicao : 6 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 25
+Possiveis valores para (2,5): 4 
+Foi enviado para o server o numero 4 na posicao : 2 5
+O envio para o server do numero 4 na posicao : 2 5 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 24
+Possiveis valores para (4,4): 7 
+Foi enviado para o server o numero 7 na posicao : 4 4
+O envio para o server do numero 7 na posicao : 4 4 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 23
+Possiveis valores para (6,0): 2 
+Foi enviado para o server o numero 2 na posicao : 6 0
+O envio para o server do numero 2 na posicao : 6 0 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 22
+Possiveis valores para (4,2): 2 4 8 
+Foi enviado para o server o numero 2 na posicao : 4 2
+O envio para o server do numero 2 na posicao : 4 2 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 4 na posicao : 4 2
+O envio para o server do numero 4 na posicao : 4 2 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 8 na posicao : 4 2
+O envio para o server do numero 8 na posicao : 4 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 21
+Possiveis valores para (6,3): 7 
+Foi enviado para o server o numero 7 na posicao : 6 3
+O envio para o server do numero 7 na posicao : 6 3 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 20
+Possiveis valores para (2,8): 9 
+Foi enviado para o server o numero 9 na posicao : 2 8
+O envio para o server do numero 9 na posicao : 2 8 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 19
+Possiveis valores para (4,1): 4 
+Foi enviado para o server o numero 4 na posicao : 4 1
+O envio para o server do numero 4 na posicao : 4 1 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 18
+Possiveis valores para (1,2): 4 9 
+Foi enviado para o server o numero 4 na posicao : 1 2
+O envio para o server do numero 4 na posicao : 1 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 17
+Possiveis valores para (8,5): 8 
+Foi enviado para o server o numero 8 na posicao : 8 5
+O envio para o server do numero 8 na posicao : 8 5 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 16
+Possiveis valores para (0,6): 1 2 
+Foi enviado para o server o numero 1 na posicao : 0 6
+O envio para o server do numero 1 na posicao : 0 6 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 2 na posicao : 0 6
+O envio para o server do numero 2 na posicao : 0 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 15
+Possiveis valores para (3,7): 2 4 
+Foi enviado para o server o numero 2 na posicao : 3 7
+O envio para o server do numero 2 na posicao : 3 7 foi feito com sucesso
+A resposta enviada para o servidor estava errada
+Foi enviado para o server o numero 4 na posicao : 3 7
+O envio para o server do numero 4 na posicao : 3 7 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 14
+Possiveis valores para (3,2): 2 
+Foi enviado para o server o numero 2 na posicao : 3 2
+O envio para o server do numero 2 na posicao : 3 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 13
+Possiveis valores para (1,1): 9 
+Foi enviado para o server o numero 9 na posicao : 1 1
+O envio para o server do numero 9 na posicao : 1 1 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 12
+Possiveis valores para (5,3): 2 
+Foi enviado para o server o numero 2 na posicao : 5 3
+O envio para o server do numero 2 na posicao : 5 3 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 11
+Possiveis valores para (0,2): 6 
+Foi enviado para o server o numero 6 na posicao : 0 2
+O envio para o server do numero 6 na posicao : 0 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 10
+Possiveis valores para (6,5): 9 
+Foi enviado para o server o numero 9 na posicao : 6 5
+O envio para o server do numero 9 na posicao : 6 5 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 9
+Possiveis valores para (2,6): 7 
+Foi enviado para o server o numero 7 na posicao : 2 6
+O envio para o server do numero 7 na posicao : 2 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 8
+Possiveis valores para (4,7): 2 
+Foi enviado para o server o numero 2 na posicao : 4 7
+O envio para o server do numero 2 na posicao : 4 7 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 7
+Possiveis valores para (5,1): 3 
+Foi enviado para o server o numero 3 na posicao : 5 1
+O envio para o server do numero 3 na posicao : 5 1 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 6
+Possiveis valores para (7,0): 4 
+Foi enviado para o server o numero 4 na posicao : 7 0
+O envio para o server do numero 4 na posicao : 7 0 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 5
+Possiveis valores para (5,6): 1 
+Foi enviado para o server o numero 1 na posicao : 5 6
+O envio para o server do numero 1 na posicao : 5 6 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 4
+Possiveis valores para (1,8): 1 
+Foi enviado para o server o numero 1 na posicao : 1 8
+O envio para o server do numero 1 na posicao : 1 8 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 3
+Possiveis valores para (0,7): 3 
+Foi enviado para o server o numero 3 na posicao : 0 7
+O envio para o server do numero 3 na posicao : 0 7 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 2
+Possiveis valores para (0,5): 1 
+Foi enviado para o server o numero 1 na posicao : 0 5
+O envio para o server do numero 1 na posicao : 0 5 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 1
+Possiveis valores para (7,2): 9 
+Foi enviado para o server o numero 9 na posicao : 7 2
+O envio para o server do numero 9 na posicao : 7 2 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Numero de posições por preencher restantes -> 0
+Possiveis valores para (3,5): 3 
+Foi enviado para o server o numero 3 na posicao : 3 5
+O envio para o server do numero 3 na posicao : 3 5 foi feito com sucesso
+A resposta enviada para o servidor estava correta
+Tentativas falhadas -> 21
+Score final -> 30
+Hora Fim Jogo -> 2025-12-25 23:23:10
+Tempo Jogo -> 00:00:08

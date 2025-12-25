@@ -10,6 +10,7 @@
 // Obter respostas possíveis para uma célula específica do Sudoku
 // --------------------------------------------------------------
 
+// Adicionei score na funcao fillSudoku
 
 int* getPossibleAnswers(char partialSolution[81], int rowSelected, int columnSelected , int *size)
 {   
@@ -152,6 +153,7 @@ void fillSudoku(int socket , char sudoku[81] , int gameId , char logPath[256])
     int positionsToFill[81][2];
     int emptyCount = 0;
     int tentativas_falhadas = 0;
+    int score = 0;
 
     registerGameTimeLive(horaInicioJogo,sizeof(horaInicioJogo));
 
@@ -224,6 +226,7 @@ void fillSudoku(int socket , char sudoku[81] , int gameId , char logPath[256])
             if(strcmp(serverAnswer,"Correct") == 0)
             {   
                 writeLogf(logPath, "A resposta enviada para o servidor estava correta");
+                score++;                                                                
                 sudoku[rowSelected * 9 + columnSelected] = possibleAnswers[j] + '0';
                 displaySudokuWithCoords(sudoku);
                 break;
@@ -232,6 +235,7 @@ void fillSudoku(int socket , char sudoku[81] , int gameId , char logPath[256])
             {
                 writeLogf(logPath, "A resposta enviada para o servidor estava errada");
                 tentativas_falhadas++;
+                score--;
             }
         }
 
@@ -239,6 +243,8 @@ void fillSudoku(int socket , char sudoku[81] , int gameId , char logPath[256])
     }
 
     writeLogf(logPath, "Tentativas falhadas -> %d", tentativas_falhadas);
+
+    writeLogf(logPath,"Score final -> %d", score);
 
     registerGameTimeLive(horaFimJogo,sizeof(horaFimJogo));
     writeLogf(logPath, "Hora Fim Jogo -> %s", horaFimJogo);

@@ -39,6 +39,7 @@ int main(void)
 
         
         inicializeGame(serverSocket , gameId , partialSolution);
+        break;
     }
     
     close(serverSocket);

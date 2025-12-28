@@ -28,10 +28,10 @@
 #define MAX_LINE_SIZE_IN_CSV 166
 
 //NUMBER_OF_PRODUCERS define o número de threads produtoras que o nosso código irá gerar
-#define NUMBER_OF_PRODUCERS 10
+#define NUMBER_OF_PRODUCERS 200
 
 //NUMBER_OF_CONSUMERS define o número de threads produtoras que o nosso código irá gerar
-#define NUMBER_OF_CONSUMERS 10
+#define NUMBER_OF_CONSUMERS 200
 
 //GameData define a estrutura que irá conter a informação dos jogos sudoku
 //Id - Identificador único de jogo
@@ -343,9 +343,9 @@ void *producer(void *arguments)
             int bytesReceived = readSocket(socket , messageFromClient , sizeof(messageFromClient));
 
             //Caso o número de bytes for menor que 0 termina o processo
-            if(bytesReceived < 0)
+            if(bytesReceived <= 0)
             {
-                perror("Error : Server could not read the answer of the client or the client disconnected from the socket");
+                perror("Error : Server could not read the request of the client or the client disconnected from the socket");
                 exit(1);
             }
 
@@ -368,7 +368,8 @@ void *producer(void *arguments)
             printf("A thread produtora %d acabou de processar o pedido de código 1 do cliente\n" , pthread_self());
             continue;
         }
-        else
+        
+        if(codeOfClientMessage == 2)
         {   
             //Recebe o que restou da mensagem para além do código
             char *restOfClientMessage = strchr(messageFromClient, ',');

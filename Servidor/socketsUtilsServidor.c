@@ -216,3 +216,169 @@ void sendGameToClient(int socket, int clientId, int numeroJogadoresSala)
     // Liberta o mutex
     pthread_mutex_unlock(&salaMutex);
 }
+
+
+// Estrutura global da fila de pedidos de validação
+// Inicializada com head e tail nulos (fila vazia)
+static FilaPedidos fila = { NULL, NULL };
+
+// Contador global de pedidos
+// Usado para atribuir IDs únicos a cada pedido
+static int pedidoCounter = 0;
+
+// Mutex para proteger o acesso concorrente à fila
+pthread_mutex_t filaMutex = PTHREAD_MUTEX_INITIALIZER;
+
+// Variável de condição para bloquear/desbloquear threads consumidoras
+// quando a fila estiver vazia ou houver novos pedidos
+pthread_cond_t filaCond = PTHREAD_COND_INITIALIZER;
+
+
+// ---------------------------------------------------------
+// Função auxiliar que gera uma string representando os IDs
+// dos clientes atualmente na fila e escreve no log
+// ---------------------------------------------------------
+void logFilaAtual()
+{
+    char filaIds[512]; // buffer para armazenar string da fila
+    int pos = 0;       // posição atual no buffer
+
+    // Começa a string com "[ "
+    pos += snprintf(filaIds + pos, sizeof(filaIds) - pos, "[ ");
+
+    // Percorre a fila ligada a partir do head
+    PedidoValidacao *p = fila.head;
+    while (p)
+    {
+        // Adiciona o ID do cliente ao buffer
+        pos += snprintf(filaIds + pos,
+                        sizeof(filaIds) - pos,
+                        "%d",
+                        p->clientId);
+
+        // Adiciona vírgula entre IDs, exceto no último elemento
+        if (p->next)
+            pos += snprintf(filaIds + pos,
+                            sizeof(filaIds) - pos,
+                            ", ");
+
+        p = p->next;
+    }
+
+    // Fecha a representação da fila com "]"
+    pos += snprintf(filaIds + pos, sizeof(filaIds) - pos, " ]");
+
+    // Escreve no log
+    writeLogf("../Servidor/log_servidor.csv",
+              "Fila atual de pedidos de validação parcial: %s",
+              filaIds);
+}
+
+// ---------------------------------------------------------
+// Função para enfileirar um pedido de validação na fila FIFO
+// ---------------------------------------------------------
+void enqueuePedido(PedidoValidacao *p)
+{
+    // Bloqueia o mutex para garantir exclusão mútua
+    // e proteger a estrutura da fila durante alterações
+    pthread_mutex_lock(&filaMutex);
+
+    // Incrementa o contador global de pedidos e atribui ao pedido
+    // Isso garante que cada pedido tenha um ID único
+    pedidoCounter++;
+    p->idPedido = pedidoCounter;
+
+    // Registra no log que o pedido foi adicionado à fila
+    writeLogf("../Servidor/log_servidor.csv",
+              "Pedido de validação parcial %d enfileirado do cliente %d. (Coluna:%d,Linha:%d)",
+              p->idPedido, p->clientId, p->col, p->row);
+
+    // O próximo ponteiro do pedido é nulo, pois será o último da fila
+    p->next = NULL;
+
+    // Se a fila estiver vazia, este pedido será o head e tail
+    if (fila.tail == NULL) {
+        fila.head = fila.tail = p;
+    } else {
+        // Caso contrário, adiciona no final da fila e atualiza o tail
+        fila.tail->next = p;
+        fila.tail = p;
+    }
+
+    // Registra no log a fila atualizada
+    logFilaAtual();
+
+    // Sinaliza a condição para acordar uma thread que esteja esperando por pedidos
+    pthread_cond_signal(&filaCond);
+
+    // Libera o mutex, permitindo que outras threads acessem a fila
+    pthread_mutex_unlock(&filaMutex);
+}
+
+
+// ---------------------------------------------------------
+// Função para remover (desenfileirar) o próximo pedido da fila
+// ---------------------------------------------------------
+PedidoValidacao* dequeuePedido()
+{
+    // Bloqueia o mutex para acesso exclusivo à fila
+    pthread_mutex_lock(&filaMutex);
+
+    // Se a fila estiver vazia, espera até que algum pedido seja enfileirado
+    while (fila.head == NULL) {
+        pthread_cond_wait(&filaCond, &filaMutex);
+    }
+
+    // Remove o primeiro pedido da fila
+    PedidoValidacao *p = fila.head;
+    fila.head = p->next;
+
+    // Se a fila ficar vazia após remover o pedido, tail também deve ser nulo
+    if (fila.head == NULL)
+        fila.tail = NULL;
+
+    // Libera o mutex
+    pthread_mutex_unlock(&filaMutex);
+
+    // Retorna o pedido removido
+    return p;
+}
+
+
+// ---------------------------------------------------------
+// Thread que processa continuamente os pedidos da fila
+// ---------------------------------------------------------
+void* workerValidacoes(void *arg)
+{
+    while (1)
+    {
+        // Remove o próximo pedido da fila (bloqueante se fila vazia)
+        PedidoValidacao *p = dequeuePedido();
+
+        // Loga o processamento do pedido
+        pthread_mutex_lock(&filaMutex);
+        writeLogf("../Servidor/log_servidor.csv",
+                  "Pedido de validação parcial %d processado do cliente %d",
+                  p->idPedido, p->clientId);
+
+        // Mostra a fila atualizada depois de remover o pedido
+        logFilaAtual();
+        pthread_mutex_unlock(&filaMutex);
+
+        // Chama a função que verifica a resposta do cliente no Sudoku
+        verifyClientSudokuAnswer(
+            p->socketCliente,
+            p->gameId,
+            p->row,
+            p->col,
+            p->answer,
+            p->clientId
+        );
+
+        // Libera a memória do pedido
+        free(p);
+    }
+
+    return NULL; // Não será alcançado, loop infinito
+}
+

@@ -316,3 +316,5 @@ void requestGame(int socket , int* gameId , char partialSolution[81] , char logP
 
     writeLogf(logPath, "Recebeu o jogo perfeitamente");
 }
+
+

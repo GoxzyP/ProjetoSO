@@ -45,9 +45,34 @@ typedef struct sala_multijogador {
 } SalaMultijogador;
 
 
+// Estrutura que representa um pedido de validação enviado por um cliente
+typedef struct PedidoValidacao {
+    int idPedido;          // ID único do pedido (incrementado globalmente)
+    int socketCliente;     // Socket do cliente que enviou o pedido
+    int clientId;          // ID do cliente que enviou o pedido
+    int gameId;            // ID do jogo Sudoku ao qual o pedido pertence
+    int row;               // Linha da célula do Sudoku que está sendo verificada
+    int col;               // Coluna da célula do Sudoku que está sendo verificada
+    int answer;            // Valor proposto pelo cliente para a célula
+    struct PedidoValidacao *next; // Ponteiro para o próximo pedido na fila (para formar lista encadeada)
+} PedidoValidacao;
+
+
+// Estrutura que representa uma fila de pedidos de validação
+typedef struct {
+    PedidoValidacao *head; // Ponteiro para o primeiro pedido da fila
+    PedidoValidacao *tail; // Ponteiro para o último pedido da fila
+} FilaPedidos;
+
+
+
 // Funções implementadas em socketUtils.c
 void readGamesFromCSV();
 void verifyClientSudokuAnswer(int socket, int gameId, int rowSelected, int columnSelected, int clientAnswer , int clientId);
 void sendGameToClient(int socket, int clientId,int numeroJogadoresSala);
+void enqueuePedido(PedidoValidacao *p);
+PedidoValidacao* dequeuePedido();
+void* workerValidacoes(void *arg);
+
 
 #endif

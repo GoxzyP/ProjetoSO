@@ -27,17 +27,15 @@ void* clienteHandler(void* arg)
 
     // ID do cliente (enviado pelo próprio cliente na primeira mensagem)
     // Inicializado a -1 para indicar que ainda não foi recebido
-
     int idCliente = -1;
 
     // Buffer para armazenar pedidos enviados pelo cliente
     char clientRequest[512];
 
-
-     // Ciclo principal de comunicação com o cliente
+    // Ciclo principal de comunicação com o cliente
     while (1)
     {
-         // Apenas escreve no log se o cliente já tiver um ID atribuído
+        // Apenas escreve no log se o cliente já tiver um ID atribuído
         if (idCliente != -1)
         {
             writeLogf("../Servidor/log_servidor.csv",
@@ -51,15 +49,16 @@ void* clienteHandler(void* arg)
                                      sizeof(clientRequest));
 
         // Se ocorrer erro ou o cliente fechar a ligação
-        if (bytesReceived < 0 || bytesReceived == 0)
+        if (bytesReceived <= 0 || bytesReceived == 0)
         {
-            perror("Error : Servidor não conseguiu receber o pedido do cliente");
+            perror("Erro: Servidor não conseguiu receber o pedido do cliente");
             writeLogf("../Servidor/log_servidor.csv",
-                      "Servidor não conseguiu receber o pedido do cliente");
+                      "Servidor não conseguiu receber o pedido do cliente %d",
+                      idCliente);
             exit(1);
         }
 
-         // Se ainda não foi recebido o ID do cliente
+        // Se ainda não foi recebido o ID do cliente
         // A primeira mensagem enviada pelo cliente corresponde ao seu ID
         if (idCliente == -1)
         {
@@ -91,7 +90,7 @@ void* clienteHandler(void* arg)
                 writeLogf("../Servidor/log_servidor.csv",
                           "O pedido do cliente %d é sobre o envio de um novo jogo",
                           idCliente);
-                
+
                 // Envia o jogo ao cliente
                 // JOGADORES_POR_SALA indica quantos jogadores são necessários
                 sendGameToClient(socketCliente,
@@ -101,37 +100,60 @@ void* clienteHandler(void* arg)
 
             case 2:
             {
+                // Loga que o cliente está a fazer um pedido de verificação de uma célula do Sudoku
                 writeLogf("../Servidor/log_servidor.csv",
                           "O pedido do cliente %d é sobre a verificação de uma resposta",
                           idCliente);
 
+                // Variáveis que vão armazenar os parâmetros enviados pelo cliente
                 int gameId, row, col, answer;
 
+                // Verifica se a string de resto da mensagem existe e tenta extrair 4 inteiros
+                // gameId -> ID do jogo
+                // row -> linha da célula a validar
+                // col -> coluna da célula a validar
+                // answer -> valor do cliente para essa célula
                 if (restOfClientRequest &&
-                    sscanf(restOfClientRequest,
-                           "%d,%d,%d,%d",
-                           &gameId,
-                           &row,
-                           &col,
-                           &answer) == 4)
+                    sscanf(restOfClientRequest, "%d,%d,%d,%d",
+                           &gameId, &row, &col, &answer) == 4)
                 {
+                    // Loga que os parâmetros recebidos são válidos
                     writeLogf("../Servidor/log_servidor.csv",
                               "O pedido do cliente %d enviou os parâmetros de verificação válidos",
                               idCliente);
 
-                    verifyClientSudokuAnswer(socketCliente,
-                                             gameId,
-                                             row,
-                                             col,
-                                             answer,
-                                             idCliente);
+                    // Aloca memória para criar um novo pedido de validação
+                    PedidoValidacao *p = malloc(sizeof(PedidoValidacao));
+                    if (!p)
+                    {
+                        // Se falhar a alocação, loga erro e interrompe o case
+                        writeLogf("../Servidor/log_servidor.csv",
+                                  "Erro de alocação de memória para PedidoValidacao (cliente %d)",
+                                  idCliente);
+                        break;
+                    }
+
+                    // Preenche os campos da estrutura com os dados do cliente e do jogo
+                    p->socketCliente = socketCliente; // socket do cliente
+                    p->clientId      = idCliente;     // ID do cliente
+                    p->gameId        = gameId;        // ID do jogo
+                    p->row           = row;           // linha da célula
+                    p->col           = col;           // coluna da célula
+                    p->answer        = answer;        // valor do cliente
+                    p->next          = NULL;          // próximo elemento da fila (nulo por enquanto)
+
+                    // Envia o pedido para a fila FIFO, que será processada pelo workerValidacoes
+                    enqueuePedido(p);
                 }
                 else
                 {
+                    // Caso os parâmetros recebidos sejam inválidos, loga o erro
                     writeLogf("../Servidor/log_servidor.csv",
                               "Parâmetros inválidos enviados pelo cliente %d",
                               idCliente);
                 }
+
+                // Encerra este case
                 break;
             }
 
@@ -147,10 +169,15 @@ void* clienteHandler(void* arg)
     return NULL;
 }
 
+
 int main(void)
 {
     int socketServidor;
     struct sockaddr_un enderecoServidor;
+
+    pthread_t worker;
+    pthread_create(&worker, NULL, workerValidacoes, NULL);
+
 
     srand(time(NULL));
 

@@ -24,7 +24,7 @@ int lerSocket(int socket , char *buffer , int numeroBytes)
 	return (numeroBytes - bytesPorLer);
 }
 
-int escreveSocket(int socket , char *buffer , int numeroBytes)
+int writeSocket(int socket , char *buffer , int numeroBytes)
 {
 	int bytesPorEscrever = numeroBytes; 
     int bytesEscritos;
@@ -42,7 +42,7 @@ int escreveSocket(int socket , char *buffer , int numeroBytes)
 	return (numeroBytes - bytesPorEscrever);
 }
 
-int lerLinha(int socket, char *buffer, int tamanhoMaximo)
+int readSocket(int socket, char *buffer, int tamanhoMaximo)
 {   
     int numeroCaracteresLidos , resultado;
     char caracter;

@@ -7,7 +7,7 @@
 #include "../include/uthash.h"
 
 // Funções implementadas em socketUtils.c
-int escreveSocket(int socket , char *buffer , int numeroBytes);
-int lerLinha(int socket, char *buffer, int tamanhoMaximo);
+int writeSocket(int socket , char *buffer , int numeroBytes);
+int readSocket(int socket, char *buffer, int tamanhoMaximo);
 
 #endif

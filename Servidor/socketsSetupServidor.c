@@ -48,8 +48,8 @@ void* clienteHandler(void* arg)
                                      clientRequest,
                                      sizeof(clientRequest));
 
-        // Se ocorrer erro ou o cliente fechar a ligação
-        if (bytesReceived <= 0 || bytesReceived == 0)
+        // Se ocorrer erro na ligação
+        if (bytesReceived < 0)
         {
             perror("Erro: Servidor não conseguiu receber o pedido do cliente");
             writeLogf("../Servidor/log_servidor.csv",
@@ -57,6 +57,14 @@ void* clienteHandler(void* arg)
                       idCliente);
             exit(1);
         }
+
+        // Se o cliente fechar a ligação
+        if (bytesReceived == 0)
+        {       
+            close(socketCliente);
+            return NULL;   // termina só esta thread
+        }
+
 
         // Se ainda não foi recebido o ID do cliente
         // A primeira mensagem enviada pelo cliente corresponde ao seu ID

@@ -75,7 +75,7 @@ int main(void)
         else if(escolha == 2) {
             continuar = 0;
             printf("Programa terminado.\n");
-            writeLogf(logPath,"O cliente %d terminou o programa",idCliente);
+            writeLogf(logPath,"O cliente %d se desconectou",idCliente);
         }
     }
     

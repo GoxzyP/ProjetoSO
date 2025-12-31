@@ -8,7 +8,7 @@
 // --------------------------------
 // Display do tabuleiro no terminal
 // --------------------------------
-void displaySudokuWithCoords(sudokuCell (*sudoku)[9][9]) 
+void displaySudokuWithCoords(void *sudoku , int (*getValueFunction)(void* , int , int)) 
 {
     // Cabeçalho com coordenadas das colunas (X)
     printf("\n\nxy "); // marcador no canto superior esquerdo
@@ -30,10 +30,11 @@ void displaySudokuWithCoords(sudokuCell (*sudoku)[9][9])
 
         // Itera sobre cada coluna da linha
         for (int col = 0; col < 9; col++) {
-            if ((*sudoku)[row][col].value == 0)
+            int value = getValueFunction(sudoku , row , col);
+            if (value == 0)
                 printf("-");  // se for 0 então não há valor ainda, substituimos por "-"
             else
-                printf("%d", (*sudoku)[row][col].value); // imprime o número presente na célula
+                printf("%d", value); // imprime o número presente na célula
 
             if ((col + 1) % 3 == 0 && col != 8)
                 printf(" |"); // separador entre blocos 3x3
@@ -68,12 +69,26 @@ void shufflePositionsInArray(int positions[][2] , int count) // funcao para bara
     }
 }
 
+int getValueFromSudokuCell(void *sudoku , int rowSelected , int columnSelected)
+{
+    sudokuCell (*grid)[9][9] = sudoku;
+    return (*grid)[rowSelected][columnSelected].value;
+}
+
+int getValueFromCharGrid(void *sudoku , int rowSelected , int columnSelected)
+{
+    char *grid = sudoku;
+    int index = rowSelected * 9 + columnSelected;
+
+    return grid[index] - '0';
+}
+
 // --------------------------------------------------------------
 // Obter respostas possíveis para uma célula específica do Sudoku
 // --------------------------------------------------------------
-int* getPossibleAnswers(sudokuCell (*sudoku)[9][9] , int rowSelected, int columnSelected , int *size)
+int* getPossibleAnswers(void *sudoku , int rowSelected, int columnSelected , int *size , int (*getValueFunction)(void* , int , int))
 {   
-    printf("A thread produtora %d entrou com sucesso na função responsável por pegar as respostas possíveis para a célula %d %d \n" , pthread_self() , rowSelected , columnSelected);
+    //printf("A thread produtora %d entrou com sucesso na função responsável por pegar as respostas possíveis para a célula %d %d \n" , pthread_self() , rowSelected , columnSelected);
 
     // Inicializa array com todos os possíveis valores numa celula (1 a 9)
     int allPossibleAnswers[] = {1,2,3,4,5,6,7,8,9};
@@ -82,17 +97,20 @@ int* getPossibleAnswers(sudokuCell (*sudoku)[9][9] , int rowSelected, int column
     // Remove valores já presentes na mesma linha e coluna
     for(int i = 0 ; i < 9 ; i++)
     {   
+        int rowValue = getValueFunction(sudoku , rowSelected , i);
+        int columnValue = getValueFunction(sudoku , i , columnSelected);
+
         // Se a linha já contém o número, remove da lista de possíveis
-        if((*sudoku)[rowSelected][i].value != 0 && allPossibleAnswers[(*sudoku)[rowSelected][i].value - 1] != 0)
+        if(rowValue != 0 && allPossibleAnswers[rowValue - 1] != 0)
         {
-            allPossibleAnswers[(*sudoku)[rowSelected][i].value - 1] = 0; //põe o valor repetido a zeros no array de respostas possíveis
+            allPossibleAnswers[rowValue - 1] = 0; //põe o valor repetido a zeros no array de respostas possíveis
             arraySize--; //diminui o tamanho do array que contém o número das respostas válidas
         }
 
         // Se a coluna já contém o número, remove da lista de possíveis
-        if((*sudoku)[i][columnSelected].value != 0 && allPossibleAnswers[(*sudoku)[i][columnSelected].value - 1] != 0)
+        if(columnValue != 0 && allPossibleAnswers[columnValue - 1] != 0)
         {
-            allPossibleAnswers[(*sudoku)[i][columnSelected].value - 1] = 0; // lógica igual às linhas
+            allPossibleAnswers[columnValue - 1] = 0; // lógica igual às linhas
             arraySize--;
         }
     }
@@ -106,9 +124,11 @@ int* getPossibleAnswers(sudokuCell (*sudoku)[9][9] , int rowSelected, int column
     {
         for(int j = 0 ; j < 3 ; j++)
         {   
-            if((*sudoku)[startRow + i][startColumn + j].value != 0 && allPossibleAnswers[(*sudoku)[startRow + i][startColumn + j].value - 1] != 0) // verifica se o valor da célula não é zero e se não é um valor repetido
+            int value = getValueFunction(sudoku , startRow + 1 , startColumn + 1);
+
+            if(value != 0 && allPossibleAnswers[value - 1] != 0) // verifica se o valor da célula não é zero e se não é um valor repetido
             {   
-                allPossibleAnswers[(*sudoku)[startRow + i][startColumn + j].value - 1] = 0;  // põe o valor (referente à posicao no bloco) a 0 no array das respostas válidas
+                allPossibleAnswers[value - 1] = 0;  // põe o valor (referente à posicao no bloco) a 0 no array das respostas válidas
                 arraySize--;                     // decrementa o número de respostas válidas
             }
         }

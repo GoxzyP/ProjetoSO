@@ -1,6 +1,7 @@
 #include "../unix.h"
 
 #include "socketsUtilsClienteSinglePlayer.h"
+#include "singlePlayerSolucaoCompleta.h"
 
 int main(void)
 {
@@ -27,6 +28,8 @@ int main(void)
         exit(1);
     }
 
+    int partialSolutionMode = 0;
+
     while(1) 
     {
         int gameId;
@@ -37,8 +40,11 @@ int main(void)
         printf("Recebeu o jogo com o id -> %d\n" , gameId);
         printf("Recebeu o jogo com a solução parcial %s\n" , partialSolution);
 
-        
-        inicializeGame(serverSocket , gameId , partialSolution);
+        if(partialSolutionMode == 1)
+            inicializeGame(serverSocket , gameId , partialSolution);
+
+        else
+            solveSudokuUsingCompleteSolution(serverSocket , gameId , partialSolution);
     }
     
     close(serverSocket);

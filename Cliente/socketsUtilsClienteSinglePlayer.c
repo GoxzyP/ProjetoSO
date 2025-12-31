@@ -14,10 +14,10 @@
 #define BUFFER_PRODUCER_CONSUMER_SIZE 5
 
 //NUMBER_OF_PRODUCERS define o número de threads produtoras que o nosso código irá gerar
-#define NUMBER_OF_PRODUCERS 200
+#define NUMBER_OF_PRODUCERS 10
 
 //NUMBER_OF_CONSUMERS define o número de threads produtoras que o nosso código irá gerar
-#define NUMBER_OF_CONSUMERS 200
+#define NUMBER_OF_CONSUMERS 10
 
 //ProducerConsumerBuffer define a estrutura do buffer partilhado entre os produtores e consumidores
 //RowSelected - Linha utilizada na tentativa produzida pelo produtor
@@ -159,15 +159,19 @@ void *producer(void *arguments)
         printf("A thread produtora %d conseguiu dar lock com sucesso na cell %d %d \n" , pthread_self() , rowSelected , columnSelected);
 
         //Caso conseguir verificar o mutex verifica se foi o primeiro produtor a chegar à célula caso não for liberta o mutex e tenta outras células
-        if(cell->state == FINISHED)
+        if(cell->state == FINISHED || cell->producer != 0)
         {   
             printf("A thread produtora %d verificou que cell %d %d já tinha dono \n" , pthread_self() , rowSelected , columnSelected);
             pthread_mutex_unlock(&cell->mutex);
             continue;
         }
 
+        //Atualiza o estado da célula atual indicando que a thread está à espera de uma validação
+        cell->state = WAITING;
+        cell->producer = pthread_self();
+
         //Obtém os valores possíveis para a célula atual
-        int* possibleAnswers = getPossibleAnswers(sudoku , rowSelected , columnSelected , &size);//Adaptar função
+        int* possibleAnswers = getPossibleAnswers(sudoku , rowSelected , columnSelected , &size , getValueFromSudokuCell);
         printf("A thread produtora %d pegou as respostas possíveis com sucesso da cell %d %d \nRespostas possíveis são -> [" , pthread_self() , rowSelected , columnSelected);
         
         for(int i = 0 ; i < size ; i++)
@@ -179,12 +183,24 @@ void *producer(void *arguments)
 
         printf("]\n");
 
+        pthread_mutex_unlock(&cell->mutex);
+
         //Itera sobre os valores possíveis até encontrar o certo
         for(int j = 0 ; j < size ; j++)
         {   
-            //Verifica se alguma resposta anterior estava correta , se estava sai do ciclo
-            if(cell->state == FINISHED)
-                break;
+            if(j != 0)
+            {
+                pthread_mutex_lock(&cell->mutex);
+
+                //Verifica se alguma resposta anterior estava correta , se estava sai do ciclo
+                if(cell->state == FINISHED)
+                {   
+                    pthread_mutex_unlock(&cell->mutex);
+                    break;
+                }
+
+                pthread_mutex_unlock(&cell->mutex);
+            }
             
             //Fecha o mutex que controla o buffer produtor/consumidor antes de inserir o valor
             pthread_mutex_lock(&mutexProducerConsumerBuffer);
@@ -203,9 +219,6 @@ void *producer(void *arguments)
             numberOfItemsInsideBuffer++;
             printf("A thread produtora %d colocou a entrada(linha : %d , coluna : %d , valor : %d) no buffer e colocou o estado à espera\n" , pthread_self() , rowSelected , columnSelected , possibleAnswers[j]);
 
-            //Atualiza o estado da célula atual indicando que a thread está à espera de uma validação
-            cell->state = WAITING;
-
             //Sinaliza um consumidor que um item foi adiciona e liberta o mutex do buffer produtor/consumidor
             pthread_cond_signal(&consumerBufferConditionVariable);
             pthread_mutex_unlock(&mutexProducerConsumerBuffer);
@@ -214,7 +227,6 @@ void *producer(void *arguments)
 
         //Liberta a memória do array que contém as possíveis respostas e desbloqueia o mutex da célula
         free(possibleAnswers);
-        pthread_mutex_unlock(&cell->mutex);
     } 
     
     pthread_mutex_lock(&mutexProducerConsumerBuffer);
@@ -242,6 +254,7 @@ void *consumer(void *arguments)
 
     //Define o código que será usado pelo servidor para identificar a mensagem do cliente
     int codeToVerifyAnswer = 2;
+    int codeToVerifyPartialSolution = 1;
 
     //Loop até que o sudoku seja completamente preenchido
     while(1)
@@ -280,7 +293,7 @@ void *consumer(void *arguments)
         pthread_mutex_lock(&cell->mutex);
 
         if(cell->state == FINISHED)
-        {
+        {   
             pthread_mutex_unlock(&cell->mutex);
             continue;
         }
@@ -289,7 +302,7 @@ void *consumer(void *arguments)
 
         //Prepara a mensagem para enviar ao servidor com o formato "codigo,id do jogo,linha,coluna,resposta do cliente\n"
         char messageToServer[BUFFER_SOCKET_MESSAGE_SIZE];
-        sprintf(messageToServer , "%d,%d,%d,%d,%d\n" , codeToVerifyAnswer , dataInArguments->gameId , bufferEntry.rowSelected , bufferEntry.columnSelected , bufferEntry.clientAnswer);
+        sprintf(messageToServer , "%d,%d,%d,%d,%d,%d\n" , codeToVerifyAnswer , codeToVerifyPartialSolution , dataInArguments->gameId , bufferEntry.rowSelected , bufferEntry.columnSelected , bufferEntry.clientAnswer);
 
         //Bloqueia o mutex responsável pela comunicação servidor/cliente utilizando o socket
         pthread_mutex_lock(&mutexSocket);
@@ -298,20 +311,20 @@ void *consumer(void *arguments)
         //Envia a tentativa ao servidor e termina o processo caso esta comunicação falhar
         if(writeSocket(socket , messageToServer , strlen(messageToServer)) != strlen(messageToServer))
         {
-            perror("Error : Client could not write the answer to the server or the server disconnected from the socket");
+            perror("Error : Client could not write the partial answer to the server or the server disconnected from the socket");
             exit(1);
         }
 
         printf("A thread consumidora %d enviou a tentativa para o server com sucesso\n" , pthread_self());
 
         //Recebe a resposta do servidor
-        char responseFromServer[BUFFER_SOCKET_MESSAGE_SIZE];
-        int bytesReceived = readSocket(socket , responseFromServer , sizeof(responseFromServer));
+        char messageFromServer[BUFFER_SOCKET_MESSAGE_SIZE];
+        int bytesReceived = readSocket(socket , messageFromServer , sizeof(messageFromServer));
 
         //Verifica se ocorreu algum erro na leitura da resposta do servidor terminando o programa caso tiver acontecido
         if(bytesReceived <= 0)
         {
-            perror("Error : Client could not read the answer from the server or the server disconnected from the socket");
+            perror("Error : Client could not read the answer regarding the partial solution from the server or the server disconnected from the socket");
             exit(1);
         }
 
@@ -319,15 +332,15 @@ void *consumer(void *arguments)
         printf("A thread consumidora %d recebeu a resposta da tentativa corretamente\n" , pthread_self());
 
         //Converte a resposta do servidor para o uma string terminada em \0 para utilizar funções da biblioteca string.h
-        responseFromServer[bytesReceived - 1] = '\0';
+        messageFromServer[bytesReceived - 1] = '\0';
         
         pthread_mutex_lock(&cell->mutex);
 
-        if (strcmp(responseFromServer, "Correct") == 0) 
+        if(strcmp(messageFromServer, "Correct") == 0) 
         {
             cell->value = bufferEntry.clientAnswer;
             cell->state = FINISHED;
-            displaySudokuWithCoords(sudoku);
+            displaySudokuWithCoords(sudoku , getValueFromSudokuCell);
         } 
         else
         {

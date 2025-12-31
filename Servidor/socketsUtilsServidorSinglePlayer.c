@@ -28,10 +28,10 @@
 #define MAX_LINE_SIZE_IN_CSV 166
 
 //NUMBER_OF_PRODUCERS define o número de threads produtoras que o nosso código irá gerar
-#define NUMBER_OF_PRODUCERS 200
+#define NUMBER_OF_PRODUCERS 1
 
 //NUMBER_OF_CONSUMERS define o número de threads produtoras que o nosso código irá gerar
-#define NUMBER_OF_CONSUMERS 200
+#define NUMBER_OF_CONSUMERS 1
 
 //GameData define a estrutura que irá conter a informação dos jogos sudoku
 //Id - Identificador único de jogo
@@ -44,6 +44,12 @@ typedef struct GameData{
     char totalSolution[82];         
     UT_hash_handle hh; 
 } gameData;
+
+typedef struct PriorityQueueEntry
+{
+    int gameId;
+    char clientCompleteSolution[82];
+}priorityQueueEntry;
 
 //QueueEntry define a estrutura de como é armazenado cada tentativa do cliente na fila
 //GameId - Identificador único de jogo
@@ -65,7 +71,7 @@ typedef struct QueueEntry
 //NumberOfItemsInQueue - Quantidade atual de itens na fila
 typedef struct QueueFifo
 {   
-    queueEntry items[BUFFER_PRODUCER_CONSUMER_SIZE];
+    void *items[BUFFER_PRODUCER_CONSUMER_SIZE];
     int front;
     int rear;
     int numberOfItemsInQueue;
@@ -78,6 +84,7 @@ typedef struct ProducerAndConsumerArguments
 {
     int socket;
     queueFifo *queue;
+    queueFifo *priorityQueue;
 }producerAndConsumerArguments;
 
 //Tabela hash com todos os jogos carregados por csv
@@ -117,7 +124,7 @@ void inicializeQueue(queueFifo *queue)
 // --------------------------------------------
 // Função que adiciona um item ao final da fila
 // --------------------------------------------
-void addItemToQueue(queueFifo *queue , queueEntry item)
+void addItemToQueue(queueFifo *queue , void *item)
 {   
     //Insere um item na última posição da fila
     queue->items[queue->rear] = item;
@@ -127,17 +134,15 @@ void addItemToQueue(queueFifo *queue , queueEntry item)
 
     //Incrementa o número de items na fila
     queue->numberOfItemsInQueue++;
-
-    printf("A thread produtora %d acabou de adicionar o item à fila simples circular\n" , pthread_self());
 }
 
 // -----------------------------------------
 // Função que remove o primeiro item da fila
 // -----------------------------------------
-queueEntry removeItemFromQueue(queueFifo *queue)
+void *removeItemFromQueue(queueFifo *queue)
 {   
     //Remove o primeiro item da fila
-    queueEntry itemRemoved = queue->items[queue->front];
+    void *itemRemoved = queue->items[queue->front];
 
     //Atualiza o índice do primeiro elemento da fila tendo em conta que é uma fila circula por isso utilizamos %
     queue->front = (queue->front + 1) % BUFFER_PRODUCER_CONSUMER_SIZE;
@@ -252,7 +257,7 @@ void sendGameToClient(int socket)
 // -----------------------------------------
 // Função que verifica a resposta do cliente
 // -----------------------------------------
-void verifyClientSudokuAnswer(int socket, int gameId, int rowSelected, int columnSelected, int clientAnswer)
+void verifyClientPartialSolution(int socket, int gameId, int rowSelected, int columnSelected, int clientAnswer)
 {   
     gameData *gameSentToClient;
 
@@ -295,13 +300,63 @@ void verifyClientSudokuAnswer(int socket, int gameId, int rowSelected, int colum
     //Envia a mensagem para o cliente , caso der erro ao enviar a mensagem termina o processo
     if (writeSocket(socket, messageToClient, strlen(messageToClient)) != strlen(messageToClient))
     {
-        perror("Error : Server could not write the answer of the client or the client disconnected from the socket");
+        perror("Error : Server could not write the answer of the client partial solution or the client disconnected from the socket");
         exit(1);
     }
 
     pthread_mutex_unlock(&mutexSocket);
 
     printf("A thread consumidora %d enviou a resposta ao cliente com sucesso\n" , pthread_self());
+}
+
+void verifyClientCompleteSolution(int socket , int gameId , char completeSolution[82])
+{
+    gameData *gameSentToClient;
+
+    //Utiliza o mutex para proteger o acesso à hashTable
+    pthread_mutex_lock(&mutexGameData);
+
+    //Procura o jogo na hashTable utilizando o seu id
+    HASH_FIND_INT(gamesHashTable, &gameId, gameSentToClient);
+    pthread_mutex_unlock(&mutexGameData);
+
+    char messageToClient[BUFFER_SOCKET_MESSAGE_SIZE];
+
+    //Verifica se foi encontrado o jogo , caso não tiver sido envia uma mensagem de erro ao cliente
+    if (!gameSentToClient)
+    {
+        strcpy(messageToClient , "Error : Server could not find a game with the id sent from the client\n");
+        printf("A thread consumidora %d não encontrou um jogo com esse id\n" , pthread_self());
+    }
+
+    for(int row = 0 ; row < 9 ; row++)
+    {
+        for(int column = 0 ; column < 9 ; column++)
+        {
+            if(gameSentToClient->totalSolution[row * 9 + column] != completeSolution[row * 9 + column])
+            {
+                sprintf(messageToClient , "%d,%d\n" , row , column);
+
+                printf("A thread consumidora %d encontrou um erro na celula %d %d da solucao completa enviada pelo cliente\n" , row , column);
+                if(writeSocket(socket , messageToClient , strlen(messageToClient)) != strlen(messageToClient))
+                {
+                    perror("Error : Server could not write the answer of the client complete solution or the client disconnected from the socket");
+                    exit(1);
+                }
+
+                return;
+            }
+        }
+    }
+
+    printf("A thread consumidora %d nao nenhum erro na solucao completa enviada pelo cliente");
+    strcpy(messageToClient, "Correct\n");
+
+    if(writeSocket(socket , messageToClient , strlen(messageToClient)) != strlen(messageToClient))
+    {
+        perror("Error : Server could not write the answer of the client complete solution or the client disconnected from the socket");
+        exit(1);
+    }
 }
 
 // --------------------------------------------------
@@ -316,10 +371,13 @@ void *producer(void *arguments)
     //Obtém a referência da fila FIFO e o socket a ser utilizado na comunicação 
     int socket = dataInArguments->socket;
     queueFifo *queue = dataInArguments->queue;
+    queueFifo *priorityQueue = dataInArguments->priorityQueue;
+    
 
     fd_set socketReadyToRead;
     struct timeval timeToReadAgain;
 
+    timeToReadAgain.tv_sec = 0;
     timeToReadAgain.tv_usec = 100;
 
     while(1)
@@ -377,71 +435,73 @@ void *producer(void *arguments)
             //Caso não tiver resto envia para o cliente uma mensagem de erro
             if(!restOfClientMessage)
             {   
-                printf("A thread produtora %d recebeu uma mensagem de código 2 inválida (faltou vírgulas)\n" , pthread_self());
-
-                char messageToClient[BUFFER_SOCKET_MESSAGE_SIZE];
-                strcpy(messageToClient , "Error : Server could not process the format of the client answer regarding the lack of , after the code\n");
-
-                pthread_mutex_lock(&mutexSocket);
-
-                if(writeSocket(socket , messageToClient , strlen(messageToClient)) != strlen(messageToClient))
-                {
-                    perror("Error : Server could not process the format of the client answer regarding the lack of , after the code or the client disconnected from the socket");
-                    exit(1);
-                }
-
-                pthread_mutex_unlock(&mutexSocket);
-
-                printf("A thread produtora %d enviou a mensagem de erro ao cliente tendo em conta a mensagem de código 2 inválida (faltou vírgulas)\n" , pthread_self());
-
-                continue;
+                perror("Error : Server could not process the format of the client answer regarding the lack of ',' after the code or the client disconnected from the socket");
+                exit(1);
             }
 
             restOfClientMessage++;
 
-            //Cria a variável que irá conter as informações da tentativa do cliente
-            queueEntry queueFifoEntry;
+            char bufferCopy[BUFFER_SOCKET_MESSAGE_SIZE];
+            strncpy(bufferCopy, restOfClientMessage, sizeof(bufferCopy));
+            bufferCopy[sizeof(bufferCopy)-1] = '\0';
 
-            //Lê o resto da mensagem do cliente e extrai as informações da tentativa , caso tiver acontecido algum erro envia uma mensagem para o cliente a avisar
-            if(sscanf(restOfClientMessage , "%d,%d,%d,%d" , &queueFifoEntry.gameId , &queueFifoEntry.rowSelected , &queueFifoEntry.columnSelected , &queueFifoEntry.clientAnswer) != 4)
-            {   
-                printf("A thread produtora %d recebeu uma mensagem de código 2 inválida (faltou paramâtreos corretos)\n" , pthread_self());
-
-                char messageToClient[BUFFER_SOCKET_MESSAGE_SIZE];
-                strcpy(messageToClient , "Error : Server could not process the format of the client answer regarding the arguments sent to the server\n");
-
-                pthread_mutex_lock(&mutexSocket);
-
-                if(writeSocket(socket , messageToClient , strlen(messageToClient)) != strlen(messageToClient))
-                {
-                    perror("Error : Server could not process the format of the client answer regarding the arguments sent to the server or the client disconnected from the socket");
-                    exit(1);
-                }
-
-                pthread_mutex_unlock(&mutexSocket);
-
-                printf("A thread produtora %d enviou a mensagem de erro ao cliente tendo em conta a mensagem de código 2 inválida (faltou paramâtreos corretos)\n" , pthread_self());
-
-                continue;
-            }
-
+            int typeOfClientAnswer = atoi(strtok(bufferCopy, ","));
+            
             //Utiliza o mutex para proteger o acesso à fila FIFO
             pthread_mutex_lock(&mutexProducerConsumerQueueFifo);
 
-            //Verifica se a fila está cheia , caso tiver blouqueia o processo à espera de um espaço vazia
-            while(isQueueFull(queue))
+            if(typeOfClientAnswer == 1)
             {
-                printf("A thread produtora %d irá bloquear-se pois a fila simples circular está cheia\n" , pthread_self());
-                pthread_cond_wait(&producerQueueFifoConditionVariable , &mutexProducerConsumerQueueFifo);
-            }
+                //Cria a variável que irá conter as informações da tentativa do cliente
+                queueEntry *queueFifoEntry = malloc(sizeof(queueEntry));
+                if(!queueFifoEntry) { perror("queueEntry malloc failed"); exit(1); }
 
-            //Adiciona o item ao fim da fila
-            addItemToQueue(queue , queueFifoEntry);
+                //Lê o resto da mensagem do cliente e extrai as informações da tentativa , caso tiver acontecido algum erro envia uma mensagem para o cliente a avisar
+                if(sscanf(restOfClientMessage , "1,%d,%d,%d,%d" , &queueFifoEntry->gameId , &queueFifoEntry->rowSelected , &queueFifoEntry->columnSelected , &queueFifoEntry->clientAnswer) != 4)
+                {   
+                    free(queueFifoEntry);
+                    perror("Error : Server could not process the format of the client answer regarding the arguments of partial solution sent to the server or the client disconnected from the socket");
+                    exit(1);
+                }
+
+                //Verifica se a fila está cheia , caso tiver blouqueia o processo à espera de um espaço vazia
+                while(isQueueFull(queue))
+                {
+                    printf("A thread produtora %d irá bloquear-se pois a fila simples circular está cheia\n" , pthread_self());
+                    pthread_cond_wait(&producerQueueFifoConditionVariable , &mutexProducerConsumerQueueFifo);
+                }
+
+                //Adiciona o item ao fim da fila
+                addItemToQueue(queue , queueFifoEntry);
+                printf("A thread produtora %d acabou de adicionar o item à fila simples circular\n" , pthread_self());
+            }
+            else if(typeOfClientAnswer == 2)
+            {
+                priorityQueueEntry *queueFifoEntry = malloc(sizeof(priorityQueueEntry));
+                if(!queueFifoEntry) { perror("priorityQueueEntry malloc failed"); exit(1); }
+
+                if(sscanf(restOfClientMessage , "2,%d,%s" , &queueFifoEntry->gameId , &queueFifoEntry->clientCompleteSolution) != 2)
+                {      
+                    free(queueFifoEntry);
+                    perror("Error : Server could not process the format of the client answer regarding the arguments of complete solution sent to the server or the client disconnected from the socket");
+                    exit(1);
+                }
+
+                //Verifica se a fila está cheia , caso tiver blouqueia o processo à espera de um espaço vazia
+                while(isQueueFull(priorityQueue))
+                {
+                    printf("A thread produtora %d irá bloquear-se pois a fila simples circular está cheia\n" , pthread_self());
+                    pthread_cond_wait(&producerQueueFifoConditionVariable , &mutexProducerConsumerQueueFifo);
+                }
+
+                //Adiciona o item ao fim da fila
+                addItemToQueue(priorityQueue , queueFifoEntry);
+                printf("A thread produtora %d acabou de adicionar o item à fila prioritaria circular\n" , pthread_self());
+            }
 
             //Sinaliza um consumidor a avisar que a fila já não está mais vazia
             pthread_cond_signal(&consumerQueueFifoConditionVariable);
             pthread_mutex_unlock(&mutexProducerConsumerQueueFifo);
-
             printf("A thread produtora %d acabou de processar o pedido de código 2 do cliente\n" , pthread_self());
         }
     }
@@ -460,29 +520,40 @@ void *consumer(void *arguments)
     //Obtém a referência da fila FIFO e o socket a ser utilizado na comunicação 
     int socket = dataInArguments->socket;
     queueFifo *queue = dataInArguments->queue;
+    queueFifo *priorityQueue = dataInArguments->priorityQueue; 
 
     while(1)
     {   
         //Utilizar o mutex para proteger o acesso à fila FIFO
         pthread_mutex_lock(&mutexProducerConsumerQueueFifo);
-
-        //Verifica se a fila está vazia , caso tiver bloqueia o processo até ter items para consumir
-        while(isQueueEmpty(queue))
-        {
-            printf("A thread consumidora %d vai bloquear porque a fila simples circular está vazia\n" , pthread_self());
+        
+        while(isQueueEmpty(priorityQueue) && isQueueEmpty(queue))
             pthread_cond_wait(&consumerQueueFifoConditionVariable , &mutexProducerConsumerQueueFifo);
+
+        if(!isQueueEmpty(priorityQueue))
+        {
+            priorityQueueEntry *item = (priorityQueueEntry*)removeItemFromQueue(priorityQueue);
+
+            pthread_cond_signal(&producerQueueFifoConditionVariable);
+            pthread_mutex_unlock(&mutexProducerConsumerQueueFifo);
+
+            printf("A thread consumidora %d ira verificar a solucao completa %s do jogo %d\n" , pthread_self() , item->clientCompleteSolution , item->gameId);
+            verifyClientCompleteSolution(socket , item->gameId , item->clientCompleteSolution);
+
+            free(item);
         }
+        else
+        {
+            queueEntry *item = (queueEntry*)removeItemFromQueue(priorityQueue);
 
-        //Remove o item do ínicio da fila
-        queueEntry item = removeItemFromQueue(queue);
+            pthread_cond_signal(&producerQueueFifoConditionVariable);
+            pthread_mutex_unlock(&mutexProducerConsumerQueueFifo);
 
-        //Sinaliza o produtor a avisar que já tem espaço para items na fila
-        pthread_cond_signal(&producerQueueFifoConditionVariable);
-        pthread_mutex_unlock(&mutexProducerConsumerQueueFifo);
+            printf("A thread consumidora %d ira verificar a solucao parcial do jogo %d na celula %d %d com o valor %d\n" , pthread_self() , item->gameId , item->rowSelected , item->columnSelected , item->clientAnswer);
+            verifyClientPartialSolution(socket , item->gameId , item->rowSelected , item->columnSelected , item->clientAnswer);
 
-        printf("A thread consumidora %d removeu o item com sucesso do jogo %d da cell %d %d com o valor %d\n" , pthread_self() , item.gameId , item.rowSelected , item.columnSelected , item.clientAnswer);
-
-        verifyClientSudokuAnswer(socket , item.gameId , item.rowSelected , item.columnSelected , item.clientAnswer);
+            free(item);
+        }
     }
 
     return NULL;
@@ -496,7 +567,17 @@ void inicializeClientResponseThreads(int socket)
     printf("Entrou na função que inicializa os threads do lado do servidor\n");
     //Cria a fila FIFO e inicializa-a
     queueFifo *queue = malloc(sizeof(queueFifo));
+    queueFifo *priorityQueue = malloc(sizeof(queueFifo));
+
     inicializeQueue(queue);
+    inicializeQueue(priorityQueue);
+
+    //Inicializa os mutexes e as variáveis condicionais
+    pthread_mutex_init(&mutexProducerConsumerQueueFifo , NULL);
+    pthread_mutex_init(&mutexGameData , NULL);
+    pthread_mutex_init(&mutexSocket , NULL);
+    pthread_cond_init(&producerQueueFifoConditionVariable , NULL);
+    pthread_cond_init(&consumerQueueFifoConditionVariable , NULL);
 
     //Inicializa o array que irá conter todos as threads dos produtores e consumidores
     pthread_t threads[NUMBER_OF_PRODUCERS + NUMBER_OF_CONSUMERS];
@@ -505,6 +586,7 @@ void inicializeClientResponseThreads(int socket)
     producerAndConsumerArguments *producerAndConsumerNeededArguments = malloc(sizeof(producerAndConsumerArguments));
     producerAndConsumerNeededArguments->socket = socket;
     producerAndConsumerNeededArguments->queue = queue;
+    producerAndConsumerNeededArguments->priorityQueue = priorityQueue;
 
     //Cria todas as threads produtoras
     for(int i = 0 ; i < NUMBER_OF_PRODUCERS ; i++)
@@ -533,6 +615,12 @@ void inicializeClientResponseThreads(int socket)
     //Espera todas as threads termirarem as suas respetivas funções
     for(int i = 0 ; i < NUMBER_OF_PRODUCERS + NUMBER_OF_CONSUMERS ; i++)
         pthread_join(threads[i] , NULL);
+
+    pthread_mutex_destroy(&mutexProducerConsumerQueueFifo);
+    pthread_mutex_destroy(&mutexGameData);
+    pthread_mutex_destroy(&mutexSocket);
+    pthread_cond_destroy(&producerQueueFifoConditionVariable);
+    pthread_cond_destroy(&consumerQueueFifoConditionVariable);
 
     //Liberta a memórias que foi usada para os argumentos dos produtores e consumidores e a fila
     free(producerAndConsumerNeededArguments);

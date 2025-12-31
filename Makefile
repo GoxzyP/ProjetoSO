@@ -24,6 +24,7 @@ SERVER_DIR = Servidor
 CLIENT_SRCS = $(CLIENT_DIR)/socketsSetupClienteSinglePlayer.c \
               $(CLIENT_DIR)/socketsUtilsCliente.c \
               $(CLIENT_DIR)/socketsUtilsClienteSinglePlayer.c \
+			  $(CLIENT_DIR)/singlePlayerSolucaoCompleta.c \
               util.c
 
 # Lista de ficheiros fonte do servidor

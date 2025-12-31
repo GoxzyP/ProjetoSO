@@ -34,9 +34,11 @@ typedef struct SudokuCell
     enum cellState state;
 }sudokuCell;
 
-void displaySudokuWithCoords(sudokuCell (*sudoku)[9][9]);
+void displaySudokuWithCoords(void *sudoku , int (*getValueFunction)(void* , int , int));
 void shufflePositionsInArray(int positions[][2] , int count);
-int* getPossibleAnswers(sudokuCell (*sudoku)[9][9] , int rowSelected, int columnSelected , int *size);
+int getValueFromSudokuCell(void *sudoku , int rowSelected , int columnSelected);
+int getValueFromCharGrid(void *sudoku , int rowSelected , int columnSelected);
+int* getPossibleAnswers(void *sudoku , int rowSelected, int columnSelected , int *size , int (*getValueFunction)(void* , int , int));
 void requestGame(int socket , int *gameId , char partialSolution[81]);
 
 #endif

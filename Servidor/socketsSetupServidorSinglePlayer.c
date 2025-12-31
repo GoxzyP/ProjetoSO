@@ -53,9 +53,7 @@ int main(void)
         else if (childPid == 0)
         {
             close(serverSocket);
-
-            while (1)
-                inicializeClientResponseThreads(clientSocket);
+            inicializeClientResponseThreads(clientSocket);
         }
 
         close(clientSocket);

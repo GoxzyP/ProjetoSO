@@ -28,8 +28,7 @@ CLIENT_SRCS = $(CLIENT_DIR)/socketsSetupClienteSinglePlayer.c \
               util.c
 
 # Lista de ficheiros fonte do servidor
-SERVER_SRCS = $(SERVER_DIR)/socketsSetupServidorSinglePlayer.c \
-              $(SERVER_DIR)/socketsUtilsServidorSinglePlayer.c \
+SERVER_SRCS = $(SERVER_DIR)/socketsUtilsServidorSinglePlayer.c \
               util.c
 
 # Converte cada ficheiro .c numa versão .o dentro da pasta Build/

@@ -28,7 +28,7 @@ int main(void)
         exit(1);
     }
 
-    int partialSolutionMode = 0;
+    int partialSolutionMode = rand() % 2;
 
     while(1) 
     {

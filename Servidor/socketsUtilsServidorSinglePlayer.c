@@ -338,11 +338,17 @@ void verifyClientCompleteSolution(int socket , int gameId , char completeSolutio
                 sprintf(messageToClient , "%d,%d\n" , row , column);
 
                 printf("A thread consumidora %d encontrou um erro na celula %d %d da solucao completa enviada pelo cliente\n" , row , column);
+
+                //Utiliza o mutex para proteger o acesso ao socket
+                pthread_mutex_lock(&mutexSocket);
+
                 if(writeSocket(socket , messageToClient , strlen(messageToClient)) != strlen(messageToClient))
                 {
                     perror("Error : Server could not write the answer of the client complete solution or the client disconnected from the socket");
                     exit(1);
                 }
+
+                thread_mutex_unlock(&mutexSocket);
 
                 return;
             }
@@ -352,11 +358,17 @@ void verifyClientCompleteSolution(int socket , int gameId , char completeSolutio
     printf("A thread consumidora %d nao nenhum erro na solucao completa enviada pelo cliente");
     strcpy(messageToClient, "Correct\n");
 
+    //Utiliza o mutex para proteger o acesso ao socket
+    pthread_mutex_lock(&mutexSocket);
+
     if(writeSocket(socket , messageToClient , strlen(messageToClient)) != strlen(messageToClient))
     {
         perror("Error : Server could not write the answer of the client complete solution or the client disconnected from the socket");
         exit(1);
     }
+
+    pthread_mutex_unlock(&mutexSocket);
+
 }
 
 // --------------------------------------------------

@@ -11,13 +11,13 @@
 #include <string.h>
 
 //BUFFER_PRODUCER_CONSUMER_SIZE define o tamanho do buffer que irá ser partilhado pelos produtores e consumidores
-#define BUFFER_PRODUCER_CONSUMER_SIZE 5
+#define BUFFER_PRODUCER_CONSUMER_SIZE 15
 
 //NUMBER_OF_PRODUCERS define o número de threads produtoras que o nosso código irá gerar
-#define NUMBER_OF_PRODUCERS 10
+#define NUMBER_OF_PRODUCERS 5
 
 //NUMBER_OF_CONSUMERS define o número de threads produtoras que o nosso código irá gerar
-#define NUMBER_OF_CONSUMERS 10
+#define NUMBER_OF_CONSUMERS 8
 
 //ProducerConsumerBuffer define a estrutura do buffer partilhado entre os produtores e consumidores
 //RowSelected - Linha utilizada na tentativa produzida pelo produtor

@@ -28,7 +28,7 @@ int main(void)
         exit(1);
     }
 
-    int partialSolutionMode = rand() % 2;
+    int partialSolutionMode = (MULTIPLAYER_MODE == 0) ? rand() % 2 : 1;
 
     while(1) 
     {
@@ -45,6 +45,8 @@ int main(void)
 
         else
             solveSudokuUsingCompleteSolution(serverSocket , gameId , partialSolution);
+
+        break;
     }
     
     close(serverSocket);

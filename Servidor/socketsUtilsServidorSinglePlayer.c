@@ -11,11 +11,11 @@
 
 // -------------------- Defines --------------------
 
-#define BUFFER_PRODUCER_CONSUMER_SIZE 5
+#define BUFFER_PRODUCER_CONSUMER_SIZE 10
 #define BUFFER_SOCKET_MESSAGE_SIZE 512
 #define MAX_LINE_SIZE_IN_CSV 166 // Tamanho máximo de cada linha que contém as informações do jogo em csv
 #define MAX_NUMBER_OF_EVENTS 64 // Número máximo de eventos que epoll_wait pode retornar de uma só vez
-#define NUMBER_OF_CONSUMERS 10
+#define NUMBER_OF_CONSUMERS 4
 
 // --------------------- Estruturas ---------------------
 
@@ -63,14 +63,25 @@ typedef struct ClientRequest
     } data;
 }clientRequest;
 
+// Estrutura que representa uma sala do modo multijogador
+typedef struct MultiplayerRoom
+{
+    int gameId;
+    char partialSolution[82];
+    int numberOfClients;
+    pthread_barrier_t barrier;
+}multiplayerRoom;
+
 // --------------------- Variáveis globais ---------------------
 
 gameData *gamesHashTable = NULL; // Tabela hash com todos os jogos
 queueFifo normalQueue ; // Fila para respostas parciais
 queueFifo priorityQueue; // Fila para respostas completas
+multiplayerRoom room = {0};
 
 pthread_mutex_t mutexProducerConsumerQueueFifo; // Mutex para acesso às filas
 pthread_mutex_t mutexGameData; // Mutex para acesso à hash table dos jogos
+pthread_mutex_t mutexMultiplayerRoom; // Mutex para acesso à sala do modo multijogador
 pthread_cond_t producerQueueFifoConditionVariable; // Condicional para produtor
 pthread_cond_t consumerQueueFifoConditionVariable; // Condicional para consumidor
 
@@ -217,6 +228,62 @@ void sendGameToClient(int socket)
     printf("Thread produtora %d finalizou a função responsável por enviar o jogo ao cliente\n" , pthread_self());
 }
 
+void handleSendGameLogic(socket)
+{
+    if(MULTIPLAYER_MODE == 0)
+    {
+        sendGameToClient(socket);
+        return;
+    }
+
+    pthread_mutex_lock(&mutexMultiplayerRoom);
+
+    if(room.numberOfClients == 0)
+    {
+        int count = HASH_COUNT(gamesHashTable);
+        int index = rand() % count;
+        int i = 0;
+        gameData *game;
+
+        for (game = gamesHashTable; game; game = game->hh.next)
+        {
+            if (i++ == index)
+            {
+                room.gameId = game->id;
+                memcpy(room.partialSolution, game->partialSolution, 81);
+                room.partialSolution[81] = '\0';
+                break;
+            }
+        }
+
+        pthread_barrier_init(&room.barrier, NULL, NUMBER_OF_PLAYERS_IN_A_ROOM);
+    }
+
+    room.numberOfClients++;
+    pthread_mutex_unlock(&mutexMultiplayerRoom);
+    pthread_barrier_wait(&room.barrier);
+
+    char messageToClient[BUFFER_SOCKET_MESSAGE_SIZE];
+    snprintf(messageToClient , sizeof(messageToClient) , "%d,%s\n" , room.gameId , room.partialSolution);
+
+    if(writeSocket(socket , messageToClient , strlen(messageToClient)) != strlen(messageToClient))
+    {   
+        room.numberOfClients--;
+        perror("Error : Server could not sent game to client or client disconnected from the socket");
+        epoll_ctl(epollFd , EPOLL_CTL_DEL , socket , NULL);
+        close(socket);
+        return;   
+    }
+
+    pthread_mutex_lock(&mutexMultiplayerRoom);
+    room.numberOfClients--;
+
+    if(room.numberOfClients == 0)
+        pthread_barrier_destroy(&room.barrier);
+
+    pthread_mutex_unlock(&mutexMultiplayerRoom);
+}
+
 // -------------------------------------
 // Verifica soluções parciais do cliente
 // -------------------------------------
@@ -341,21 +408,31 @@ void *ioHandler(void *arguments)
 
             int codeOfClientMessage = atoi(messageFromClient); //Lê o código da mensagem do cliente
 
+            clientRequest *request = malloc(sizeof(clientRequest));
+            request->socket = clientSocket;
+
             // Caso o código seja 1, envia um jogo ao cliente
             if(codeOfClientMessage == 1)
             {   
-                sendGameToClient(clientSocket);
+                request->requestType = 0;
+
+                pthread_mutex_lock(&mutexProducerConsumerQueueFifo);
+
+                while(isQueueFull(&priorityQueue))
+                        pthread_cond_wait(&producerQueueFifoConditionVariable, &mutexProducerConsumerQueueFifo);
+
+                addItemToQueue(&priorityQueue , request);
+
+                pthread_cond_signal(&consumerQueueFifoConditionVariable);
+                pthread_mutex_unlock(&mutexProducerConsumerQueueFifo);
+
                 printf("A thread produtora %d acabou de processar o pedido de código 1 do cliente\n" , pthread_self());
-                continue;
             }
             // Caso o código seja 2, o cliente está a enviar uma tentativa de solução
             else if(codeOfClientMessage == 2)
             {
-                clientRequest *request = malloc(sizeof(clientRequest));
-                request->socket = clientSocket;
-
                 char *restOfClientMessage = strchr(messageFromClient, ',');
-                if(!restOfClientMessage){ free(restOfClientMessage) ; continue;}
+                if(!restOfClientMessage){continue;}
                 restOfClientMessage++; 
 
                 request->requestType = atoi(restOfClientMessage); // Determina se a mensagem é parcial (1) ou completa (2).
@@ -393,6 +470,8 @@ void *ioHandler(void *arguments)
                 pthread_cond_signal(&consumerQueueFifoConditionVariable);
                 pthread_mutex_unlock(&mutexProducerConsumerQueueFifo);
             }
+            else
+                free(request);
         }
     }    
 
@@ -423,7 +502,13 @@ void *consumer(void *arguments)
         pthread_cond_signal(&producerQueueFifoConditionVariable);
         pthread_mutex_unlock(&mutexProducerConsumerQueueFifo);
 
-        if(request->requestType == 1)
+        if(request->requestType == 0)
+        {   
+            printf("A\n");
+            handleSendGameLogic(request->socket);
+        }
+
+        else if(request->requestType == 1)
         {
             verifyClientPartialSolution(
                 request->socket, 
@@ -460,6 +545,7 @@ int main(void)
 
     pthread_mutex_init(&mutexProducerConsumerQueueFifo, NULL);
     pthread_mutex_init(&mutexGameData, NULL);
+    pthread_mutex_init(&mutexMultiplayerRoom, NULL);
     pthread_cond_init(&producerQueueFifoConditionVariable, NULL);
     pthread_cond_init(&consumerQueueFifoConditionVariable, NULL);
 

@@ -15,6 +15,7 @@
 // Número de jogadores necessários por sala/jogo
 #define JOGADORES_POR_SALA 3
 
+
 // Função executada por cada thread que trata um cliente
 // Recebe como argumento um ponteiro para o socket do cliente
 void* clienteHandler(void* arg)
@@ -183,6 +184,7 @@ int main(void)
     int socketServidor;
     struct sockaddr_un enderecoServidor;
 
+    
     pthread_t worker;
     pthread_create(&worker, NULL, workerValidacoes, NULL);
 

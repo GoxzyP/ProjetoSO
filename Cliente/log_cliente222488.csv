@@ -1,0 +1,36 @@
+O id do cliente 222488 foi enviado para o servidor
+O cliente 222488 comecou a jogar
+Escreveu com sucesso o pedido do jogo
+Foi recebida a resposta do servidor sobre o pedido de jogo
+Id de jogo recebido -> 5
+Recebeu o jogo perfeitamente
+Hora Inicio Jogo -> 2026-01-02 18:23:38
+Fez o shuffle do array de posições por preencher
+Número de posições inicialmente por preencher -> 51
+Update recebido: (8,6) = 5 pelo cliente 222453
+Update recebido: (6,2) = 5 pelo cliente 222488
+Update recebido: (5,3) = 4 pelo cliente 222488
+Update recebido: (2,5) = 6 pelo cliente 222513
+Update recebido: (4,6) = 2 pelo cliente 222453
+Update recebido: (4,4) = 9 pelo cliente 222488
+Update recebido: (7,2) = 2 pelo cliente 222513
+Update recebido: (7,7) = 7 pelo cliente 222513
+Update recebido: (2,3) = 7 pelo cliente 222513
+Update recebido: (0,6) = 4 pelo cliente 222513
+Update recebido: (1,8) = 3 pelo cliente 222488
+Update recebido: (5,2) = 7 pelo cliente 222453
+Update recebido: (0,3) = 1 pelo cliente 222453
+Update recebido: (2,4) = 8 pelo cliente 222513
+Update recebido: (7,6) = 1 pelo cliente 222453
+Update recebido: (6,0) = 4 pelo cliente 222513
+Update recebido: (6,4) = 7 pelo cliente 222453
+Update recebido: (8,3) = 6 pelo cliente 222488
+Update recebido: (4,7) = 4 pelo cliente 222453
+Update recebido: (1,2) = 6 pelo cliente 222453
+Update recebido: (2,0) = 5 pelo cliente 222513
+Update recebido: (0,7) = 5 pelo cliente 222453
+Update recebido: (1,6) = 7 pelo cliente 222488
+Tentativas falhadas -> 14
+Score final -> 9
+Hora Fim Jogo -> 2026-01-02 18:23:39
+Tempo Jogo -> 00:00:01

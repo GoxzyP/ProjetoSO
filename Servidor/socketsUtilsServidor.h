@@ -2,6 +2,7 @@
 #define SERVIDOR_H
 
 #include "../include/uthash.h" // <--- isto garante que UT_hash_handle é conhecido
+#include <pthread.h>
 
 // Estrutura que representa um jogo do Sudoku
 typedef struct gamedata{
@@ -10,7 +11,6 @@ typedef struct gamedata{
     char totalSolution[81];         // array bidimensional com a solução completa
     UT_hash_handle hh; 
 } gameData;
-
 
 // Estrutura que representa uma sala multijogador no servidor
 // É usada para agrupar jogadores que vão partilhar o mesmo jogo Sudoku
@@ -64,6 +64,25 @@ typedef struct {
     PedidoValidacao *tail; // Ponteiro para o último pedido da fila
 } FilaPedidos;
 
+
+#define MAX_CLIENTES_SALA 3
+
+typedef struct {
+    int socket;
+    int clientId;
+} ClienteSala;
+
+typedef struct {
+    int gameId;
+    char sudoku[81];
+
+    ClienteSala clientes[MAX_CLIENTES_SALA];
+    int numClientes;
+
+    pthread_mutex_t mutex;
+    pthread_barrier_t barrier;
+    int barrierInicializada;
+} Sala;
 
 
 // Funções implementadas em socketUtils.c

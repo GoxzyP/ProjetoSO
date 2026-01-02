@@ -1,6 +1,11 @@
 #ifndef CLIENTE_H
 #define CLIENTE_H
 
+typedef struct {
+    int socket;
+    char* sudoku;
+    char* logPath;
+} SudokuListenerArgs;
 
 
 // Mostra o Sudoku no ecrã com coordenadas (x, y)

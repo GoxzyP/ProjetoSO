@@ -95,12 +95,14 @@ int loadSudoku(sudokuCell sudoku[9][9] , char partialSolution[82] , int emptyPos
         pthread_mutex_init(&cell->mutex , NULL);
         cell->state = cell->value == 0 ? IDLE : FINISHED;
         cell->producer = 0;
+        cell->score = 0;
 
         if(cell->value == 0)
         {
             emptyPositions[emptyPositionsCount][0] = cellLine;
             emptyPositions[emptyPositionsCount][1] = cellColumn;
             emptyPositionsCount++;
+            cell->score = 9;
         }
 
         //Incrementa a coluna
@@ -340,12 +342,15 @@ void *consumer(void *arguments)
         {
             cell->value = bufferEntry.clientAnswer;
             cell->state = FINISHED;
-            displaySudokuWithCoords(sudoku , getValueFromSudokuCell);
+            displaySudokuWithCoords(sudoku , getValueFromSudokuCell , bufferEntry.rowSelected , bufferEntry.columnSelected , bufferEntry.clientAnswer);
         } 
         else
         {
             if(cell->state != FINISHED)
+            {
+                cell->score--;
                 cell->state = IDLE;
+            }
         }
         
         pthread_mutex_unlock(&cell->mutex);
@@ -433,6 +438,16 @@ void inicializeGame(int socket , int gameId , char partialSolution[82])
     pthread_mutex_destroy(&mutexSocket);
     pthread_cond_destroy(&producerBufferConditionVariable);
     pthread_cond_destroy(&consumerBufferConditionVariable);
+
+    int totalScore = 0;
+
+    for(int row = 0 ; row < 9 ; row++)
+    {
+        for(int column = 0 ; column < 9 ; column++)
+            totalScore += sudoku[row][column].score;
+    }
+
+    printf("Score -> %d\n" , totalScore);
 
     //Liberta a memórias que foi usada para os argumentos dos produtores e consumidores
     free(producerNeededArguments);

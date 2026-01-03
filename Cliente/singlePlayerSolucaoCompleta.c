@@ -86,7 +86,7 @@ void solveSudokuUsingCompleteSolution(int socket , int gameId , char sudoku[82])
         if(strncmp(messageFromServer , "Correct" , strlen("Correct")) == 0)
         {   
             printf("A solucao completa enviada para o servidor estava correta");
-            displaySudokuWithCoords(sudoku , getValueFromCharGrid);
+            displaySudokuWithCoords(sudoku , getValueFromCharGrid , 0 , 0 , 0);
             return;
         }
 
@@ -109,7 +109,7 @@ void solveSudokuUsingCompleteSolution(int socket , int gameId , char sudoku[82])
                 }
             }
 
-            displaySudokuWithCoords(sudoku , getValueFromCharGrid);
+            displaySudokuWithCoords(sudoku , getValueFromCharGrid , 0 , 0 , 0);
         }
     }
 }

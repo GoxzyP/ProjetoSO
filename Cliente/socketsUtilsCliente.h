@@ -29,12 +29,13 @@ enum cellState
 typedef struct SudokuCell 
 {
     int value;
+    int score;
     pthread_t producer;
     pthread_mutex_t mutex;
     enum cellState state;
 }sudokuCell;
 
-void displaySudokuWithCoords(void *sudoku , int (*getValueFunction)(void* , int , int));
+void displaySudokuWithCoords(void *sudoku , int (*getValueFunction)(void* , int , int) , int highlightRow , int highlighColumn , int highlightValue);
 void shufflePositionsInArray(int positions[][2] , int count);
 int getValueFromSudokuCell(void *sudoku , int rowSelected , int columnSelected);
 int getValueFromCharGrid(void *sudoku , int rowSelected , int columnSelected);

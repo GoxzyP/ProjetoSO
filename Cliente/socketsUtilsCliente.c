@@ -8,8 +8,12 @@
 // --------------------------------
 // Display do tabuleiro no terminal
 // --------------------------------
-void displaySudokuWithCoords(void *sudoku , int (*getValueFunction)(void* , int , int)) 
-{
+void displaySudokuWithCoords(void *sudoku , int (*getValueFunction)(void* , int , int) , int highlightRow , int highlighColumn , int highlightValue) 
+{   
+    int isPartialSolution = (getValueFunction == getValueFromSudokuCell);
+
+    printf("\e[1;1H\e[2J"); 
+
     // Cabeçalho com coordenadas das colunas (X)
     printf("\n\nxy "); // marcador no canto superior esquerdo
     for (int col = 0; col < 9; col++) {
@@ -31,7 +35,10 @@ void displaySudokuWithCoords(void *sudoku , int (*getValueFunction)(void* , int 
         // Itera sobre cada coluna da linha
         for (int col = 0; col < 9; col++) {
             int value = getValueFunction(sudoku , row , col);
-            if (value == 0)
+
+            if(isPartialSolution && row == highlightRow && col == highlighColumn)
+                printf("\033[5m\033[32m%d\033[0m", highlightValue);
+            else if (value == 0)
                 printf("-");  // se for 0 então não há valor ainda, substituimos por "-"
             else
                 printf("%d", value); // imprime o número presente na célula
@@ -47,6 +54,8 @@ void displaySudokuWithCoords(void *sudoku , int (*getValueFunction)(void* , int 
         if ((row + 1) % 3 == 0 && row != 8)
             printf("  ---------------------\n");
     }
+
+    usleep(250000);
 }
 
 // ------------------------------------------------------------------

@@ -21,6 +21,7 @@ typedef struct ClientStatsServer {
 typedef struct ServerGlobalStats {
     int totalAcertos;
     int totalErros;
+    int totalJogadas;
     int totalJogos;
     int totalClientes;
     int clientesAtivos;

@@ -177,12 +177,21 @@ void verifyClientPartialSolution(int socket, int gameId, int rowSelected, int co
         // Incrementar estatísticas de acertos
         writerLock();  // Lock de ESCRITA - acesso exclusivo
         globalStats.totalAcertos++;
+        globalStats.totalJogadas++;
         
         ClientStatsServer *cliente;
         HASH_FIND_INT(clientsStatsHash, &clientId, cliente);
-        if (cliente) {
-            cliente->acertos++;
+        if (!cliente) {
+            // Criar cliente se não existir
+            cliente = malloc(sizeof(ClientStatsServer));
+            cliente->idCliente = clientId;
+            cliente->acertos = 0;
+            cliente->erros = 0;
+            cliente->jogos = 0;
+            HASH_ADD_INT(clientsStatsHash, idCliente, cliente);
+            globalStats.totalClientes++;
         }
+        cliente->acertos++;
         writerUnlock();  // Unlock de ESCRITA
     } else {
         strcpy(messageToClient, "Wrong\n");
@@ -192,12 +201,21 @@ void verifyClientPartialSolution(int socket, int gameId, int rowSelected, int co
         // Incrementar estatísticas de erros
         writerLock();  // Lock de ESCRITA - acesso exclusivo
         globalStats.totalErros++;
+        globalStats.totalJogadas++;
         
         ClientStatsServer *cliente;
         HASH_FIND_INT(clientsStatsHash, &clientId, cliente);
-        if (cliente) {
-            cliente->erros++;
+        if (!cliente) {
+            // Criar cliente se não existir
+            cliente = malloc(sizeof(ClientStatsServer));
+            cliente->idCliente = clientId;
+            cliente->acertos = 0;
+            cliente->erros = 0;
+            cliente->jogos = 0;
+            HASH_ADD_INT(clientsStatsHash, idCliente, cliente);
+            globalStats.totalClientes++;
         }
+        cliente->erros++;
         writerUnlock();  // Unlock de ESCRITA
     }
     
@@ -246,6 +264,27 @@ void verifyClientCompleteSolution(int socket , int gameId , char completeSolutio
 
                 printf("A thread consumidora %lu encontrou um erro na celula %d %d da solucao completa enviada pelo cliente %d\n" , pthread_self(), row , column, clientId);
 
+                // Atualizar estatísticas - solução completa incorreta
+                writerLock();
+                globalStats.totalErros++;
+                globalStats.totalJogadas++;
+                
+                ClientStatsServer *cliente;
+                HASH_FIND_INT(clientsStatsHash, &clientId, cliente);
+                if (!cliente) {
+                    cliente = malloc(sizeof(ClientStatsServer));
+                    cliente->idCliente = clientId;
+                    cliente->acertos = 0;
+                    cliente->erros = 0;
+                    cliente->jogos = 0;
+                    HASH_ADD_INT(clientsStatsHash, idCliente, cliente);
+                    globalStats.totalClientes++;
+                }
+                cliente->erros++;
+                writerUnlock();
+                
+                writeServerStats();
+
                 if(writeSocket(socket , messageToClient , strlen(messageToClient)) != strlen(messageToClient))
                 {
                     perror("Error : Server could not write the answer of the client complete solution or the client disconnected from the socket");
@@ -260,6 +299,28 @@ void verifyClientCompleteSolution(int socket , int gameId , char completeSolutio
 
     printf("A thread consumidora %lu nao encontrou nenhum erro na solucao completa enviada pelo cliente %d\n", pthread_self(), clientId);
     writeLogf("../Servidor/log_servidor.txt", "Cliente %d: solução COMPLETA CORRETA do jogo %d", clientId, gameId);
+    
+    // Atualizar estatísticas - solução completa correta
+    writerLock();
+    globalStats.totalAcertos++;
+    globalStats.totalJogadas++;
+    
+    ClientStatsServer *cliente;
+    HASH_FIND_INT(clientsStatsHash, &clientId, cliente);
+    if (!cliente) {
+        cliente = malloc(sizeof(ClientStatsServer));
+        cliente->idCliente = clientId;
+        cliente->acertos = 0;
+        cliente->erros = 0;
+        cliente->jogos = 0;
+        HASH_ADD_INT(clientsStatsHash, idCliente, cliente);
+        globalStats.totalClientes++;
+    }
+    cliente->acertos++;
+    writerUnlock();
+    
+    writeServerStats();
+    
     strcpy(messageToClient, "Correct\n");
 
     if(writeSocket(socket , messageToClient , strlen(messageToClient)) != strlen(messageToClient))

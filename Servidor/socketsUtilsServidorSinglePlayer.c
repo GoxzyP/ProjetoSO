@@ -16,7 +16,7 @@
 // Variáveis globais para estatísticas
 // --------------------------------------------------
 ClientStatsServer *clientsStatsHash = NULL;  // Hash table de stats de clientes
-ServerGlobalStats globalStats = {0, 0, 0, 0, 0};  // Stats globais inicializadas
+ServerGlobalStats globalStats = {0, 0, 0, 0, 0, 0};  // Stats globais inicializadas
 
 // Padrão Leitor-Escritor: múltiplos leitores OU um escritor exclusivo
 pthread_mutex_t mutexLeitores;   // Protege numLeitores
@@ -218,6 +218,7 @@ void initStatsSystem()
     // Inicializar estrutura de stats globais
     globalStats.totalAcertos = 0;
     globalStats.totalErros = 0;
+    globalStats.totalJogadas = 0;
     globalStats.totalJogos = 0;
     globalStats.totalClientes = 0;
     globalStats.clientesAtivos = 0;

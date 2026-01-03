@@ -1,0 +1,2 @@
+Id do jogo recebido -> 1
+Recebeu o jogo perfeitamente

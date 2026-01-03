@@ -1,0 +1,3 @@
+Id do jogo recebido -> 3
+Recebeu o jogo perfeitamente
+Estatísticas do cliente escritas com sucesso

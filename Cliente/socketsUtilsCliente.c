@@ -352,7 +352,7 @@ void fillSudoku(int socket, char sudoku[81], int gameId, char logPath[256], Clie
 }
 
 // ------------------------------------------------------------------
-// Escreve estatísticas do cliente no log
+// Escreve estatísticas do cliente no log E mostra no terminal
 // ------------------------------------------------------------------
 void writeClientStats(ClientStats *stats, char logPath[256], int clientId)
 {
@@ -368,6 +368,22 @@ void writeClientStats(ClientStats *stats, char logPath[256], int clientId)
     {
         mediaTentativasPorCelula = (float)stats->totalJogadas / (float)stats->totalCelulasPreenchidas;
     }
+
+    // =========================================================================
+    // MOSTRAR ESTATÍSTICAS NO TERMINAL (CMD)
+    // =========================================================================
+    printf("\n");
+    printf("========================================\n");
+    printf("ESTATISTICAS DO CLIENTE %d\n", clientId);
+    printf("========================================\n");
+    printf("1. Taxa de Acerto Geral: %.2f%%\n", taxaAcerto);
+    printf("2. Total de Acertos: %d\n", stats->totalAcertos);
+    printf("3. Total de Jogadas: %d\n", stats->totalJogadas);
+    printf("4. Total de Jogos: %d\n", stats->totalJogos);
+    printf("5. Total de Erros: %d\n", stats->totalErros);
+    printf("6. Media de Tentativas por Celula: %.2f\n", mediaTentativasPorCelula);
+    printf("========================================\n\n");
+    fflush(stdout);  // Força a exibição imediata no terminal
 
     // Criar caminho para ficheiro de estatísticas separado
     char statsPath[512];

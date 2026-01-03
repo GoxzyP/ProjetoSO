@@ -268,7 +268,7 @@ void writerUnlock()
 }
 
 // --------------------------------------------------------------
-// Escreve estatísticas do servidor no log
+// Escreve estatísticas do servidor no log E mostra no terminal
 // --------------------------------------------------------------
 void writeServerStats()
 {
@@ -293,6 +293,23 @@ void writeServerStats()
     int totalJogos = globalStats.totalJogos;
 
     readerUnlock();  // Unlock de LEITURA
+
+    // =========================================================================
+    // MOSTRAR ESTATÍSTICAS NO TERMINAL (CMD)
+    // =========================================================================
+    printf("\n");
+    printf("========================================\n");
+    printf("ESTATISTICAS GLOBAIS DO SERVIDOR\n");
+    printf("========================================\n");
+    printf("1. Clientes Ativos (Conectados): %d\n", clientesAtivos);
+    printf("2. Taxa de Acerto Global: %.2f%%\n", taxaAcertoGlobal);
+    printf("3. Total de Acertos: %d\n", totalAcertos);
+    printf("4. Total de Jogadas: %d\n", totalJogadas);
+    printf("5. Total de Jogos Distribuidos: %d\n", totalJogos);
+    printf("6. Total de Erros: %d\n", totalErros);
+    printf("7. Media de Jogadas por Cliente: %.2f\n", mediaJogadasPorCliente);
+    printf("========================================\n\n");
+    fflush(stdout);  // Força a exibição imediata no terminal
 
     // Criar caminho para ficheiro de estatísticas separado
     char statsPath[512] = "../Servidor/estatisticas_servidor.csv";

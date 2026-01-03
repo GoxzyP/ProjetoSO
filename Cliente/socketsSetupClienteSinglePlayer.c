@@ -4,6 +4,7 @@
 #include "socketsUtilsCliente.h"
 #include "socketsUtilsClienteSinglePlayer.h"
 #include "singlePlayerSolucaoCompleta.h"
+#include "../log.h"
 
 // Stats globais definidas em socketsUtilsClienteSinglePlayer.c
 extern ClientStats clientStats;
@@ -44,10 +45,12 @@ int main(void)
         int gameId;
         char partialSolution[82];
 
-        requestGame(serverSocket , &gameId , partialSolution, logPath);
+        requestGame(serverSocket , &gameId , partialSolution, logPath, clientId);
 
-        printf("Recebeu o jogo com o id -> %d\n" , gameId);
-        printf("Recebeu o jogo com a solução parcial %s\n" , partialSolution);
+        printf("Cliente %d: Recebeu o jogo com o id -> %d\n" , clientId, gameId);
+        printf("Cliente %d: Recebeu o jogo com a solução parcial %s\n" , clientId, partialSolution);
+        writeLogf(logPath, "Cliente %d: Recebeu o jogo com o id -> %d", clientId, gameId);
+        writeLogf(logPath, "Cliente %d: Recebeu o jogo com a solução parcial %s", clientId, partialSolution);
 
         if(partialSolutionMode == 1)
             inicializeGame(serverSocket , gameId , partialSolution, clientId, logPath);
@@ -58,6 +61,8 @@ int main(void)
         // Escrever estatísticas após cada jogo
         writeClientStats(&clientStats, logPath, clientId);
         printf("\n=== Estatísticas atualizadas: Cliente %d, Jogos: %d, Acertos: %d, Erros: %d ===\n\n", 
+               clientId, clientStats.totalJogos, clientStats.totalAcertos, clientStats.totalErros);
+        writeLogf(logPath, "Estatísticas atualizadas: Cliente %d, Jogos: %d, Acertos: %d, Erros: %d", 
                clientId, clientStats.totalJogos, clientStats.totalAcertos, clientStats.totalErros);
         
         break; // Sair após completar um jogo

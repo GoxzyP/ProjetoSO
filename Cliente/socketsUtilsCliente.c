@@ -156,9 +156,10 @@ int* getPossibleAnswers(void *sudoku , int rowSelected, int columnSelected , int
     return possibleAnswersBasedOnPlacement; // retorna ponteiro para array dinâmico
 }
 
-void requestGame(int socket , int *gameId , char partialSolution[82], char logPath[256])
+void requestGame(int socket , int *gameId , char partialSolution[82], char logPath[256], int clientId)
 {   
     printf("Entrou na função que irá pedir o jogo ao server\n");
+    writeLogf(logPath, "Entrou na função que irá pedir o jogo ao server");
 
     int operationSuccesss = 0;
     int codeRequestGame = 1;
@@ -167,9 +168,10 @@ void requestGame(int socket , int *gameId , char partialSolution[82], char logPa
     {
         char messageToServer[BUFFER_SOCKET_MESSAGE_SIZE];
 
-        sprintf(messageToServer , "%d,\n" , codeRequestGame);
+        sprintf(messageToServer , "%d,%d\n" , codeRequestGame, clientId);
 
         printf("Escreveu o pedido do jogo ao servidor\n");
+        writeLogf(logPath, "Escreveu o pedido do jogo ao servidor");
 
         if(writeSocket(socket , messageToServer , strlen(messageToServer)) != strlen(messageToServer))
         {
@@ -181,6 +183,7 @@ void requestGame(int socket , int *gameId , char partialSolution[82], char logPa
         int bytesReceived = readSocket(socket , messageFromServer , sizeof(messageFromServer));
 
         printf("Leu a mensagem do servidor em relação ao pedido do jogo\n");
+        writeLogf(logPath, "Leu a mensagem do servidor em relação ao pedido do jogo");
 
         if(bytesReceived <= 0)
         {
@@ -189,6 +192,7 @@ void requestGame(int socket , int *gameId , char partialSolution[82], char logPa
         }
 
         printf("Mensagem recebida do servidor -> %s\n" , messageFromServer);
+        writeLogf(logPath, "Mensagem recebida do servidor -> %s", messageFromServer);
 
         char *dividedLine = strtok(messageFromServer , ",");
 
@@ -221,7 +225,7 @@ void requestGame(int socket , int *gameId , char partialSolution[82], char logPa
         strcpy(partialSolution , dividedLine);
 
         printf("Finalizou a função responsável por receber o jogo do servidor\n");
-        writeLogf(logPath, "Recebeu o jogo perfeitamente");
+        writeLogf(logPath, "Finalizou a função responsável por receber o jogo do servidor");
         operationSuccesss = 1;
     }
 }
@@ -385,6 +389,18 @@ void writeClientStats(ClientStats *stats, char logPath[256], int clientId)
     printf("========================================\n\n");
     fflush(stdout);  // Força a exibição imediata no terminal
 
+    // Guardar nas logs do cliente também
+    writeLogf(logPath, "========================================");
+    writeLogf(logPath, "ESTATISTICAS DO CLIENTE %d", clientId);
+    writeLogf(logPath, "========================================");
+    writeLogf(logPath, "1. Taxa de Acerto Geral: %.2f%%", taxaAcerto);
+    writeLogf(logPath, "2. Total de Acertos: %d", stats->totalAcertos);
+    writeLogf(logPath, "3. Total de Jogadas: %d", stats->totalJogadas);
+    writeLogf(logPath, "4. Total de Jogos: %d", stats->totalJogos);
+    writeLogf(logPath, "5. Total de Erros: %d", stats->totalErros);
+    writeLogf(logPath, "6. Media de Tentativas por Celula: %.2f", mediaTentativasPorCelula);
+    writeLogf(logPath, "========================================\n");
+
     // Criar caminho para ficheiro de estatísticas separado
     char statsPath[512];
     snprintf(statsPath, sizeof(statsPath), "../Cliente/estatisticas_cliente%d.csv", clientId);
@@ -409,6 +425,4 @@ void writeClientStats(ClientStats *stats, char logPath[256], int clientId)
     fprintf(file, "========================================\n");
 
     fclose(file);
-
-    writeLogf(logPath, "Estatísticas do cliente escritas com sucesso");
 }

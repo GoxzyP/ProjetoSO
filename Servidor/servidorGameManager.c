@@ -78,6 +78,7 @@ void readGamesFromCSV()
 void sendGameToClient(int socket, int clientId)
 {   
     printf("Thread produtora %lu entrou na função de enviar o jogo para o cliente %d\n" , pthread_self(), clientId); 
+    writeLogf("../Servidor/log_servidor.txt", "Thread produtora %lu entrou na função de enviar o jogo para o cliente %d", pthread_self(), clientId);
     // Mostra no console que a thread produtora começou a enviar o jogo
 
     int numberOfGamesInServer = HASH_COUNT(gamesHashTable); // Conta quantos jogos existem no servidor
@@ -102,6 +103,7 @@ void sendGameToClient(int socket, int clientId)
 
             snprintf(messageToClient , sizeof(messageToClient) , "%d,%s\n" , game->id , game->partialSolution);
             printf("Mensagem que será enviada para o cliente %d pela thread produtora %lu -> %s\n" , clientId, pthread_self() , messageToClient);
+            writeLogf("../Servidor/log_servidor.txt", "Mensagem que será enviada para o cliente %d pela thread produtora %lu -> %s", clientId, pthread_self(), messageToClient);
 
             if(writeSocket(socket , messageToClient , strlen(messageToClient)) != strlen(messageToClient))
             {   
@@ -112,8 +114,7 @@ void sendGameToClient(int socket, int clientId)
             }
 
             printf("Thread produtora %lu enviou o jogo com sucesso para o cliente %d\n" , pthread_self(), clientId);
-            
-            writeLogf("../Servidor/log_servidor.txt", "Jogo ID %d enviado ao cliente %d pela thread %lu", game->id, clientId, pthread_self());
+            writeLogf("../Servidor/log_servidor.txt", "Thread produtora %lu enviou o jogo com sucesso para o cliente %d", pthread_self(), clientId);
             
             // Atualizar estatísticas
             writerLock();  // Lock de ESCRITA - acesso exclusivo
@@ -146,6 +147,7 @@ void sendGameToClient(int socket, int clientId)
     }
 
     printf("Thread produtora %lu finalizou a função responsável por enviar o jogo ao cliente %d\n" , pthread_self(), clientId);
+    writeLogf("../Servidor/log_servidor.txt", "Thread produtora %lu finalizou a função responsável por enviar o jogo ao cliente %d", pthread_self(), clientId);
 }
 
 
@@ -172,7 +174,7 @@ void verifyClientPartialSolution(int socket, int gameId, int rowSelected, int co
     if (isCorrect) {
         strcpy(messageToClient, "Correct\n");
         printf("A thread consumidora %lu avaliou a tentativa do cliente %d e esta estava correta\n" , pthread_self(), clientId);
-        writeLogf("../Servidor/log_servidor.txt", "Cliente %d: resposta CORRETA na posição [%d,%d] do jogo %d", clientId, rowSelected, columnSelected, gameId);
+        writeLogf("../Servidor/log_servidor.txt", "A thread consumidora %lu avaliou a tentativa do cliente %d e esta estava correta", pthread_self(), clientId);
         
         // Incrementar estatísticas de acertos
         writerLock();  // Lock de ESCRITA - acesso exclusivo
@@ -196,7 +198,7 @@ void verifyClientPartialSolution(int socket, int gameId, int rowSelected, int co
     } else {
         strcpy(messageToClient, "Wrong\n");
         printf("A thread consumidora %lu avaliou a tentativa do cliente %d e esta estava errada\n" , pthread_self(), clientId);
-        writeLogf("../Servidor/log_servidor.txt", "Cliente %d: resposta ERRADA na posição [%d,%d] do jogo %d", clientId, rowSelected, columnSelected, gameId);
+        writeLogf("../Servidor/log_servidor.txt", "A thread consumidora %lu avaliou a tentativa do cliente %d e esta estava errada", pthread_self(), clientId);
         
         // Incrementar estatísticas de erros
         writerLock();  // Lock de ESCRITA - acesso exclusivo
@@ -220,6 +222,7 @@ void verifyClientPartialSolution(int socket, int gameId, int rowSelected, int co
     }
     
     printf("A thread consumidora %lu está a preparar-se para enviar a resposta da tentativa ao cliente %d\n" , pthread_self(), clientId);
+    writeLogf("../Servidor/log_servidor.txt", "A thread consumidora %lu está a preparar-se para enviar a resposta da tentativa ao cliente %d", pthread_self(), clientId);
 
     if (writeSocket(socket, messageToClient, strlen(messageToClient)) != strlen(messageToClient))
     {
@@ -229,6 +232,7 @@ void verifyClientPartialSolution(int socket, int gameId, int rowSelected, int co
     }
 
     printf("A thread consumidora %lu enviou a resposta ao cliente %d com sucesso\n" , pthread_self(), clientId);
+    writeLogf("../Servidor/log_servidor.txt", "A thread consumidora %lu enviou a resposta ao cliente %d com sucesso", pthread_self(), clientId);
     
     // Atualizar ficheiro de estatísticas
     writeServerStats();
@@ -263,6 +267,7 @@ void verifyClientCompleteSolution(int socket , int gameId , char completeSolutio
                 sprintf(messageToClient , "%d,%d\n" , row , column);
 
                 printf("A thread consumidora %lu encontrou um erro na celula %d %d da solucao completa enviada pelo cliente %d\n" , pthread_self(), row , column, clientId);
+                writeLogf("../Servidor/log_servidor.txt", "A thread consumidora %lu encontrou um erro na celula %d %d da solucao completa enviada pelo cliente %d", pthread_self(), row, column, clientId);
 
                 // Atualizar estatísticas - solução completa incorreta
                 writerLock();
@@ -298,7 +303,7 @@ void verifyClientCompleteSolution(int socket , int gameId , char completeSolutio
     }
 
     printf("A thread consumidora %lu nao encontrou nenhum erro na solucao completa enviada pelo cliente %d\n", pthread_self(), clientId);
-    writeLogf("../Servidor/log_servidor.txt", "Cliente %d: solução COMPLETA CORRETA do jogo %d", clientId, gameId);
+    writeLogf("../Servidor/log_servidor.txt", "A thread consumidora %lu nao encontrou nenhum erro na solucao completa enviada pelo cliente %d", pthread_self(), clientId);
     
     // Atualizar estatísticas - solução completa correta
     writerLock();

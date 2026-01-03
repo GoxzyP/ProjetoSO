@@ -42,6 +42,7 @@ typedef struct ProducerArguments
     sudokuCell (*sudoku)[9][9];
     int (*emptyPositions)[81][2];
     int numberOfEmptyPositions;
+    char logPath[256];
 }producerArguments;
 
 //ConsumerArguments define a estrutra de argumentos passados para cada thread de consumidor
@@ -77,15 +78,17 @@ pthread_mutex_t mutexSocket;
 ClientStats clientStats = {0, 0, 0, 0, 0};
 
 // -----------------------------------------------------------------------------------
-// Função que inicializa o sudoku onde cada célula tem o seu valor,estado,mutex e cond 
+// Funo que inicializa o sudoku onde cada célula tem o seu valor,estado,mutex e cond 
 // -----------------------------------------------------------------------------------
-int loadSudoku(sudokuCell sudoku[9][9] , char partialSolution[82] , int emptyPositions[81][2])
+int loadSudoku(sudokuCell sudoku[9][9] , char partialSolution[82] , int emptyPositions[81][2], char logPath[256])
 {   
     printf("Entrou na função responsável por incializar o sudoku\n");
+    writeLogf(logPath, "Entrou na função responsável por incializar o sudoku\n");
     //Recebe o tamanho do array de caracteres
     int partialSolutionSize = strlen(partialSolution);
 
     printf("Recebeu o tamanho da solução parcial do sudoku\n");
+    writeLogf(logPath, "Recebeu o tamanho da solução parcial do sudoku\n");
 
     //Inicializa as variáveis que iremos usar como indexes para o array bidimensional
     int cellLine = 0;
@@ -123,11 +126,15 @@ int loadSudoku(sudokuCell sudoku[9][9] , char partialSolution[82] , int emptyPos
     }
 
     printf("Todas as posições vazias são %d -> { " , emptyPositionsCount);
+    writeLogf(logPath, "Todas as posições vazias são %d -> { ", emptyPositionsCount);
 
-    for(int i = 0 ; i < emptyPositionsCount ; i++)
+    for(int i = 0 ; i < emptyPositionsCount ; i++) {
         printf("[%d , %d] " , emptyPositions[i][0] , emptyPositions[i][1]);
+        writeLogf(logPath, "[%d , %d] ", emptyPositions[i][0], emptyPositions[i][1]);
+    }
 
     printf("}\n");fflush(stdout);
+    writeLogf(logPath, "}\n");
 
     printf("Finalizou com sucesso a função responsável por inicializar o sudoku\n");
 
@@ -142,11 +149,13 @@ void *producer(void *arguments)
     printf("A thread produtora %d entrou na função do producer\n" , pthread_self());
     //Converte os arguments do tipo void* para producerArguments através de casting
     producerArguments *dataInArguments = (producerArguments *)arguments;
+    writeLogf(dataInArguments->logPath, "A thread produtora %lu entrou na função do producer\n", pthread_self());
 
     //Obtém a referência do sudoku
     sudokuCell (*sudoku)[9][9] = dataInArguments->sudoku;
 
     printf("A thread produtora %d carregou as variáveis necessárias para a função\n" , pthread_self());
+    writeLogf(dataInArguments->logPath, "A thread produtora %lu carregou as variáveis necessárias para a função\n", pthread_self());
 
     //Itera sobre as posições vazias
     for(int i = 0 ; i < dataInArguments->numberOfEmptyPositions; i++)
@@ -157,6 +166,7 @@ void *producer(void *arguments)
         int columnSelected = (*dataInArguments->emptyPositions)[i][1];
 
         printf("A thread produtora %d irá tentar entrar na cell %d %d \n" , pthread_self() , rowSelected , columnSelected);
+        writeLogf(dataInArguments->logPath, "A thread produtora %lu irá tentar entrar na cell %d %d \n", pthread_self(), rowSelected, columnSelected);
         //Obtém a referência da célula que precisa ser preenchida
         sudokuCell *cell = &(*sudoku)[rowSelected][columnSelected];
 
@@ -165,11 +175,13 @@ void *producer(void *arguments)
             continue;
 
         printf("A thread produtora %d conseguiu dar lock com sucesso na cell %d %d \n" , pthread_self() , rowSelected , columnSelected);
+        writeLogf(dataInArguments->logPath, "A thread produtora %lu conseguiu dar lock com sucesso na cell %d %d \n", pthread_self(), rowSelected, columnSelected);
 
         //Caso conseguir verificar o mutex verifica se foi o primeiro produtor a chegar à célula caso não for liberta o mutex e tenta outras células
         if(cell->state == FINISHED || cell->producer != 0)
         {   
             printf("A thread produtora %d verificou que cell %d %d já tinha dono \n" , pthread_self() , rowSelected , columnSelected);
+            writeLogf(dataInArguments->logPath, "A thread produtora %lu verificou que cell %d %d já tinha dono \n", pthread_self(), rowSelected, columnSelected);
             pthread_mutex_unlock(&cell->mutex);
             continue;
         }
@@ -181,15 +193,20 @@ void *producer(void *arguments)
         //Obtém os valores possíveis para a célula atual
         int* possibleAnswers = getPossibleAnswers(sudoku , rowSelected , columnSelected , &size , getValueFromSudokuCell);
         printf("A thread produtora %d pegou as respostas possíveis com sucesso da cell %d %d \nRespostas possíveis são -> [" , pthread_self() , rowSelected , columnSelected);
+        writeLogf(dataInArguments->logPath, "A thread produtora %lu pegou as respostas possíveis com sucesso da cell %d %d \nRespostas possíveis são -> [", pthread_self(), rowSelected, columnSelected);
         
         for(int i = 0 ; i < size ; i++)
         {
             printf("%d" , possibleAnswers[i]);
-            if(i < size - 1)
+            writeLogf(dataInArguments->logPath, "%d", possibleAnswers[i]);
+            if(i < size - 1) {
                 printf(",");
+                writeLogf(dataInArguments->logPath, ",");
+            }
         }
 
         printf("]\n");
+        writeLogf(dataInArguments->logPath, "]\n");
 
         pthread_mutex_unlock(&cell->mutex);
 
@@ -213,11 +230,13 @@ void *producer(void *arguments)
             //Fecha o mutex que controla o buffer produtor/consumidor antes de inserir o valor
             pthread_mutex_lock(&mutexProducerConsumerBuffer);
             printf("A thread produtora %d fechou o mutex do buffer produtor/consumidor\n" , pthread_self());
+            writeLogf(dataInArguments->logPath, "A thread produtora %lu fechou o mutex do buffer produtor/consumidor\n", pthread_self());
 
             //Verifica se o buffer está cheio , caso tiver liberta o mutex e bloqueia a tarefa atual até receber um sinal do consumidor
             while(numberOfItemsInsideBuffer == BUFFER_PRODUCER_CONSUMER_SIZE)
             {   
                 printf("A thread produtora %d vai bloquear porque o buffer produtor/consumidor está cheio\n" , pthread_self());
+                writeLogf(dataInArguments->logPath, "A thread produtora %lu vai bloquear porque o buffer produtor/consumidor está cheio\n", pthread_self());
                 pthread_cond_wait(&producerBufferConditionVariable , &mutexProducerConsumerBuffer);
             }
 
@@ -226,11 +245,13 @@ void *producer(void *arguments)
             bufferProducerIndex = (bufferProducerIndex + 1) % BUFFER_PRODUCER_CONSUMER_SIZE;
             numberOfItemsInsideBuffer++;
             printf("A thread produtora %d colocou a entrada(linha : %d , coluna : %d , valor : %d) no buffer e colocou o estado à espera\n" , pthread_self() , rowSelected , columnSelected , possibleAnswers[j]);
+            writeLogf(dataInArguments->logPath, "A thread produtora %lu colocou a entrada(linha : %d , coluna : %d , valor : %d) no buffer e colocou o estado à espera\n", pthread_self(), rowSelected, columnSelected, possibleAnswers[j]);
 
             //Sinaliza um consumidor que um item foi adiciona e liberta o mutex do buffer produtor/consumidor
             pthread_cond_signal(&consumerBufferConditionVariable);
             pthread_mutex_unlock(&mutexProducerConsumerBuffer);
             printf("A thread produtora %d abriu o mutex do buffer produtor/consumidor e sinalizou o consumidor\n" , pthread_self());
+            writeLogf(dataInArguments->logPath, "A thread produtora %lu abriu o mutex do buffer produtor/consumidor e sinalizou o consumidor\n", pthread_self());
         }
 
         //Liberta a memória do array que contém as possíveis respostas e desbloqueia o mutex da célula
@@ -254,11 +275,13 @@ void *consumer(void *arguments)
     printf("A thread consumidora %d entrou na função do consumer\n" , pthread_self());
     //Converte os arguments do tipo void* para consumerArguments através de casting
     consumerArguments *dataInArguments = (consumerArguments*)arguments;
+    writeLogf(dataInArguments->logPath, "A thread consumidora %lu entrou na função do consumer\n", pthread_self());
 
     //Obtém a referência do sudoku e o socket que está ser utilizado na comunicação servidor/cliente
     int socket = dataInArguments->socket;
     sudokuCell (*sudoku)[9][9] = dataInArguments->sudoku;
     printf("A thread consumidora %d carregou as variáveis necessárias para a função\n" , pthread_self());
+    writeLogf(dataInArguments->logPath, "A thread consumidora %lu carregou as variáveis necessárias para a função\n", pthread_self());
 
     //Define o código que será usado pelo servidor para identificar a mensagem do cliente
     int codeToVerifyAnswer = 2;
@@ -270,12 +293,14 @@ void *consumer(void *arguments)
         //Bloqueia o mutex responsável pelo buffer produtor/consumidor
         pthread_mutex_lock(&mutexProducerConsumerBuffer);
         printf("A thread consumidora %d bloqueou o mutex do buffer produtor/consumidor\n" , pthread_self());
+        writeLogf(dataInArguments->logPath, "A thread consumidora %lu bloqueou o mutex do buffer produtor/consumidor\n", pthread_self());
 
         //Verifica se o buffer está vazio , se estiver desbloqueia o mutex e bloqueia a thread atual até que receba um sinal de um produtor
         while(numberOfItemsInsideBuffer == 0 && numberOfActiveProducers > 0)
         {   
-            pthread_cond_wait(&consumerBufferConditionVariable , &mutexProducerConsumerBuffer);
             printf("A thread consumidora %d bloqueou porque o buffer produtor/consumidor está vazio\n" , pthread_self());
+            writeLogf(dataInArguments->logPath, "A thread consumidora %lu bloqueou porque o buffer produtor/consumidor está vazio\n", pthread_self());
+            pthread_cond_wait(&consumerBufferConditionVariable , &mutexProducerConsumerBuffer);
         }
 
         if(numberOfItemsInsideBuffer == 0 && numberOfActiveProducers == 0)
@@ -289,11 +314,13 @@ void *consumer(void *arguments)
         bufferConsumerIndex = (bufferConsumerIndex + 1) % BUFFER_PRODUCER_CONSUMER_SIZE;
         numberOfItemsInsideBuffer--;
         printf("A thread consumidora %d retirou uma entrada do buffer\n" , pthread_self());
+        writeLogf(dataInArguments->logPath, "A thread consumidora %lu retirou uma entrada do buffer\n", pthread_self());
 
         //Sinaliza um produtor que já tem espaço disponível no buffer para outro item e liberta o mutex responsável pelo buffer produtor/consumidor
         pthread_cond_signal(&producerBufferConditionVariable);
         pthread_mutex_unlock(&mutexProducerConsumerBuffer);
         printf("A thread consumidora %d desbloqueou o buffer produtor/consumidor e sinalizou um produtor\n" , pthread_self());
+        writeLogf(dataInArguments->logPath, "A thread consumidora %lu desbloqueou o buffer produtor/consumidor e sinalizou um produtor\n", pthread_self());
 
         //Obtém a referência e bloqueia o mutex da célula da tentativa atual
         sudokuCell *cell = &(*sudoku)[bufferEntry.rowSelected][bufferEntry.columnSelected];
@@ -308,14 +335,15 @@ void *consumer(void *arguments)
 
         pthread_mutex_unlock(&cell->mutex);
 
-        //Prepara a mensagem para enviar ao servidor com o formato "codigo,id do jogo,linha,coluna,resposta do cliente\n"
+        //Prepara a mensagem para enviar ao servidor com o formato "codigo,id do jogo,linha,coluna,resposta do cliente,clientId\n"
         char messageToServer[BUFFER_SOCKET_MESSAGE_SIZE];
-        sprintf(messageToServer , "%d,%d,%d,%d,%d,%d\n" , codeToVerifyAnswer , codeToVerifyPartialSolution , dataInArguments->gameId , bufferEntry.rowSelected , bufferEntry.columnSelected , bufferEntry.clientAnswer);
+        sprintf(messageToServer , "%d,%d,%d,%d,%d,%d,%d\n" , codeToVerifyAnswer , codeToVerifyPartialSolution , dataInArguments->gameId , bufferEntry.rowSelected , bufferEntry.columnSelected , bufferEntry.clientAnswer, dataInArguments->clientId);
 
         //Bloqueia o mutex responsável pela comunicação servidor/cliente utilizando o socket
         pthread_mutex_lock(&mutexSocket);
 
         printf("A thread consumidora %d está a prepar-se para enviar uma tentativa para o server\n" , pthread_self());
+        writeLogf(dataInArguments->logPath, "A thread consumidora %lu está a prepar-se para enviar uma tentativa para o server\n", pthread_self());
         //Envia a tentativa ao servidor e termina o processo caso esta comunicação falhar
         if(writeSocket(socket , messageToServer , strlen(messageToServer)) != strlen(messageToServer))
         {
@@ -324,6 +352,7 @@ void *consumer(void *arguments)
         }
 
         printf("A thread consumidora %d enviou a tentativa para o server com sucesso\n" , pthread_self());
+        writeLogf(dataInArguments->logPath, "A thread consumidora %lu enviou a tentativa para o server com sucesso\n", pthread_self());
 
         //Recebe a resposta do servidor
         char messageFromServer[BUFFER_SOCKET_MESSAGE_SIZE];
@@ -338,6 +367,7 @@ void *consumer(void *arguments)
 
         pthread_mutex_unlock(&mutexSocket);
         printf("A thread consumidora %d recebeu a resposta da tentativa corretamente\n" , pthread_self());
+        writeLogf(dataInArguments->logPath, "A thread consumidora %lu recebeu a resposta da tentativa corretamente\n", pthread_self());
 
         //Converte a resposta do servidor para o uma string terminada em \0 para utilizar funções da biblioteca string.h
         messageFromServer[bytesReceived - 1] = '\0';
@@ -380,17 +410,20 @@ void *consumer(void *arguments)
 void inicializeGame(int socket , int gameId , char partialSolution[82], int clientId, char logPath[256])
 {    
     printf("Começou a função responsável por inicializar o jogo\n");
+    writeLogf(logPath, "Começou a função responsável por inicializar o jogo\n");
     //Inicializa o sudoku e o array que irá conter as coordenadas das posições vazias
     sudokuCell sudoku[9][9];
     int emptyPositions[81][2];
 
     //Carrega um sudoku e calcula o numero de posições por preencher
-    int numberOfEmptyPositions = loadSudoku(sudoku , partialSolution , emptyPositions);
+    int numberOfEmptyPositions = loadSudoku(sudoku , partialSolution , emptyPositions, logPath);
     printf("Conseguiu inicializar o sudoku e precisa preencher %d posições\n" , numberOfEmptyPositions);
+    writeLogf(logPath, "Conseguiu inicializar o sudoku e precisa preencher %d posições\n", numberOfEmptyPositions);
     
     //Mistura o array de posições vazias para adicionar para o sudoku ser resolvido de uma maneira randómica
     shufflePositionsInArray(emptyPositions , numberOfEmptyPositions);
     printf("Conseguiu misturar as posições vazias para preencher o sudoku de maneira random\n");
+    writeLogf(logPath, "Conseguiu misturar as posições vazias para preencher o sudoku de maneira random\n");
 
     //Incrementa contador de jogos nas stats
     clientStats.totalJogos++;
@@ -401,6 +434,7 @@ void inicializeGame(int socket , int gameId , char partialSolution[82], int clie
     pthread_cond_init(&producerBufferConditionVariable , NULL);
     pthread_cond_init(&consumerBufferConditionVariable , NULL);
     printf("Inicializou os mutexes e variáveis condicionais\n");
+    writeLogf(logPath, "Inicializou os mutexes e variáveis condicionais\n");
 
     numberOfActiveProducers = NUMBER_OF_PRODUCERS;
 
@@ -412,7 +446,9 @@ void inicializeGame(int socket , int gameId , char partialSolution[82], int clie
     producerNeededArguments->sudoku = &sudoku;
     producerNeededArguments->emptyPositions = &emptyPositions;
     producerNeededArguments->numberOfEmptyPositions = numberOfEmptyPositions;
+    strncpy(producerNeededArguments->logPath, logPath, sizeof(producerNeededArguments->logPath));
     printf("Alocou as informações necessários dos produtores na struct\n");
+    writeLogf(logPath, "Alocou as informações necessários dos produtores na struct\n");
 
     //Cria todas as threads produtoras
     for(int i = 0 ; i < NUMBER_OF_PRODUCERS ; i++)
@@ -425,6 +461,7 @@ void inicializeGame(int socket , int gameId , char partialSolution[82], int clie
     }
 
     printf("Criou os %d threads produtoras\n" , NUMBER_OF_PRODUCERS);
+    writeLogf(logPath, "Criou os %d threads produtoras\n", NUMBER_OF_PRODUCERS);
 
     //Prepara os argumentos necessários para o funcionamente das threads consumidoras
     consumerArguments *consumerNeededArguments = malloc(sizeof(consumerArguments));
@@ -434,6 +471,7 @@ void inicializeGame(int socket , int gameId , char partialSolution[82], int clie
     consumerNeededArguments->clientId = clientId;
     strncpy(consumerNeededArguments->logPath, logPath, sizeof(consumerNeededArguments->logPath));
     printf("Alocou as informações necessários dos consumidores na struct\n");
+    writeLogf(logPath, "Alocou as informações necessários dos consumidores na struct\n");
 
     //Cria todas as threads consumidoras
     for(int i = 0 ; i < NUMBER_OF_CONSUMERS ; i++)
@@ -446,12 +484,14 @@ void inicializeGame(int socket , int gameId , char partialSolution[82], int clie
     }
 
     printf("Criou os %d threads consumidores\n" , NUMBER_OF_CONSUMERS);
+    writeLogf(logPath, "Criou os %d threads consumidores\n", NUMBER_OF_CONSUMERS);
 
     //Espera todas as threads termirarem as suas respetivas funções
     for(int i = 0 ; i < NUMBER_OF_PRODUCERS + NUMBER_OF_CONSUMERS ; i++)
         pthread_join(threads[i] , NULL);
 
     printf("Todas as threads foram eliminadas corretamente\n");
+    writeLogf(logPath, "Todas as threads foram eliminadas corretamente\n");
 
     pthread_mutex_destroy(&mutexProducerConsumerBuffer);
     pthread_mutex_destroy(&mutexSocket);

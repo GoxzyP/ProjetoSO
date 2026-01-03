@@ -88,8 +88,12 @@ void *ioHandler(void *arguments)
                     clientId = atoi(comma + 1);
                 }
                 
+                printf("Pedido de jogo recebido do cliente ID %d (socket %d)\n", clientId, clientSocket);
+                writeLogf("../Servidor/log_servidor.txt", "Pedido de jogo recebido do cliente ID %d (socket %d)", clientId, clientSocket);
+                
                 sendGameToClient(clientSocket, clientId);
                 printf("A thread produtora %lu acabou de processar o pedido de código 1 do cliente %d\n" , pthread_self(), clientId);
+                writeLogf("../Servidor/log_servidor.txt", "Thread produtora %lu acabou de processar o pedido de código 1 do cliente %d", pthread_self(), clientId);
                 continue;
             }
             // Caso o código seja 2, o cliente está a enviar uma tentativa de solução
@@ -134,7 +138,8 @@ void *ioHandler(void *arguments)
                     // Preenche a estrutura para pedido completo (formato: "2,gameId,solution,clientId")
                     char tempSolution[100];  // Buffer maior para evitar overflow
                     int tempClientId;
-                    sscanf(restOfClientMessage , "2,%d,%99[^,],%d" , &request->data.completeSolution.gameId , tempSolution, &tempClientId);
+                    sscanf(restOfClientMessage , "2,%d,%82[^,],%d" , &request->data.completeSolution.gameId , tempSolution, &tempClientId);
+                    
                     strncpy(request->data.completeSolution.clientCompleteSolution, tempSolution, 81);
                     request->data.completeSolution.clientCompleteSolution[81] = '\0';
                     request->data.completeSolution.clientId = tempClientId;
@@ -311,6 +316,19 @@ void writeServerStats()
     printf("7. Media de Jogadas por Cliente: %.2f\n", mediaJogadasPorCliente);
     printf("========================================\n\n");
     fflush(stdout);  // Força a exibição imediata no terminal
+
+    // Guardar nas logs do servidor também
+    writeLogf("../Servidor/log_servidor.txt", "========================================");
+    writeLogf("../Servidor/log_servidor.txt", "ESTATISTICAS GLOBAIS DO SERVIDOR");
+    writeLogf("../Servidor/log_servidor.txt", "========================================");
+    writeLogf("../Servidor/log_servidor.txt", "1. Clientes Ativos (Conectados): %d", clientesAtivos);
+    writeLogf("../Servidor/log_servidor.txt", "2. Taxa de Acerto Global: %.2f%%", taxaAcertoGlobal);
+    writeLogf("../Servidor/log_servidor.txt", "3. Total de Acertos: %d", totalAcertos);
+    writeLogf("../Servidor/log_servidor.txt", "4. Total de Jogadas: %d", totalJogadas);
+    writeLogf("../Servidor/log_servidor.txt", "5. Total de Jogos Distribuidos: %d", totalJogos);
+    writeLogf("../Servidor/log_servidor.txt", "6. Total de Erros: %d", totalErros);
+    writeLogf("../Servidor/log_servidor.txt", "7. Media de Jogadas por Cliente: %.2f", mediaJogadasPorCliente);
+    writeLogf("../Servidor/log_servidor.txt", "========================================\n");
 
     // Criar caminho para ficheiro de estatísticas separado
     char statsPath[512] = "../Servidor/estatisticas_servidor.csv";

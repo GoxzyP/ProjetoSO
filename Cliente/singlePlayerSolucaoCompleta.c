@@ -73,7 +73,7 @@ void solveSudokuUsingCompleteSolution(int socket , int gameId , char sudoku[82],
         }
 
         char messageToServer[BUFFER_SOCKET_MESSAGE_SIZE];
-        sprintf(messageToServer , "%d,%d,%d,%s\n" , codeToVerifyAnswer , codeToVerifyCompleteAnswer , gameId , sudoku);
+        sprintf(messageToServer , "%d,%d,%d,%s,%d\n" , codeToVerifyAnswer , codeToVerifyCompleteAnswer , gameId , sudoku, clientId);
 
         if(writeSocket(socket , messageToServer , strlen(messageToServer)) != strlen(messageToServer))
         {
@@ -107,6 +107,7 @@ void solveSudokuUsingCompleteSolution(int socket , int gameId , char sudoku[82],
             writeClientStats(&clientStats, logPath, clientId);
             
             printf("A solucao completa enviada para o servidor estava correta");
+            writeLogf(logPath, "A solucao completa enviada para o servidor estava correta");
             displaySudokuWithCoords(sudoku , getValueFromCharGrid);
             return;
         }
@@ -123,6 +124,7 @@ void solveSudokuUsingCompleteSolution(int socket , int gameId , char sudoku[82],
             startingColumn = messageFromServer[2] - '0';
 
             printf("Foi encontrado um erro na celula %d %d da solucao completa" , startingRow , startingColumn);
+            writeLogf(logPath, "Foi encontrado um erro na celula %d %d da solucao completa", startingRow, startingColumn);
 
             wrongValuesAlreadyTried[startingRow][startingColumn][sudoku[startingRow * 9 + startingColumn] - '0'] = 1;
 

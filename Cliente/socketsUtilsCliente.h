@@ -48,7 +48,7 @@ void shufflePositionsInArray(int positions[][2] , int count);
 int getValueFromSudokuCell(void *sudoku , int rowSelected , int columnSelected);
 int getValueFromCharGrid(void *sudoku , int rowSelected , int columnSelected);
 int* getPossibleAnswers(void *sudoku , int rowSelected, int columnSelected , int *size , int (*getValueFunction)(void* , int , int));
-void requestGame(int socket , int *gameId , char partialSolution[81], char logPath[256]);
+void requestGame(int socket , int *gameId , char partialSolution[81], char logPath[256], int clientId);
 void fillSudoku(int socket, char sudoku[81], int gameId, char logPath[256], ClientStats *stats, int clientId);
 void writeClientStats(ClientStats *stats, char logPath[256], int clientId);
 

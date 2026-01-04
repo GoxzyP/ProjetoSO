@@ -493,11 +493,6 @@ void inicializeGame(int socket , int gameId , char partialSolution[82], int clie
     printf("Todas as threads foram eliminadas corretamente\n");
     writeLogf(logPath, "Todas as threads foram eliminadas corretamente\n");
 
-    pthread_mutex_destroy(&mutexProducerConsumerBuffer);
-    pthread_mutex_destroy(&mutexSocket);
-    pthread_cond_destroy(&producerBufferConditionVariable);
-    pthread_cond_destroy(&consumerBufferConditionVariable);
-
     //Liberta a memórias que foi usada para os argumentos dos produtores e consumidores
     free(producerNeededArguments);
     free(consumerNeededArguments);

@@ -104,7 +104,10 @@ void *ioHandler(void *arguments)
 
                 // Obtem o restante da mensagem após a primeira vírgula
                 char *restOfClientMessage = strchr(messageFromClient, ',');
-                if(!restOfClientMessage){ free(restOfClientMessage) ; continue;}
+                if(!restOfClientMessage){ 
+                    free(request);  // Liberar memória antes de continuar
+                    continue; 
+                }
                 restOfClientMessage++; 
 
                 // Determina se a mensagem é parcial (1) ou completa (2)

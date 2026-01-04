@@ -333,10 +333,15 @@ void writeServerStats()
     // Criar caminho para ficheiro de estatísticas separado
     char statsPath[512] = "../Servidor/estatisticas_servidor.csv";
 
+    // PROTEGER ESCRITA NO FICHEIRO DE ESTATÍSTICAS
+    extern pthread_mutex_t mutexFileWrite;
+    pthread_mutex_lock(&mutexFileWrite);
+    
     // SOBRESCREVER ficheiro de estatísticas
     FILE *file = fopen(statsPath, "w");  // Modo "w" sobrescreve
     if (!file) {
         perror("Erro ao abrir ficheiro de estatísticas do servidor");
+        pthread_mutex_unlock(&mutexFileWrite);
         return;
     }
 
@@ -353,6 +358,8 @@ void writeServerStats()
     fprintf(file, "========================================\n");
     
     fclose(file);
+    
+    pthread_mutex_unlock(&mutexFileWrite);  // LIBERTAR MUTEX
 }
 
 // --------------------------------------------------------------

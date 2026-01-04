@@ -12,11 +12,11 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 
 Novo cliente conectado (socket 5). Total de clientes ativos: 1
-Pedido de jogo recebido do cliente ID 9382 (socket 5)
-Thread produtora 139938085426944 entrou na função de enviar o jogo para o cliente 9382
-Mensagem que será enviada para o cliente 9382 pela thread produtora 139938085426944 -> 5,970020000100549000043000010300010007800307005200060001010000630000854009000030024
+Pedido de jogo recebido do cliente ID 30753 (socket 5)
+Thread produtora 140360868124416 entrou na função de enviar o jogo para o cliente 30753
+Mensagem que será enviada para o cliente 30753 pela thread produtora 140360868124416 -> 5,970020000100549000043000010300010007800307005200060001010000630000854009000030024
 
-Thread produtora 139938085426944 enviou o jogo com sucesso para o cliente 9382
+Thread produtora 140360868124416 enviou o jogo com sucesso para o cliente 30753
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
@@ -29,101 +29,101 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 7. Media de Jogadas por Cliente: 0.00
 ========================================
 
-Thread produtora 139938085426944 finalizou a função responsável por enviar o jogo ao cliente 9382
-Thread produtora 139938085426944 acabou de processar o pedido de código 1 do cliente 9382
-A thread consumidora 139938169353984 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938169353984 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938169353984 enviou a resposta ao cliente 9382 com sucesso
+Thread produtora 140360868124416 finalizou a função responsável por enviar o jogo ao cliente 30753
+Thread produtora 140360868124416 acabou de processar o pedido de código 1 do cliente 30753
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 100.00%
-3. Total de Acertos: 1
+2. Taxa de Acerto Global: 0.00%
+3. Total de Acertos: 0
 4. Total de Jogadas: 1
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 0
+6. Total de Erros: 1
 7. Media de Jogadas por Cliente: 1.00
 ========================================
 
-A thread consumidora 139938169353984 avaliou a tentativa do cliente 9382 e esta estava errada
-A thread consumidora 139938169353984 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938169353984 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 50.00%
-3. Total de Acertos: 1
+2. Taxa de Acerto Global: 0.00%
+3. Total de Acertos: 0
 4. Total de Jogadas: 2
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 1
+6. Total de Erros: 2
 7. Media de Jogadas por Cliente: 2.00
 ========================================
 
-A thread consumidora 139938169353984 avaliou a tentativa do cliente 9382 e esta estava errada
-A thread consumidora 139938169353984 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938169353984 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
-A thread consumidora 139938152568576 avaliou a tentativa do cliente 9382 e esta estava errada
 1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938152568576 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 2. Taxa de Acerto Global: 33.33%
-A thread consumidora 139938152568576 enviou a resposta ao cliente 9382 com sucesso
 3. Total de Acertos: 1
 4. Total de Jogadas: 3
-========================================
 5. Total de Jogos Distribuidos: 1
-ESTATISTICAS GLOBAIS DO SERVIDOR
 6. Total de Erros: 2
-========================================
 7. Media de Jogadas por Cliente: 3.00
-1. Clientes Ativos (Conectados): 1
 ========================================
 
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
 2. Taxa de Acerto Global: 25.00%
 3. Total de Acertos: 1
 4. Total de Jogadas: 4
-A thread consumidora 139938169353984 avaliou a tentativa do cliente 9382 e esta estava correta
 5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938169353984 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 6. Total de Erros: 3
 7. Media de Jogadas por Cliente: 4.00
-A thread consumidora 139938169353984 enviou a resposta ao cliente 9382 com sucesso
 ========================================
 
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30753 com sucesso
 ========================================
-A thread consumidora 139938152568576 avaliou a tentativa do cliente 9382 e esta estava errada
 ESTATISTICAS GLOBAIS DO SERVIDOR
-A thread consumidora 139938152568576 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 ========================================
 1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938152568576 enviou a resposta ao cliente 9382 com sucesso
 2. Taxa de Acerto Global: 40.00%
-========================================
 3. Total de Acertos: 2
-ESTATISTICAS GLOBAIS DO SERVIDOR
 4. Total de Jogadas: 5
-========================================
 5. Total de Jogos Distribuidos: 1
-1. Clientes Ativos (Conectados): 1
 6. Total de Erros: 3
-2. Taxa de Acerto Global: 33.33%
 7. Media de Jogadas por Cliente: 5.00
-3. Total de Acertos: 2
 ========================================
 
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 33.33%
+3. Total de Acertos: 2
 4. Total de Jogadas: 6
 5. Total de Jogos Distribuidos: 1
 6. Total de Erros: 4
 7. Media de Jogadas por Cliente: 6.00
-A thread consumidora 139938169353984 avaliou a tentativa do cliente 9382 e esta estava errada
 ========================================
 
-A thread consumidora 139938169353984 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938169353984 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
@@ -136,9 +136,9 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 7. Media de Jogadas por Cliente: 7.00
 ========================================
 
-A thread consumidora 139938110605056 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938110605056 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938110605056 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
@@ -151,656 +151,656 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 7. Media de Jogadas por Cliente: 8.00
 ========================================
 
-A thread consumidora 139938102212352 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938102212352 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938102212352 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
-A thread consumidora 139938093819648 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938093819648 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 1. Clientes Ativos (Conectados): 1
 2. Taxa de Acerto Global: 44.44%
-A thread consumidora 139938093819648 enviou a resposta ao cliente 9382 com sucesso
 3. Total de Acertos: 4
 4. Total de Jogadas: 9
-========================================
 5. Total de Jogos Distribuidos: 1
-ESTATISTICAS GLOBAIS DO SERVIDOR
 6. Total de Erros: 5
-========================================
 7. Media de Jogadas por Cliente: 9.00
-1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938160961280 avaliou a tentativa do cliente 9382 e esta estava correta
-2. Taxa de Acerto Global: 50.00%
 ========================================
 
-3. Total de Acertos: 5
-A thread consumidora 139938160961280 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-4. Total de Jogadas: 10
-A thread consumidora 139938160961280 enviou a resposta ao cliente 9382 com sucesso
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 5
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 40.00%
+3. Total de Acertos: 4
+4. Total de Jogadas: 10
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 6
 7. Media de Jogadas por Cliente: 10.00
 ========================================
-========================================
 
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 54.55%
-3. Total de Acertos: 6
-A thread consumidora 139938144175872 avaliou a tentativa do cliente 9382 e esta estava correta
+2. Taxa de Acerto Global: 36.36%
+3. Total de Acertos: 4
 4. Total de Jogadas: 11
 5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938144175872 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-6. Total de Erros: 5
+6. Total de Erros: 7
 7. Media de Jogadas por Cliente: 11.00
-A thread consumidora 139938144175872 enviou a resposta ao cliente 9382 com sucesso
 ========================================
 
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 58.33%
-A thread consumidora 139938135783168 avaliou a tentativa do cliente 9382 e esta estava errada
-3. Total de Acertos: 7
-A thread consumidora 139938135783168 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
+2. Taxa de Acerto Global: 33.33%
+3. Total de Acertos: 4
 4. Total de Jogadas: 12
-A thread consumidora 139938135783168 enviou a resposta ao cliente 9382 com sucesso
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 5
-========================================
+6. Total de Erros: 8
 7. Media de Jogadas por Cliente: 12.00
-A thread consumidora 139938152568576 avaliou a tentativa do cliente 9382 e esta estava correta
-ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 
-A thread consumidora 139938152568576 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938152568576 enviou a resposta ao cliente 9382 com sucesso
-2. Taxa de Acerto Global: 53.85%
-3. Total de Acertos: 7
-========================================
+2. Taxa de Acerto Global: 38.46%
+3. Total de Acertos: 5
 4. Total de Jogadas: 13
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 6
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 57.14%
+6. Total de Erros: 8
 7. Media de Jogadas por Cliente: 13.00
-A thread consumidora 139938127390464 avaliou a tentativa do cliente 9382 e esta estava correta
-3. Total de Acertos: 8
-4. Total de Jogadas: 14
-A thread consumidora 139938127390464 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 ========================================
 
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 35.71%
+3. Total de Acertos: 5
+4. Total de Jogadas: 14
 5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938127390464 enviou a resposta ao cliente 9382 com sucesso
-6. Total de Erros: 6
+6. Total de Erros: 9
 7. Media de Jogadas por Cliente: 14.00
 ========================================
 
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 60.00%
-3. Total de Acertos: 9
+2. Taxa de Acerto Global: 40.00%
+3. Total de Acertos: 6
 4. Total de Jogadas: 15
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 6
-A thread consumidora 139938118997760 avaliou a tentativa do cliente 9382 e esta estava errada
+6. Total de Erros: 9
 7. Media de Jogadas por Cliente: 15.00
 ========================================
 
-A thread consumidora 139938118997760 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938118997760 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 56.25%
-A thread consumidora 139938169353984 avaliou a tentativa do cliente 9382 e esta estava errada
-3. Total de Acertos: 9
+2. Taxa de Acerto Global: 43.75%
+3. Total de Acertos: 7
 4. Total de Jogadas: 16
-A thread consumidora 139938169353984 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938169353984 enviou a resposta ao cliente 9382 com sucesso
-6. Total de Erros: 7
+6. Total de Erros: 9
 7. Media de Jogadas por Cliente: 16.00
 ========================================
-========================================
 
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30753 com sucesso
+========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 52.94%
-3. Total de Acertos: 9
-A thread consumidora 139938110605056 avaliou a tentativa do cliente 9382 e esta estava errada
+2. Taxa de Acerto Global: 47.06%
+3. Total de Acertos: 8
 4. Total de Jogadas: 17
-A thread consumidora 139938110605056 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 8
-A thread consumidora 139938110605056 enviou a resposta ao cliente 9382 com sucesso
+6. Total de Erros: 9
 7. Media de Jogadas por Cliente: 17.00
 ========================================
 
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 50.00%
-3. Total de Acertos: 9
+2. Taxa de Acerto Global: 44.44%
+3. Total de Acertos: 8
 4. Total de Jogadas: 18
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 9
+6. Total de Erros: 10
 7. Media de Jogadas por Cliente: 18.00
 ========================================
 
-A thread consumidora 139938102212352 avaliou a tentativa do cliente 9382 e esta estava errada
-A thread consumidora 139938102212352 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938102212352 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 47.37%
-3. Total de Acertos: 9
+2. Taxa de Acerto Global: 42.11%
+3. Total de Acertos: 8
 4. Total de Jogadas: 19
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 10
+6. Total de Erros: 11
 7. Media de Jogadas por Cliente: 19.00
 ========================================
 
-A thread consumidora 139938093819648 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938093819648 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938093819648 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
-A thread consumidora 139938160961280 avaliou a tentativa do cliente 9382 e esta estava correta
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 50.00%
-A thread consumidora 139938160961280 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-3. Total de Acertos: 10
+2. Taxa de Acerto Global: 45.00%
+3. Total de Acertos: 9
 4. Total de Jogadas: 20
-A thread consumidora 139938160961280 enviou a resposta ao cliente 9382 com sucesso
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 10
+6. Total de Erros: 11
 7. Media de Jogadas por Cliente: 20.00
 ========================================
 
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 42.86%
+3. Total de Acertos: 9
+4. Total de Jogadas: 21
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 12
+7. Media de Jogadas por Cliente: 21.00
+========================================
+
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 45.45%
+3. Total de Acertos: 10
+4. Total de Jogadas: 22
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 12
+7. Media de Jogadas por Cliente: 22.00
+========================================
+
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 47.83%
+3. Total de Acertos: 11
+4. Total de Jogadas: 23
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 12
+7. Media de Jogadas por Cliente: 23.00
+========================================
+
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 50.00%
+3. Total de Acertos: 12
+4. Total de Jogadas: 24
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 12
+7. Media de Jogadas por Cliente: 24.00
+========================================
+
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 48.00%
+3. Total de Acertos: 12
+4. Total de Jogadas: 25
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 13
+7. Media de Jogadas por Cliente: 25.00
+========================================
+
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 46.15%
+3. Total de Acertos: 12
+4. Total de Jogadas: 26
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 14
+7. Media de Jogadas por Cliente: 26.00
+========================================
+
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 44.44%
+3. Total de Acertos: 12
+4. Total de Jogadas: 27
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 15
+7. Media de Jogadas por Cliente: 27.00
+========================================
+
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 42.86%
+3. Total de Acertos: 12
+4. Total de Jogadas: 28
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 16
+7. Media de Jogadas por Cliente: 28.00
+========================================
+
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 44.83%
+3. Total de Acertos: 13
+4. Total de Jogadas: 29
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 16
+7. Media de Jogadas por Cliente: 29.00
+========================================
+
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 46.67%
+3. Total de Acertos: 14
+4. Total de Jogadas: 30
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 16
+7. Media de Jogadas por Cliente: 30.00
+========================================
+
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 48.39%
+3. Total de Acertos: 15
+4. Total de Jogadas: 31
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 16
+7. Media de Jogadas por Cliente: 31.00
+========================================
+
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 50.00%
+3. Total de Acertos: 16
+4. Total de Jogadas: 32
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 16
+7. Media de Jogadas por Cliente: 32.00
+========================================
+
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 48.48%
+3. Total de Acertos: 16
+4. Total de Jogadas: 33
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 17
+7. Media de Jogadas por Cliente: 33.00
+========================================
+
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 50.00%
+3. Total de Acertos: 17
+4. Total de Jogadas: 34
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 17
+7. Media de Jogadas por Cliente: 34.00
+========================================
+
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 51.43%
+3. Total de Acertos: 18
+4. Total de Jogadas: 35
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 17
+7. Media de Jogadas por Cliente: 35.00
+========================================
+
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 52.78%
+3. Total de Acertos: 19
+4. Total de Jogadas: 36
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 17
+7. Media de Jogadas por Cliente: 36.00
+========================================
+
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 51.35%
+3. Total de Acertos: 19
+4. Total de Jogadas: 37
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 18
+7. Media de Jogadas por Cliente: 37.00
+========================================
+
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 52.63%
+3. Total de Acertos: 20
+4. Total de Jogadas: 38
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 18
+7. Media de Jogadas por Cliente: 38.00
+========================================
+
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 53.85%
+3. Total de Acertos: 21
+4. Total de Jogadas: 39
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 18
+7. Media de Jogadas por Cliente: 39.00
+========================================
+
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 52.50%
+3. Total de Acertos: 21
+4. Total de Jogadas: 40
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 19
+7. Media de Jogadas por Cliente: 40.00
+========================================
+
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 53.66%
+3. Total de Acertos: 22
+4. Total de Jogadas: 41
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 19
+7. Media de Jogadas por Cliente: 41.00
+========================================
+
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
 2. Taxa de Acerto Global: 52.38%
-3. Total de Acertos: 11
-4. Total de Jogadas: 21
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 10
-7. Media de Jogadas por Cliente: 21.00
-========================================
-
-A thread consumidora 139938144175872 avaliou a tentativa do cliente 9382 e esta estava errada
-A thread consumidora 139938144175872 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938144175872 enviou a resposta ao cliente 9382 com sucesso
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 50.00%
-3. Total de Acertos: 11
-4. Total de Jogadas: 22
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 11
-7. Media de Jogadas por Cliente: 22.00
-========================================
-
-A thread consumidora 139938135783168 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938135783168 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938135783168 enviou a resposta ao cliente 9382 com sucesso
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938152568576 avaliou a tentativa do cliente 9382 e esta estava errada
-2. Taxa de Acerto Global: 52.17%
-A thread consumidora 139938152568576 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-3. Total de Acertos: 12
-A thread consumidora 139938152568576 enviou a resposta ao cliente 9382 com sucesso
-4. Total de Jogadas: 23
-5. Total de Jogos Distribuidos: 1
-========================================
-6. Total de Erros: 11
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-7. Media de Jogadas por Cliente: 23.00
-1. Clientes Ativos (Conectados): 1
-========================================
-
-A thread consumidora 139938127390464 avaliou a tentativa do cliente 9382 e esta estava correta
-2. Taxa de Acerto Global: 50.00%
-A thread consumidora 139938127390464 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-3. Total de Acertos: 12
-A thread consumidora 139938127390464 enviou a resposta ao cliente 9382 com sucesso
-4. Total de Jogadas: 24
-5. Total de Jogos Distribuidos: 1
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-6. Total de Erros: 12
-========================================
-7. Media de Jogadas por Cliente: 24.00
-1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938118997760 avaliou a tentativa do cliente 9382 e esta estava correta
-2. Taxa de Acerto Global: 52.00%
-========================================
-
-A thread consumidora 139938118997760 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-3. Total de Acertos: 13
-4. Total de Jogadas: 25
-5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938118997760 enviou a resposta ao cliente 9382 com sucesso
-6. Total de Erros: 12
-7. Media de Jogadas por Cliente: 25.00
-========================================
-========================================
-
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938169353984 avaliou a tentativa do cliente 9382 e esta estava errada
-2. Taxa de Acerto Global: 53.85%
-A thread consumidora 139938169353984 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-3. Total de Acertos: 14
-A thread consumidora 139938169353984 enviou a resposta ao cliente 9382 com sucesso
-4. Total de Jogadas: 26
-5. Total de Jogos Distribuidos: 1
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-6. Total de Erros: 12
-========================================
-7. Media de Jogadas por Cliente: 26.00
-========================================
-
-1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938110605056 avaliou a tentativa do cliente 9382 e esta estava errada
-2. Taxa de Acerto Global: 51.85%
-3. Total de Acertos: 14
-A thread consumidora 139938110605056 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-4. Total de Jogadas: 27
-5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938110605056 enviou a resposta ao cliente 9382 com sucesso
-6. Total de Erros: 13
-7. Media de Jogadas por Cliente: 27.00
-========================================
-
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-A thread consumidora 139938169353984 avaliou a tentativa do cliente 9382 e esta estava correta
-========================================
-A thread consumidora 139938169353984 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938169353984 enviou a resposta ao cliente 9382 com sucesso
-2. Taxa de Acerto Global: 50.00%
-3. Total de Acertos: 14
-========================================
-4. Total de Jogadas: 28
-5. Total de Jogos Distribuidos: 1
-ESTATISTICAS GLOBAIS DO SERVIDOR
-6. Total de Erros: 14
-========================================
-7. Media de Jogadas por Cliente: 28.00
-1. Clientes Ativos (Conectados): 1
-========================================
-
-2. Taxa de Acerto Global: 51.72%
-3. Total de Acertos: 15
-4. Total de Jogadas: 29
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 14
-7. Media de Jogadas por Cliente: 29.00
-========================================
-
-A thread consumidora 139938093819648 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938093819648 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938093819648 enviou a resposta ao cliente 9382 com sucesso
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938160961280 avaliou a tentativa do cliente 9382 e esta estava errada
-2. Taxa de Acerto Global: 53.33%
-A thread consumidora 139938160961280 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-3. Total de Acertos: 16
-A thread consumidora 139938160961280 enviou a resposta ao cliente 9382 com sucesso
-4. Total de Jogadas: 30
-5. Total de Jogos Distribuidos: 1
-========================================
-6. Total de Erros: 14
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-7. Media de Jogadas por Cliente: 30.00
-========================================
-
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 51.61%
-3. Total de Acertos: 16
-4. Total de Jogadas: 31
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 15
-A thread consumidora 139938093819648 avaliou a tentativa do cliente 9382 e esta estava correta
-7. Media de Jogadas por Cliente: 31.00
-========================================
-
-A thread consumidora 139938093819648 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938093819648 enviou a resposta ao cliente 9382 com sucesso
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-A thread consumidora 139938135783168 avaliou a tentativa do cliente 9382 e esta estava correta
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 53.12%
-A thread consumidora 139938135783168 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-3. Total de Acertos: 17
-A thread consumidora 139938135783168 enviou a resposta ao cliente 9382 com sucesso
-4. Total de Jogadas: 32
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 15
-========================================
-7. Media de Jogadas por Cliente: 32.00
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-
-========================================
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 54.55%
-3. Total de Acertos: 18
-4. Total de Jogadas: 33
-5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938093819648 avaliou a tentativa do cliente 9382 e esta estava correta
-6. Total de Erros: 15
-7. Media de Jogadas por Cliente: 33.00
-A thread consumidora 139938093819648 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-========================================
-
-A thread consumidora 139938093819648 enviou a resposta ao cliente 9382 com sucesso
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-A thread consumidora 139938127390464 avaliou a tentativa do cliente 9382 e esta estava correta
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 55.88%
-A thread consumidora 139938127390464 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-3. Total de Acertos: 19
-A thread consumidora 139938127390464 enviou a resposta ao cliente 9382 com sucesso
-4. Total de Jogadas: 34
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 15
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-7. Media de Jogadas por Cliente: 34.00
-A thread consumidora 139938118997760 avaliou a tentativa do cliente 9382 e esta estava correta
-========================================
-========================================
-
-1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938118997760 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-2. Taxa de Acerto Global: 57.14%
-A thread consumidora 139938118997760 enviou a resposta ao cliente 9382 com sucesso
-3. Total de Acertos: 20
-4. Total de Jogadas: 35
-5. Total de Jogos Distribuidos: 1
-========================================
-6. Total de Erros: 15
-7. Media de Jogadas por Cliente: 35.00
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-
-========================================
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 58.33%
-3. Total de Acertos: 21
-4. Total de Jogadas: 36
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 15
-7. Media de Jogadas por Cliente: 36.00
-========================================
-
-A thread consumidora 139938102212352 avaliou a tentativa do cliente 9382 e esta estava errada
-A thread consumidora 139938102212352 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938102212352 enviou a resposta ao cliente 9382 com sucesso
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 56.76%
-3. Total de Acertos: 21
-4. Total de Jogadas: 37
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 16
-7. Media de Jogadas por Cliente: 37.00
-========================================
-
-A thread consumidora 139938110605056 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938110605056 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938110605056 enviou a resposta ao cliente 9382 com sucesso
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 57.89%
 3. Total de Acertos: 22
-4. Total de Jogadas: 38
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 16
-A thread consumidora 139938169353984 avaliou a tentativa do cliente 9382 e esta estava correta
-7. Media de Jogadas por Cliente: 38.00
-========================================
-
-A thread consumidora 139938169353984 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938169353984 enviou a resposta ao cliente 9382 com sucesso
-========================================
-A thread consumidora 139938160961280 avaliou a tentativa do cliente 9382 e esta estava errada
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-A thread consumidora 139938160961280 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938160961280 enviou a resposta ao cliente 9382 com sucesso
-2. Taxa de Acerto Global: 58.97%
-3. Total de Acertos: 23
-4. Total de Jogadas: 39
-========================================
-5. Total de Jogos Distribuidos: 1
-ESTATISTICAS GLOBAIS DO SERVIDOR
-6. Total de Erros: 16
-========================================
-1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938135783168 avaliou a tentativa do cliente 9382 e esta estava correta
-7. Media de Jogadas por Cliente: 39.00
-A thread consumidora 139938135783168 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-2. Taxa de Acerto Global: 57.50%
-========================================
-
-3. Total de Acertos: 23
-A thread consumidora 139938135783168 enviou a resposta ao cliente 9382 com sucesso
-4. Total de Jogadas: 40
-5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938093819648 avaliou a tentativa do cliente 9382 e esta estava errada
-========================================
-6. Total de Erros: 17
-A thread consumidora 139938093819648 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-ESTATISTICAS GLOBAIS DO SERVIDOR
-7. Media de Jogadas por Cliente: 40.00
-A thread consumidora 139938093819648 enviou a resposta ao cliente 9382 com sucesso
-========================================
-1. Clientes Ativos (Conectados): 1
-========================================
-
-========================================
-2. Taxa de Acerto Global: 58.54%
-ESTATISTICAS GLOBAIS DO SERVIDOR
-3. Total de Acertos: 24
-4. Total de Jogadas: 41
-========================================
-5. Total de Jogos Distribuidos: 1
-1. Clientes Ativos (Conectados): 1
-6. Total de Erros: 17
-2. Taxa de Acerto Global: 57.14%
-7. Media de Jogadas por Cliente: 41.00
-3. Total de Acertos: 24
-========================================
-
 4. Total de Jogadas: 42
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 18
+6. Total de Erros: 20
 7. Media de Jogadas por Cliente: 42.00
 ========================================
 
-A thread consumidora 139938144175872 avaliou a tentativa do cliente 9382 e esta estava errada
-A thread consumidora 139938144175872 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938144175872 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 55.81%
-3. Total de Acertos: 24
-A thread consumidora 139938152568576 avaliou a tentativa do cliente 9382 e esta estava correta
+2. Taxa de Acerto Global: 51.16%
+3. Total de Acertos: 22
 4. Total de Jogadas: 43
-A thread consumidora 139938152568576 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938152568576 enviou a resposta ao cliente 9382 com sucesso
-6. Total de Erros: 19
+6. Total de Erros: 21
 7. Media de Jogadas por Cliente: 43.00
 ========================================
 
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 56.82%
-3. Total de Acertos: 25
+2. Taxa de Acerto Global: 52.27%
+3. Total de Acertos: 23
 4. Total de Jogadas: 44
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 19
+6. Total de Erros: 21
 7. Media de Jogadas por Cliente: 44.00
 ========================================
 
-A thread consumidora 139938127390464 avaliou a tentativa do cliente 9382 e esta estava errada
-A thread consumidora 139938127390464 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938127390464 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 55.56%
-3. Total de Acertos: 25
+2. Taxa de Acerto Global: 53.33%
+3. Total de Acertos: 24
 4. Total de Jogadas: 45
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 20
+6. Total de Erros: 21
 7. Media de Jogadas por Cliente: 45.00
 ========================================
 
-A thread consumidora 139938118997760 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938118997760 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938118997760 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 56.52%
-3. Total de Acertos: 26
+2. Taxa de Acerto Global: 54.35%
+3. Total de Acertos: 25
 4. Total de Jogadas: 46
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 20
+6. Total de Erros: 21
 7. Media de Jogadas por Cliente: 46.00
 ========================================
 
-A thread consumidora 139938118997760 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938118997760 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938118997760 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
-A thread consumidora 139938110605056 avaliou a tentativa do cliente 9382 e esta estava correta
 ========================================
-A thread consumidora 139938110605056 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 57.45%
-A thread consumidora 139938110605056 enviou a resposta ao cliente 9382 com sucesso
-3. Total de Acertos: 27
+2. Taxa de Acerto Global: 55.32%
+3. Total de Acertos: 26
 4. Total de Jogadas: 47
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 20
-========================================
-A thread consumidora 139938169353984 avaliou a tentativa do cliente 9382 e esta estava correta
+6. Total de Erros: 21
 7. Media de Jogadas por Cliente: 47.00
-ESTATISTICAS GLOBAIS DO SERVIDOR
-A thread consumidora 139938169353984 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 ========================================
 
-========================================
-A thread consumidora 139938169353984 enviou a resposta ao cliente 9382 com sucesso
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 58.33%
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
-3. Total de Acertos: 28
 ========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 56.25%
+3. Total de Acertos: 27
 4. Total de Jogadas: 48
-1. Clientes Ativos (Conectados): 1
 5. Total de Jogos Distribuidos: 1
-2. Taxa de Acerto Global: 59.18%
-3. Total de Acertos: 29
-6. Total de Erros: 20
-4. Total de Jogadas: 49
+6. Total de Erros: 21
 7. Media de Jogadas por Cliente: 48.00
-5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938160961280 avaliou a tentativa do cliente 9382 e esta estava correta
-6. Total de Erros: 20
 ========================================
 
-A thread consumidora 139938160961280 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-7. Media de Jogadas por Cliente: 49.00
-A thread consumidora 139938160961280 enviou a resposta ao cliente 9382 com sucesso
-========================================
-
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 60.00%
-3. Total de Acertos: 30
-A thread consumidora 139938135783168 avaliou a tentativa do cliente 9382 e esta estava correta
+2. Taxa de Acerto Global: 57.14%
+3. Total de Acertos: 28
+4. Total de Jogadas: 49
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 21
+7. Media de Jogadas por Cliente: 49.00
+========================================
+
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.00%
+3. Total de Acertos: 29
 4. Total de Jogadas: 50
 5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938135783168 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-6. Total de Erros: 20
+6. Total de Erros: 21
 7. Media de Jogadas por Cliente: 50.00
-A thread consumidora 139938135783168 enviou a resposta ao cliente 9382 com sucesso
 ========================================
 
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
-A thread consumidora 139938093819648 avaliou a tentativa do cliente 9382 e esta estava errada
 1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938093819648 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-2. Taxa de Acerto Global: 60.78%
-3. Total de Acertos: 31
-A thread consumidora 139938093819648 enviou a resposta ao cliente 9382 com sucesso
+2. Taxa de Acerto Global: 58.82%
+3. Total de Acertos: 30
 4. Total de Jogadas: 51
 5. Total de Jogos Distribuidos: 1
-========================================
-6. Total de Erros: 20
-ESTATISTICAS GLOBAIS DO SERVIDOR
+6. Total de Erros: 21
 7. Media de Jogadas por Cliente: 51.00
 ========================================
 
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
 2. Taxa de Acerto Global: 59.62%
@@ -808,12 +808,12 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 4. Total de Jogadas: 52
 5. Total de Jogos Distribuidos: 1
 6. Total de Erros: 21
-A thread consumidora 139938144175872 avaliou a tentativa do cliente 9382 e esta estava correta
 7. Media de Jogadas por Cliente: 52.00
-A thread consumidora 139938144175872 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 ========================================
 
-A thread consumidora 139938144175872 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
@@ -826,9 +826,9 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 7. Media de Jogadas por Cliente: 53.00
 ========================================
 
-A thread consumidora 139938152568576 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938152568576 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938152568576 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
@@ -839,11 +839,11 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 5. Total de Jogos Distribuidos: 1
 6. Total de Erros: 21
 7. Media de Jogadas por Cliente: 54.00
-A thread consumidora 139938127390464 avaliou a tentativa do cliente 9382 e esta estava correta
 ========================================
 
-A thread consumidora 139938127390464 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938127390464 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
@@ -856,69 +856,69 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 7. Media de Jogadas por Cliente: 55.00
 ========================================
 
-A thread consumidora 139938102212352 avaliou a tentativa do cliente 9382 e esta estava errada
-A thread consumidora 139938102212352 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938102212352 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
-A thread consumidora 139938118997760 avaliou a tentativa do cliente 9382 e esta estava correta
 1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938118997760 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 2. Taxa de Acerto Global: 60.71%
-A thread consumidora 139938118997760 enviou a resposta ao cliente 9382 com sucesso
 3. Total de Acertos: 34
 4. Total de Jogadas: 56
 5. Total de Jogos Distribuidos: 1
 6. Total de Erros: 22
-========================================
 7. Media de Jogadas por Cliente: 56.00
-ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30753 e esta estava errada
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 61.40%
-3. Total de Acertos: 35
+2. Taxa de Acerto Global: 59.65%
+3. Total de Acertos: 34
 4. Total de Jogadas: 57
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 22
+6. Total de Erros: 23
 7. Media de Jogadas por Cliente: 57.00
 ========================================
 
-A thread consumidora 139938110605056 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938110605056 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938110605056 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 62.07%
-A thread consumidora 139938169353984 avaliou a tentativa do cliente 9382 e esta estava correta
-3. Total de Acertos: 36
-A thread consumidora 139938169353984 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
+2. Taxa de Acerto Global: 60.34%
+3. Total de Acertos: 35
 4. Total de Jogadas: 58
 5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938169353984 enviou a resposta ao cliente 9382 com sucesso
-6. Total de Erros: 22
+6. Total de Erros: 23
 7. Media de Jogadas por Cliente: 58.00
 ========================================
 
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 62.71%
-3. Total de Acertos: 37
+2. Taxa de Acerto Global: 61.02%
+3. Total de Acertos: 36
 4. Total de Jogadas: 59
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 22
+6. Total de Erros: 23
 7. Media de Jogadas por Cliente: 59.00
 ========================================
 
-A thread consumidora 139938160961280 avaliou a tentativa do cliente 9382 e esta estava errada
-A thread consumidora 139938160961280 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938160961280 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
@@ -931,69 +931,69 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 7. Media de Jogadas por Cliente: 60.00
 ========================================
 
-A thread consumidora 139938135783168 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938135783168 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938135783168 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
-A thread consumidora 139938093819648 avaliou a tentativa do cliente 9382 e esta estava correta
 1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938093819648 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 2. Taxa de Acerto Global: 62.30%
-A thread consumidora 139938093819648 enviou a resposta ao cliente 9382 com sucesso
 3. Total de Acertos: 38
 4. Total de Jogadas: 61
 5. Total de Jogos Distribuidos: 1
-========================================
 6. Total de Erros: 23
 7. Media de Jogadas por Cliente: 61.00
-ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30753 com sucesso
 ========================================
-A thread consumidora 139938144175872 avaliou a tentativa do cliente 9382 e esta estava correta
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
 1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938144175872 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 2. Taxa de Acerto Global: 62.90%
 3. Total de Acertos: 39
-A thread consumidora 139938144175872 enviou a resposta ao cliente 9382 com sucesso
 4. Total de Jogadas: 62
-========================================
 5. Total de Jogos Distribuidos: 1
-ESTATISTICAS GLOBAIS DO SERVIDOR
 6. Total de Erros: 23
-========================================
 7. Media de Jogadas por Cliente: 62.00
-1. Clientes Ativos (Conectados): 1
 ========================================
 
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
 2. Taxa de Acerto Global: 63.49%
 3. Total de Acertos: 40
 4. Total de Jogadas: 63
 5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938093819648 avaliou a tentativa do cliente 9382 e esta estava correta
 6. Total de Erros: 23
 7. Media de Jogadas por Cliente: 63.00
-A thread consumidora 139938093819648 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 ========================================
 
-A thread consumidora 139938093819648 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
 2. Taxa de Acerto Global: 64.06%
-A thread consumidora 139938127390464 avaliou a tentativa do cliente 9382 e esta estava correta
 3. Total de Acertos: 41
 4. Total de Jogadas: 64
-A thread consumidora 139938127390464 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
 5. Total de Jogos Distribuidos: 1
 6. Total de Erros: 23
-A thread consumidora 139938127390464 enviou a resposta ao cliente 9382 com sucesso
 7. Media de Jogadas por Cliente: 64.00
 ========================================
 
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
@@ -1006,9 +1006,9 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 7. Media de Jogadas por Cliente: 65.00
 ========================================
 
-A thread consumidora 139938102212352 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938102212352 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938102212352 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
@@ -1021,151 +1021,136 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 7. Media de Jogadas por Cliente: 66.00
 ========================================
 
-A thread consumidora 139938118997760 avaliou a tentativa do cliente 9382 e esta estava errada
-A thread consumidora 139938118997760 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938118997760 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938110605056 avaliou a tentativa do cliente 9382 e esta estava correta
-2. Taxa de Acerto Global: 64.18%
-3. Total de Acertos: 43
-A thread consumidora 139938110605056 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
+2. Taxa de Acerto Global: 65.67%
+3. Total de Acertos: 44
 4. Total de Jogadas: 67
 5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938110605056 enviou a resposta ao cliente 9382 com sucesso
-6. Total de Erros: 24
+6. Total de Erros: 23
 7. Media de Jogadas por Cliente: 67.00
 ========================================
-========================================
 
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30753 com sucesso
+========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 64.71%
-3. Total de Acertos: 44
+2. Taxa de Acerto Global: 66.18%
+3. Total de Acertos: 45
 4. Total de Jogadas: 68
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 24
+6. Total de Erros: 23
 7. Media de Jogadas por Cliente: 68.00
 ========================================
 
-A thread consumidora 139938169353984 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938169353984 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938169353984 enviou a resposta ao cliente 9382 com sucesso
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 65.22%
-3. Total de Acertos: 45
-4. Total de Jogadas: 69
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 24
-7. Media de Jogadas por Cliente: 69.00
-========================================
-
-A thread consumidora 139938160961280 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938160961280 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938160961280 enviou a resposta ao cliente 9382 com sucesso
-========================================
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 65.71%
-3. Total de Acertos: 46
-A thread consumidora 139938135783168 avaliou a tentativa do cliente 9382 e esta estava correta
-4. Total de Jogadas: 70
-A thread consumidora 139938135783168 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938135783168 enviou a resposta ao cliente 9382 com sucesso
-6. Total de Erros: 24
-7. Media de Jogadas por Cliente: 70.00
-========================================
-========================================
-
-ESTATISTICAS GLOBAIS DO SERVIDOR
-========================================
-1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 66.20%
-3. Total de Acertos: 47
-4. Total de Jogadas: 71
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 24
-7. Media de Jogadas por Cliente: 71.00
-========================================
-
-A thread consumidora 139938152568576 avaliou a tentativa do cliente 9382 e esta estava correta
-A thread consumidora 139938152568576 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-A thread consumidora 139938152568576 enviou a resposta ao cliente 9382 com sucesso
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
 2. Taxa de Acerto Global: 66.67%
+3. Total de Acertos: 46
+4. Total de Jogadas: 69
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 23
+7. Media de Jogadas por Cliente: 69.00
+========================================
+
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 67.14%
+3. Total de Acertos: 47
+4. Total de Jogadas: 70
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 23
+7. Media de Jogadas por Cliente: 70.00
+========================================
+
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30753 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 67.61%
 3. Total de Acertos: 48
-4. Total de Jogadas: 72
-A thread consumidora 139938144175872 avaliou a tentativa do cliente 9382 e esta estava correta
+4. Total de Jogadas: 71
 5. Total de Jogos Distribuidos: 1
-A thread consumidora 139938144175872 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-6. Total de Erros: 24
-7. Media de Jogadas por Cliente: 72.00
-A thread consumidora 139938144175872 enviou a resposta ao cliente 9382 com sucesso
+6. Total de Erros: 23
+7. Media de Jogadas por Cliente: 71.00
 ========================================
 
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
-A thread consumidora 139938093819648 avaliou a tentativa do cliente 9382 e esta estava correta
 1. Clientes Ativos (Conectados): 1
-A thread consumidora 139938093819648 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-2. Taxa de Acerto Global: 67.12%
-A thread consumidora 139938093819648 enviou a resposta ao cliente 9382 com sucesso
+2. Taxa de Acerto Global: 68.06%
 3. Total de Acertos: 49
-4. Total de Jogadas: 73
+4. Total de Jogadas: 72
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 23
+7. Media de Jogadas por Cliente: 72.00
+========================================
+
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30753 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
-5. Total de Jogos Distribuidos: 1
 ========================================
 1. Clientes Ativos (Conectados): 1
-6. Total de Erros: 24
-A thread consumidora 139938127390464 avaliou a tentativa do cliente 9382 e esta estava correta
-2. Taxa de Acerto Global: 67.57%
-7. Media de Jogadas por Cliente: 73.00
+2. Taxa de Acerto Global: 68.49%
 3. Total de Acertos: 50
-A thread consumidora 139938127390464 está a preparar-se para enviar a resposta da tentativa ao cliente 9382
-4. Total de Jogadas: 74
-A thread consumidora 139938127390464 enviou a resposta ao cliente 9382 com sucesso
+4. Total de Jogadas: 73
+5. Total de Jogos Distribuidos: 1
+6. Total de Erros: 23
+7. Media de Jogadas por Cliente: 73.00
 ========================================
 
-5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 24
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30753 e esta estava correta
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30753
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30753 com sucesso
 ========================================
-7. Media de Jogadas por Cliente: 74.00
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
-
-========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 68.00%
+2. Taxa de Acerto Global: 68.92%
 3. Total de Acertos: 51
-4. Total de Jogadas: 75
+4. Total de Jogadas: 74
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 24
-7. Media de Jogadas por Cliente: 75.00
+6. Total de Erros: 23
+7. Media de Jogadas por Cliente: 74.00
 ========================================
 
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 0
-2. Taxa de Acerto Global: 68.00%
+2. Taxa de Acerto Global: 68.92%
 3. Total de Acertos: 51
-4. Total de Jogadas: 75
+4. Total de Jogadas: 74
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 24
-7. Media de Jogadas por Cliente: 75.00
+6. Total de Erros: 23
+7. Media de Jogadas por Cliente: 74.00
 ========================================
 
 Cliente desconectado (socket 5). Total de clientes ativos: 0
@@ -1173,20 +1158,37 @@ Cliente desconectado (socket 5). Total de clientes ativos: 0
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 68.00%
+2. Taxa de Acerto Global: 68.92%
 3. Total de Acertos: 51
-4. Total de Jogadas: 75
+4. Total de Jogadas: 74
 5. Total de Jogos Distribuidos: 1
-6. Total de Erros: 24
-7. Media de Jogadas por Cliente: 75.00
+6. Total de Erros: 23
+7. Media de Jogadas por Cliente: 74.00
 ========================================
 
 Novo cliente conectado (socket 6). Total de clientes ativos: 1
-Pedido de jogo recebido do cliente ID 9641 (socket 6)
-Thread produtora 139938085426944 entrou na função de enviar o jogo para o cliente 9641
-Mensagem que será enviada para o cliente 9641 pela thread produtora 139938085426944 -> 5,970020000100549000043000010300010007800307005200060001010000630000854009000030024
+Pedido de jogo recebido do cliente ID 30948 (socket 6)
+Thread produtora 140360868124416 entrou na função de enviar o jogo para o cliente 30948
+Mensagem que será enviada para o cliente 30948 pela thread produtora 140360868124416 -> 2,640080000700216000019000070900070004500904002800030007070000390000521006000090081
 
-Thread produtora 139938085426944 enviou o jogo com sucesso para o cliente 9641
+Thread produtora 140360868124416 enviou o jogo com sucesso para o cliente 30948
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 68.92%
+3. Total de Acertos: 51
+4. Total de Jogadas: 74
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 23
+7. Media de Jogadas por Cliente: 37.00
+========================================
+
+Thread produtora 140360868124416 finalizou a função responsável por enviar o jogo ao cliente 30948
+Thread produtora 140360868124416 acabou de processar o pedido de código 1 do cliente 30948
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30948 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
@@ -1199,9 +1201,9 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 7. Media de Jogadas por Cliente: 37.50
 ========================================
 
-Thread produtora 139938085426944 finalizou a função responsável por enviar o jogo ao cliente 9641
-Thread produtora 139938085426944 acabou de processar o pedido de código 1 do cliente 9641
-A thread consumidora 139938102212352 encontrou um erro na celula 0 2 da solucao completa enviada pelo cliente 9641
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30948 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
@@ -1214,7 +1216,9 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 7. Media de Jogadas por Cliente: 38.00
 ========================================
 
-A thread consumidora 139938118997760 encontrou um erro na celula 0 2 da solucao completa enviada pelo cliente 9641
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30948 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
@@ -1227,29 +1231,1306 @@ ESTATISTICAS GLOBAIS DO SERVIDOR
 7. Media de Jogadas por Cliente: 38.50
 ========================================
 
-A thread consumidora 139938110605056 nao encontrou nenhum erro na solucao completa enviada pelo cliente 9641
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30948 com sucesso
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 1
-2. Taxa de Acerto Global: 66.67%
-3. Total de Acertos: 52
+2. Taxa de Acerto Global: 65.38%
+3. Total de Acertos: 51
 4. Total de Jogadas: 78
 5. Total de Jogos Distribuidos: 2
-6. Total de Erros: 26
+6. Total de Erros: 27
 7. Media de Jogadas por Cliente: 39.00
+========================================
+
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 65.82%
+3. Total de Acertos: 52
+4. Total de Jogadas: 79
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 27
+7. Media de Jogadas por Cliente: 39.50
+========================================
+
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 66.25%
+3. Total de Acertos: 53
+4. Total de Jogadas: 80
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 27
+7. Media de Jogadas por Cliente: 40.00
+========================================
+
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 65.43%
+3. Total de Acertos: 53
+4. Total de Jogadas: 81
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 28
+7. Media de Jogadas por Cliente: 40.50
+========================================
+
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 64.63%
+3. Total de Acertos: 53
+4. Total de Jogadas: 82
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 29
+7. Media de Jogadas por Cliente: 41.00
+========================================
+
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 63.86%
+3. Total de Acertos: 53
+4. Total de Jogadas: 83
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 30
+7. Media de Jogadas por Cliente: 41.50
+========================================
+
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 63.10%
+3. Total de Acertos: 53
+4. Total de Jogadas: 84
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 31
+7. Media de Jogadas por Cliente: 42.00
+========================================
+
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 63.53%
+3. Total de Acertos: 54
+4. Total de Jogadas: 85
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 31
+7. Media de Jogadas por Cliente: 42.50
+========================================
+
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 62.79%
+3. Total de Acertos: 54
+4. Total de Jogadas: 86
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 32
+7. Media de Jogadas por Cliente: 43.00
+========================================
+
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 62.07%
+3. Total de Acertos: 54
+4. Total de Jogadas: 87
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 33
+7. Media de Jogadas por Cliente: 43.50
+========================================
+
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 62.50%
+3. Total de Acertos: 55
+4. Total de Jogadas: 88
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 33
+7. Media de Jogadas por Cliente: 44.00
+========================================
+
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 62.92%
+3. Total de Acertos: 56
+4. Total de Jogadas: 89
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 33
+7. Media de Jogadas por Cliente: 44.50
+========================================
+
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 62.22%
+3. Total de Acertos: 56
+4. Total de Jogadas: 90
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 34
+7. Media de Jogadas por Cliente: 45.00
+========================================
+
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 61.54%
+3. Total de Acertos: 56
+4. Total de Jogadas: 91
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 35
+7. Media de Jogadas por Cliente: 45.50
+========================================
+
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 60.87%
+3. Total de Acertos: 56
+4. Total de Jogadas: 92
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 36
+7. Media de Jogadas por Cliente: 46.00
+========================================
+
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 60.22%
+3. Total de Acertos: 56
+4. Total de Jogadas: 93
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 37
+7. Media de Jogadas por Cliente: 46.50
+========================================
+
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.57%
+3. Total de Acertos: 56
+4. Total de Jogadas: 94
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 38
+7. Media de Jogadas por Cliente: 47.00
+========================================
+
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.95%
+3. Total de Acertos: 56
+4. Total de Jogadas: 95
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 39
+7. Media de Jogadas por Cliente: 47.50
+========================================
+
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.33%
+3. Total de Acertos: 56
+4. Total de Jogadas: 96
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 40
+7. Media de Jogadas por Cliente: 48.00
+========================================
+
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.76%
+3. Total de Acertos: 57
+4. Total de Jogadas: 97
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 40
+7. Media de Jogadas por Cliente: 48.50
+========================================
+
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.16%
+3. Total de Acertos: 57
+4. Total de Jogadas: 98
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 41
+7. Media de Jogadas por Cliente: 49.00
+========================================
+
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.58%
+3. Total de Acertos: 57
+4. Total de Jogadas: 99
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 42
+7. Media de Jogadas por Cliente: 49.50
+========================================
+
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.00%
+3. Total de Acertos: 57
+4. Total de Jogadas: 100
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 43
+7. Media de Jogadas por Cliente: 50.00
+========================================
+
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 56.44%
+3. Total de Acertos: 57
+4. Total de Jogadas: 101
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 44
+7. Media de Jogadas por Cliente: 50.50
+========================================
+
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 56.86%
+3. Total de Acertos: 58
+4. Total de Jogadas: 102
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 44
+7. Media de Jogadas por Cliente: 51.00
+========================================
+
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.28%
+3. Total de Acertos: 59
+4. Total de Jogadas: 103
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 44
+7. Media de Jogadas por Cliente: 51.50
+========================================
+
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.69%
+3. Total de Acertos: 60
+4. Total de Jogadas: 104
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 44
+7. Media de Jogadas por Cliente: 52.00
+========================================
+
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.10%
+3. Total de Acertos: 61
+4. Total de Jogadas: 105
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 44
+7. Media de Jogadas por Cliente: 52.50
+========================================
+
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.55%
+3. Total de Acertos: 61
+4. Total de Jogadas: 106
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 45
+7. Media de Jogadas por Cliente: 53.00
+========================================
+
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.94%
+3. Total de Acertos: 62
+4. Total de Jogadas: 107
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 45
+7. Media de Jogadas por Cliente: 53.50
+========================================
+
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.33%
+3. Total de Acertos: 63
+4. Total de Jogadas: 108
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 45
+7. Media de Jogadas por Cliente: 54.00
+========================================
+
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.80%
+3. Total de Acertos: 63
+4. Total de Jogadas: 109
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 46
+7. Media de Jogadas por Cliente: 54.50
+========================================
+
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.18%
+3. Total de Acertos: 64
+4. Total de Jogadas: 110
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 46
+7. Media de Jogadas por Cliente: 55.00
+========================================
+
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.56%
+3. Total de Acertos: 65
+4. Total de Jogadas: 111
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 46
+7. Media de Jogadas por Cliente: 55.50
+========================================
+
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.93%
+3. Total de Acertos: 66
+4. Total de Jogadas: 112
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 46
+7. Media de Jogadas por Cliente: 56.00
+========================================
+
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.41%
+3. Total de Acertos: 66
+4. Total de Jogadas: 113
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 47
+7. Media de Jogadas por Cliente: 56.50
+========================================
+
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.89%
+3. Total de Acertos: 66
+4. Total de Jogadas: 114
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 48
+7. Media de Jogadas por Cliente: 57.00
+========================================
+
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.26%
+3. Total de Acertos: 67
+4. Total de Jogadas: 115
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 48
+7. Media de Jogadas por Cliente: 57.50
+========================================
+
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.62%
+3. Total de Acertos: 68
+4. Total de Jogadas: 116
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 48
+7. Media de Jogadas por Cliente: 58.00
+========================================
+
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.12%
+3. Total de Acertos: 68
+4. Total de Jogadas: 117
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 49
+7. Media de Jogadas por Cliente: 58.50
+========================================
+
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.63%
+3. Total de Acertos: 68
+4. Total de Jogadas: 118
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 50
+7. Media de Jogadas por Cliente: 59.00
+========================================
+
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.98%
+3. Total de Acertos: 69
+4. Total de Jogadas: 119
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 50
+7. Media de Jogadas por Cliente: 59.50
+========================================
+
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.33%
+3. Total de Acertos: 70
+4. Total de Jogadas: 120
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 50
+7. Media de Jogadas por Cliente: 60.00
+========================================
+
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.85%
+3. Total de Acertos: 70
+4. Total de Jogadas: 121
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 51
+7. Media de Jogadas por Cliente: 60.50
+========================================
+
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.38%
+3. Total de Acertos: 70
+4. Total de Jogadas: 122
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 52
+7. Media de Jogadas por Cliente: 61.00
+========================================
+
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.72%
+3. Total de Acertos: 71
+4. Total de Jogadas: 123
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 52
+7. Media de Jogadas por Cliente: 61.50
+========================================
+
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.06%
+3. Total de Acertos: 72
+4. Total de Jogadas: 124
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 52
+7. Media de Jogadas por Cliente: 62.00
+========================================
+
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.40%
+3. Total de Acertos: 73
+4. Total de Jogadas: 125
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 52
+7. Media de Jogadas por Cliente: 62.50
+========================================
+
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.73%
+3. Total de Acertos: 74
+4. Total de Jogadas: 126
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 52
+7. Media de Jogadas por Cliente: 63.00
+========================================
+
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.06%
+3. Total de Acertos: 75
+4. Total de Jogadas: 127
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 52
+7. Media de Jogadas por Cliente: 63.50
+========================================
+
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.59%
+3. Total de Acertos: 75
+4. Total de Jogadas: 128
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 53
+7. Media de Jogadas por Cliente: 64.00
+========================================
+
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.14%
+3. Total de Acertos: 75
+4. Total de Jogadas: 129
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 54
+7. Media de Jogadas por Cliente: 64.50
+========================================
+
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.69%
+3. Total de Acertos: 75
+4. Total de Jogadas: 130
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 55
+7. Media de Jogadas por Cliente: 65.00
+========================================
+
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.02%
+3. Total de Acertos: 76
+4. Total de Jogadas: 131
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 55
+7. Media de Jogadas por Cliente: 65.50
+========================================
+
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.58%
+3. Total de Acertos: 76
+4. Total de Jogadas: 132
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 56
+7. Media de Jogadas por Cliente: 66.00
+========================================
+
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 57.89%
+3. Total de Acertos: 77
+4. Total de Jogadas: 133
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 56
+7. Media de Jogadas por Cliente: 66.50
+========================================
+
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.21%
+3. Total de Acertos: 78
+4. Total de Jogadas: 134
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 56
+7. Media de Jogadas por Cliente: 67.00
+========================================
+
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.52%
+3. Total de Acertos: 79
+4. Total de Jogadas: 135
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 56
+7. Media de Jogadas por Cliente: 67.50
+========================================
+
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.82%
+3. Total de Acertos: 80
+4. Total de Jogadas: 136
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 56
+7. Media de Jogadas por Cliente: 68.00
+========================================
+
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.12%
+3. Total de Acertos: 81
+4. Total de Jogadas: 137
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 56
+7. Media de Jogadas por Cliente: 68.50
+========================================
+
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.70%
+3. Total de Acertos: 81
+4. Total de Jogadas: 138
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 57
+7. Media de Jogadas por Cliente: 69.00
+========================================
+
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 58.99%
+3. Total de Acertos: 82
+4. Total de Jogadas: 139
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 57
+7. Media de Jogadas por Cliente: 69.50
+========================================
+
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.29%
+3. Total de Acertos: 83
+4. Total de Jogadas: 140
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 57
+7. Media de Jogadas por Cliente: 70.00
+========================================
+
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.57%
+3. Total de Acertos: 84
+4. Total de Jogadas: 141
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 57
+7. Media de Jogadas por Cliente: 70.50
+========================================
+
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.86%
+3. Total de Acertos: 85
+4. Total de Jogadas: 142
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 57
+7. Media de Jogadas por Cliente: 71.00
+========================================
+
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.44%
+3. Total de Acertos: 85
+4. Total de Jogadas: 143
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 58
+7. Media de Jogadas por Cliente: 71.50
+========================================
+
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.72%
+3. Total de Acertos: 86
+4. Total de Jogadas: 144
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 58
+7. Media de Jogadas por Cliente: 72.00
+========================================
+
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 60.00%
+3. Total de Acertos: 87
+4. Total de Jogadas: 145
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 58
+7. Media de Jogadas por Cliente: 72.50
+========================================
+
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.59%
+3. Total de Acertos: 87
+4. Total de Jogadas: 146
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 59
+7. Media de Jogadas por Cliente: 73.00
+========================================
+
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.86%
+3. Total de Acertos: 88
+4. Total de Jogadas: 147
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 59
+7. Media de Jogadas por Cliente: 73.50
+========================================
+
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 60.14%
+3. Total de Acertos: 89
+4. Total de Jogadas: 148
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 59
+7. Media de Jogadas por Cliente: 74.00
+========================================
+
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.73%
+3. Total de Acertos: 89
+4. Total de Jogadas: 149
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 60
+7. Media de Jogadas por Cliente: 74.50
+========================================
+
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30948 e esta estava errada
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.33%
+3. Total de Acertos: 89
+4. Total de Jogadas: 150
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 75.00
+========================================
+
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.60%
+3. Total de Acertos: 90
+4. Total de Jogadas: 151
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 75.50
+========================================
+
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 59.87%
+3. Total de Acertos: 91
+4. Total de Jogadas: 152
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 76.00
+========================================
+
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 60.13%
+3. Total de Acertos: 92
+4. Total de Jogadas: 153
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 76.50
+========================================
+
+A thread consumidora 140360935266048 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360935266048 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360935266048 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 60.39%
+3. Total de Acertos: 93
+4. Total de Jogadas: 154
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 77.00
+========================================
+
+A thread consumidora 140360918480640 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360918480640 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360918480640 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 60.65%
+3. Total de Acertos: 94
+4. Total de Jogadas: 155
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 77.50
+========================================
+
+A thread consumidora 140360910087936 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360910087936 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360910087936 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 60.90%
+3. Total de Acertos: 95
+4. Total de Jogadas: 156
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 78.00
+========================================
+
+A thread consumidora 140360893302528 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360893302528 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360893302528 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 61.15%
+3. Total de Acertos: 96
+4. Total de Jogadas: 157
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 78.50
+========================================
+
+A thread consumidora 140360901695232 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360901695232 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360901695232 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 61.39%
+3. Total de Acertos: 97
+4. Total de Jogadas: 158
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 79.00
+========================================
+
+A thread consumidora 140360876517120 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360876517120 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360876517120 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 61.64%
+3. Total de Acertos: 98
+4. Total de Jogadas: 159
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 79.50
+========================================
+
+A thread consumidora 140360884909824 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360884909824 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360884909824 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 61.87%
+3. Total de Acertos: 99
+4. Total de Jogadas: 160
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 80.00
+========================================
+
+A thread consumidora 140360952051456 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360952051456 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360952051456 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 62.11%
+3. Total de Acertos: 100
+4. Total de Jogadas: 161
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 80.50
+========================================
+
+A thread consumidora 140360943658752 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360943658752 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360943658752 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 62.35%
+3. Total de Acertos: 101
+4. Total de Jogadas: 162
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 81.00
+========================================
+
+A thread consumidora 140360926873344 avaliou a tentativa do cliente 30948 e esta estava correta
+A thread consumidora 140360926873344 está a preparar-se para enviar a resposta da tentativa ao cliente 30948
+A thread consumidora 140360926873344 enviou a resposta ao cliente 30948 com sucesso
+========================================
+ESTATISTICAS GLOBAIS DO SERVIDOR
+========================================
+1. Clientes Ativos (Conectados): 1
+2. Taxa de Acerto Global: 62.58%
+3. Total de Acertos: 102
+4. Total de Jogadas: 163
+5. Total de Jogos Distribuidos: 2
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 81.50
 ========================================
 
 ========================================
 ESTATISTICAS GLOBAIS DO SERVIDOR
 ========================================
 1. Clientes Ativos (Conectados): 0
-2. Taxa de Acerto Global: 66.67%
-3. Total de Acertos: 52
-4. Total de Jogadas: 78
+2. Taxa de Acerto Global: 62.58%
+3. Total de Acertos: 102
+4. Total de Jogadas: 163
 5. Total de Jogos Distribuidos: 2
-6. Total de Erros: 26
-7. Media de Jogadas por Cliente: 39.00
+6. Total de Erros: 61
+7. Media de Jogadas por Cliente: 81.50
 ========================================
 
 Cliente desconectado (socket 6). Total de clientes ativos: 0

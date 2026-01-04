@@ -3,17 +3,31 @@
 #include <string.h>
 #include <time.h>
 #include <stdarg.h>
+#include <pthread.h>
 #include "log.h"
+
+// Mutex global para proteger escritas em ficheiros
+pthread_mutex_t mutexFileWrite = PTHREAD_MUTEX_INITIALIZER;
+
+// -------------------------------------------------------------------------------------------------
+// Inicializa o sistema de logs (caso necessário reinicializar o mutex)
+// -------------------------------------------------------------------------------------------------
+void initLogSystem() {
+    pthread_mutex_init(&mutexFileWrite, NULL);
+}
 
 // -------------------------------------------------------------------------------------------------
 // Escreve um log formatado num ficheiro. Pode conter mais argumentos que serão juntados à string 
 // -------------------------------------------------------------------------------------------------
 void writeLogf(const char *filePath, const char *format, ...) { 
+    pthread_mutex_lock(&mutexFileWrite);  // PROTEGER ESCRITA NO FICHEIRO
+    
     FILE *file = fopen(filePath, "a");
     
     if (!file) 
     {
         perror("Error opening/creating log file");
+        pthread_mutex_unlock(&mutexFileWrite);
         return;
     }
 
@@ -24,6 +38,8 @@ void writeLogf(const char *filePath, const char *format, ...) {
     va_end(args);
 
     fclose(file);
+    
+    pthread_mutex_unlock(&mutexFileWrite);  // LIBERTAR MUTEX
 }
 
 // ------------------------------------------------------------------

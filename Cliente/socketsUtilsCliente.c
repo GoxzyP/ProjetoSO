@@ -405,11 +405,16 @@ void writeClientStats(ClientStats *stats, char logPath[256], int clientId)
     char statsPath[512];
     snprintf(statsPath, sizeof(statsPath), "../Cliente/estatisticas_cliente%d.csv", clientId);
 
+    // PROTEGER ESCRITA NO FICHEIRO DE ESTATÍSTICAS
+    extern pthread_mutex_t mutexFileWrite;
+    pthread_mutex_lock(&mutexFileWrite);
+    
     // SOBRESCREVER ficheiro de estatísticas
     FILE *file = fopen(statsPath, "w"); // Modo "w" sobrescreve
     if (!file)
     {
         perror("Erro ao abrir ficheiro de estatísticas do cliente");
+        pthread_mutex_unlock(&mutexFileWrite);
         return;
     }
 
@@ -425,4 +430,6 @@ void writeClientStats(ClientStats *stats, char logPath[256], int clientId)
     fprintf(file, "========================================\n");
 
     fclose(file);
+    
+    pthread_mutex_unlock(&mutexFileWrite);  // LIBERTAR MUTEX
 }

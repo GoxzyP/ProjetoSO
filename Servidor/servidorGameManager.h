@@ -35,3 +35,4 @@ void verifyClientPartialSolution(int socket, int gameId, int row, int col, int v
 void verifyClientCompleteSolution(int socket, int gameId, char solution[82], int clientId);
 
 #endif
+

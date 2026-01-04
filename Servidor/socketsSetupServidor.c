@@ -179,15 +179,14 @@ void* clienteHandler(void* arg)
 }
 
 
+
 int main(void)
 {
     int socketServidor;
     struct sockaddr_un enderecoServidor;
 
-    
     pthread_t worker;
     pthread_create(&worker, NULL, workerValidacoes, NULL);
-
 
     srand(time(NULL));
 

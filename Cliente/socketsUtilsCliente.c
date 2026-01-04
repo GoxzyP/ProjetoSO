@@ -197,7 +197,19 @@ void* sudokuListener(void* arg)
             pthread_cond_signal(&fillCond);
             pthread_mutex_unlock(&fillMutex);
         }
+        else if (strcmp(serverAnswer, "GAME_OVER") == 0)
+    {
+    writeLogf(logPath, "Jogo terminado pelo servidor");
+
+    pthread_mutex_lock(&fillMutex);
+    lastAnswerCorrect = 3; // código especial fim de jogo
+    pthread_cond_signal(&fillCond);
+    pthread_mutex_unlock(&fillMutex);
+
+    break;
     }
+        
+}
 
     return NULL;
 }
@@ -205,94 +217,110 @@ void* sudokuListener(void* arg)
 // ======================================================
 // Função principal que preenche o Sudoku
 // ======================================================
-void fillSudoku(int socket , char sudoku[81] , int gameId , char logPath[256]) 
+void fillSudoku(int socket, char sudoku[81], int gameId, char logPath[256]) 
 {
     char horaInicioJogo[20], horaFimJogo[20], tempoJogo[20];
-    int positionsToFill[81][2];
-    int emptyCount = 0, tentativas_falhadas = 0, score = 0;
+    int tentativas_falhadas = 0, score = 0;
 
-    registerGameTimeLive(horaInicioJogo,sizeof(horaInicioJogo));
+    registerGameTimeLive(horaInicioJogo, sizeof(horaInicioJogo));
     writeLogf(logPath, "Hora Inicio Jogo -> %s", horaInicioJogo);
 
-    // Marca posições vazias
-    for(int row = 0 ; row < 9 ; row++)
-        for(int col = 0 ; col < 9 ; col++)
-            if(sudoku[row * 9 + col] == '0')
-            {
-                positionsToFill[emptyCount][0] = row;
-                positionsToFill[emptyCount][1] = col;
-                emptyCount++;
-            }
-
-    shufflePositionsInArray(positionsToFill , emptyCount);
-    writeLogf(logPath, "Fez o shuffle do array de posições por preencher");
-    writeLogf(logPath, "Número de posições inicialmente por preencher -> %d", emptyCount);
-
-    // Cria thread listener
+    // Cria thread listener para receber updates
     SudokuListenerArgs args = {socket, sudoku, logPath};
     pthread_t listenerThreadId;
     pthread_create(&listenerThreadId, NULL, sudokuListener, &args);
 
-    // Loop principal de preenchimento
-    for(int i = 0 ; i < emptyCount ; i++)
-    {   
-        int rowSelected = positionsToFill[i][0];
-        int columnSelected = positionsToFill[i][1];
+    // ===============================
+    // LOOP GLOBAL: preencher todo o Sudoku
+    // ===============================
+    while (sudokuHasZeros(sudoku))
+    {
+        int positionsToFill[81][2];
+        int emptyCount = 0;
 
-        int size = 0; 
-        int* possibleAnswers = getPossibleAnswers(sudoku, rowSelected , columnSelected , &size);
+        // Recalcula posições vazias
+        for (int row = 0; row < 9; row++)
+            for (int col = 0; col < 9; col++)
+                if (sudoku[row * 9 + col] == '0') {
+                    positionsToFill[emptyCount][0] = row;
+                    positionsToFill[emptyCount][1] = col;
+                    emptyCount++;
+                }
 
-        for(int j = 0 ; j < size ; j++)
-        {   
-            char messageToServer[512];
-            int codeVerifyAnswer = 2;
-            sprintf(messageToServer , "%d,%d,%d,%d,%d\n",
-                    codeVerifyAnswer, gameId, rowSelected, columnSelected, possibleAnswers[j]);
+        shufflePositionsInArray(positionsToFill, emptyCount); // embaralha posições
+        writeLogf(logPath, "Recalculei e shuffle das posições vazias (%d)", emptyCount);
 
-            if(escreveSocket(socket , messageToServer , strlen(messageToServer)) != strlen(messageToServer))
+        // Loop pelas posições vazias
+        for (int i = 0; i < emptyCount; i++)
+        {
+            int row = positionsToFill[i][0];
+            int col = positionsToFill[i][1];
+
+            if (sudoku[row * 9 + col] != '0')
+                continue; // outro cliente já preencheu
+
+            int size = 0;
+            int* possibleAnswers = getPossibleAnswers(sudoku, row, col, &size);
+
+            for (int j = 0; j < size; j++)
             {
-                perror("Erro: Não foi possível enviar a solução para o servidor");
-                writeLogf(logPath, "Não foi possível enviar a solução para o servidor");
-                exit(1);
+                char msg[128];
+                sprintf(msg, "2,%d,%d,%d,%d\n",
+                        gameId, row, col, possibleAnswers[j]);
+
+                escreveSocket(socket, msg, strlen(msg));
+
+                // Espera resposta do servidor
+                pthread_mutex_lock(&fillMutex);
+                lastAnswerCorrect = -1;
+                while (lastAnswerCorrect == -1)
+                    pthread_cond_wait(&fillCond, &fillMutex);
+                int resp = lastAnswerCorrect;
+                pthread_mutex_unlock(&fillMutex);
+
+                if (resp == 1) // Correct
+                {
+                    sudoku[row * 9 + col] = possibleAnswers[j] + '0';
+                    displaySudokuWithCoords(sudoku);
+                    score = score + 20;
+                    break;
+                }
+
+                if (resp == 2) // preenchido por outro cliente
+                {
+                    tentativas_falhadas++;
+                    break;
+                }
+
+                if (resp == 3) // GAME_OVER
+                    goto fim;
             }
 
-            // Espera resposta do servidor
-            pthread_mutex_lock(&fillMutex);
-            lastAnswerCorrect = -1;
-            while(lastAnswerCorrect == -1)
-                pthread_cond_wait(&fillCond, &fillMutex);
-
-            int correto = lastAnswerCorrect;
-            pthread_mutex_unlock(&fillMutex);
-
-            if(correto)
-            {   
-                score++;                                                                
-                sudoku[rowSelected * 9 + columnSelected] = possibleAnswers[j] + '0';
-                displaySudokuWithCoords(sudoku);
-                break;
-            }
-            else
-            {
-                tentativas_falhadas++;
-                score--;
-            }
+            free(possibleAnswers);
         }
-
-        free(possibleAnswers);
     }
 
+fim:
     writeLogf(logPath, "Tentativas falhadas -> %d", tentativas_falhadas);
-    writeLogf(logPath,"Score final -> %d", score);
+    writeLogf(logPath, "Score final -> %d", score);
 
-    registerGameTimeLive(horaFimJogo,sizeof(horaFimJogo));
+    registerGameTimeLive(horaFimJogo, sizeof(horaFimJogo));
     writeLogf(logPath, "Hora Fim Jogo -> %s", horaFimJogo);
 
-    registerGameTime(horaInicioJogo,horaFimJogo,tempoJogo,sizeof(tempoJogo));
+    registerGameTime(horaInicioJogo, horaFimJogo, tempoJogo, sizeof(tempoJogo));
     writeLogf(logPath, "Tempo Jogo -> %s", tempoJogo);
 
-    pthread_cancel(listenerThreadId); // encerra listener
+    pthread_cancel(listenerThreadId);
     pthread_join(listenerThreadId, NULL);
+}
+
+
+int sudokuHasZeros(char sudoku[81])
+{
+    for (int i = 0; i < 81; i++)
+        if (sudoku[i] == '0')
+            return 1;
+    return 0;
 }
 
 void requestGame(int socket , int* gameId , char partialSolution[81] , char logPath[256])

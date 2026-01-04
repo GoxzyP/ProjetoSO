@@ -12,6 +12,12 @@
 
 gameData *gamesHashTable = NULL;
 
+
+Sala sala = {
+    .numClientes = 0,
+    .barrierInicializada = 0
+};
+
 // --------------------------------------------------------------
 // Lê todos os jogos Sudoku disponíveis do CSV
 // --------------------------------------------------------------
@@ -43,8 +49,6 @@ void readGamesFromCSV() {
     fclose(file);
 }
 
-Sala sala = {0};  // inicializa a sala
-
 // -------------------------------------------------------------------
 // Verifica a jogada de um cliente e atualiza o tabuleiro compartilhado
 // -------------------------------------------------------------------
@@ -60,22 +64,30 @@ void verifyClientSudokuAnswer(int socketCliente,
 {
     pthread_mutex_lock(&sala.mutex);
 
-    // Verifica se célula já foi preenchida
-    if (gameId != sala.gameId || sala.sudoku[row*9+col] != '0') {
+    // jogo errado ou célula já preenchida
+    if (gameId != sala.gameId || sala.sudoku[row*9 + col] != '0')
+    {
         escreveSocket(socketCliente, "Invalid\n", 8);
         pthread_mutex_unlock(&sala.mutex);
         return;
     }
 
-    int correto = checkSudokuAnswer(row, col, answer);
+    int correto = (sala.solution[row*9 + col] - '0') == answer;
+
     if (correto)
     {
-        sala.sudoku[row*9+col] = answer + '0';
-        broadcastUpdate(row, col, answer, clientId); // notifica todos clientes
-        int bytes = escreveSocket(socketCliente, "Correct\n", 8);
-        if(bytes < 0) {
-            writeLogf("../Servidor/log_servidor.csv","Cliente %d desconectou antes de receber resposta", clientId);
-            return;
+        sala.sudoku[row*9 + col] = answer + '0';
+        sala.emptyCells--;
+
+        broadcastUpdate(row, col, answer, clientId);
+        escreveSocket(socketCliente, "Correct\n", 8);
+
+        //  FIM DO JOGO
+        if (sala.emptyCells == 0)
+        {
+            for (int i = 0; i < sala.numClientes; i++)
+                escreveSocket(sala.clientes[i].socket,
+                              "GAME_OVER\n", 10);
         }
     }
     else
@@ -85,6 +97,7 @@ void verifyClientSudokuAnswer(int socketCliente,
 
     pthread_mutex_unlock(&sala.mutex);
 }
+
 
 // -------------------------------------------------------------------
 // Função que verifica se a jogada do cliente está correta
@@ -115,11 +128,14 @@ void sendGameToClient(int socketCliente, int clientId, int numeroJogadoresSala)
     if (sala.numClientes == 0)
     {
         int count = HASH_COUNT(gamesHashTable);
-        if (count == 0) {
+        if (count == 0)
+        {
+            writeLogf("../Servidor/log_servidor.csv", "Nenhum jogo disponível no servidor");
             pthread_mutex_unlock(&sala.mutex);
             return;
         }
 
+        // Escolhe aleatoriamente um jogo
         int index = rand() % count;
         int i = 0;
         gameData *game;
@@ -128,13 +144,30 @@ void sendGameToClient(int socketCliente, int clientId, int numeroJogadoresSala)
             if (i == index)
             {
                 sala.gameId = game->id;
-                memcpy(sala.sudoku, game->partialSolution, 81); 
-                sala.sudoku[81] = '\0';  // terminador
+
+                // Copia tabuleiro parcial e solução completa
+                memcpy(sala.sudoku, game->partialSolution, 81);
+                memcpy(sala.solution, game->totalSolution, 81);
+
+                sala.sudoku[81] = '\0';
+                sala.solution[81] = '\0';
+
+                // Conta células vazias
+                sala.emptyCells = 0;
+                for (int k = 0; k < 81; k++)
+                    if (sala.sudoku[k] == '0')
+                        sala.emptyCells++;
+
+                writeLogf("../Servidor/log_servidor.csv",
+                          "Jogo escolhido: %d, células vazias: %d",
+                          sala.gameId, sala.emptyCells);
+
                 break;
             }
             i++;
         }
 
+        // Inicializa barreira para todos os jogadores
         pthread_barrier_init(&sala.barrier, NULL, numeroJogadoresSala);
         sala.barrierInicializada = 1;
     }
@@ -146,17 +179,36 @@ void sendGameToClient(int socketCliente, int clientId, int numeroJogadoresSala)
 
     pthread_mutex_unlock(&sala.mutex);
 
-    // Espera todos os jogadores entrarem
-    pthread_barrier_wait(&sala.barrier);
+    // Espera todos os jogadores entrarem na sala
+    int res = pthread_barrier_wait(&sala.barrier);
 
-    // Envia tabuleiro atual
+    if (res != 0 && res != PTHREAD_BARRIER_SERIAL_THREAD)
+    {
+        writeLogf("../Servidor/log_servidor.csv",
+                  "Aviso: Barreira liberada parcialmente (algum cliente saiu?)");
+    }
+
+    // Envia tabuleiro completo ao cliente no formato correto
     char resposta[512];
-    int pos = sprintf(resposta, "%d,", sala.gameId);
-    memcpy(resposta+pos, sala.sudoku, 81);
+    int pos = sprintf(resposta, "%d,", sala.gameId);  // gameId + vírgula
+    memcpy(resposta + pos, sala.sudoku, 81);          // 81 caracteres do Sudoku
     pos += 81;
     resposta[pos++] = '\n';
-    escreveSocket(socketCliente, resposta, pos);
+
+    int bytes = escreveSocket(socketCliente, resposta, pos);
+    if (bytes != pos)
+    {
+        writeLogf("../Servidor/log_servidor.csv",
+                  "Cliente %d desconectou antes de receber o tabuleiro", clientId);
+    }
+    else
+    {
+        writeLogf("../Servidor/log_servidor.csv",
+                  "Tabuleiro enviado para o cliente %d com sucesso", clientId);
+    }
 }
+
+
 
 
 // -----------------------------

@@ -2,6 +2,7 @@
 #include "socketsUtilsServidorSinglePlayer.h" // Para acesso às stats
 #include "../util.h"            // Inclui funções utilitárias, ex: writeSocket
 #include "../log.h"             // Para sistema de logs
+#include "../unix.h"
 
 #include <stdio.h>   // Para printf, perror
 #include <stdlib.h>  // Para malloc, exit, atoi, rand
@@ -23,8 +24,20 @@ extern void writeServerStats();
 
 gameData *gamesHashTable = NULL;     // Hash table para armazenar os jogos carregados
 pthread_mutex_t mutexGameData;       // Mutex para proteger acesso a gamesHashTable
+pthread_mutex_t mutexMultiplayerRoom;       // Mutex para proteger acesso a sala
 
 #define MAX_LINE_SIZE_IN_CSV 166       // Tamanho máximo de cada linha no CSV que contém informações do jogo
+
+// Estrutura que representa uma sala do modo multijogador
+typedef struct MultiplayerRoom
+{
+    int gameId;
+    char partialSolution[82];
+    int numberOfClients;
+    pthread_barrier_t barrier;
+}multiplayerRoom;
+
+multiplayerRoom room = {0};
 
 // -----------------------------------------
 // Lê os jogos do CSV e insere na hash table
@@ -148,6 +161,86 @@ void sendGameToClient(int socket, int clientId)
 
     printf("Thread produtora %lu finalizou a função responsável por enviar o jogo ao cliente %d\n" , pthread_self(), clientId);
     writeLogf("../Servidor/log_servidor.txt", "Thread produtora %lu finalizou a função responsável por enviar o jogo ao cliente %d", pthread_self(), clientId);
+}
+
+void handleSendGameLogic(int socket , int clientId)
+{
+    if(MULTIPLAYER_MODE == 0)
+    {
+        sendGameToClient(socket , clientId);
+        return;
+    }
+
+    pthread_mutex_lock(&mutexMultiplayerRoom);
+
+    if(room.numberOfClients == 0)
+    {
+        int count = HASH_COUNT(gamesHashTable);
+        int index = rand() % count;
+        int i = 0;
+        gameData *game;
+
+        for (game = gamesHashTable; game; game = game->hh.next)
+        {
+            if (i++ == index)
+            {
+                room.gameId = game->id;
+                memcpy(room.partialSolution, game->partialSolution, 81);
+                room.partialSolution[81] = '\0';
+                break;
+            }
+        }
+
+        pthread_barrier_init(&room.barrier, NULL, NUMBER_OF_PLAYERS_IN_A_ROOM);
+    }
+
+    room.numberOfClients++;
+    pthread_mutex_unlock(&mutexMultiplayerRoom);
+    pthread_barrier_wait(&room.barrier);
+
+    char messageToClient[BUFFER_SOCKET_MESSAGE_SIZE];
+    snprintf(messageToClient , sizeof(messageToClient) , "%d,%s\n" , room.gameId , room.partialSolution);
+
+    if(writeSocket(socket , messageToClient , strlen(messageToClient)) != strlen(messageToClient))
+    {   
+        room.numberOfClients--;
+        perror("Error : Server could not sent game to client or client disconnected from the socket");
+        epoll_ctl(epollFd , EPOLL_CTL_DEL , socket , NULL);
+        close(socket);
+        return;   
+    }
+
+    pthread_mutex_lock(&mutexMultiplayerRoom);
+    room.numberOfClients--;
+
+    if(room.numberOfClients == 0)
+        pthread_barrier_destroy(&room.barrier);
+
+    pthread_mutex_unlock(&mutexMultiplayerRoom);
+
+    // Atualizar estatísticas
+    writerLock();  // Lock de ESCRITA - acesso exclusivo
+    
+    globalStats.totalJogos++;
+    
+    // Encontrar ou criar cliente na hash table
+    ClientStatsServer *cliente;
+    HASH_FIND_INT(clientsStatsHash, &clientId, cliente);
+    if (!cliente) {
+        cliente = malloc(sizeof(ClientStatsServer));
+        cliente->idCliente = clientId;
+        cliente->acertos = 0;
+        cliente->erros = 0;
+        cliente->jogos = 0;
+        HASH_ADD_INT(clientsStatsHash, idCliente, cliente);
+        globalStats.totalClientes++;
+    }
+    cliente->jogos++;
+    
+    writerUnlock();  // Unlock de ESCRITA
+    
+    // Atualizar ficheiro de estatísticas
+    writeServerStats();
 }
 
 

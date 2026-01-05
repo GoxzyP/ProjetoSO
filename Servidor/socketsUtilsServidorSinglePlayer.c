@@ -76,11 +76,16 @@ void *ioHandler(void *arguments)
             }
 
             // Lê o código da mensagem do cliente
-            int codeOfClientMessage = atoi(messageFromClient); 
+            int codeOfClientMessage = atoi(messageFromClient);
+
+            clientRequest *request = malloc(sizeof(clientRequest));
+            request->socket = clientSocket;
 
             // Caso o código seja 1, envia um jogo ao cliente
             if(codeOfClientMessage == 1)
             {   
+                request->requestType = 0;
+
                 // Extrair clientId da mensagem (formato: "1,clientId")
                 int clientId = 0;
                 char *comma = strchr(messageFromClient, ',');
@@ -88,20 +93,27 @@ void *ioHandler(void *arguments)
                     clientId = atoi(comma + 1);
                 }
                 
+                request->data.completeSolution.clientId = clientId;
+
                 printf("Pedido de jogo recebido do cliente ID %d (socket %d)\n", clientId, clientSocket);
                 writeLogf("../Servidor/log_servidor.txt", "Pedido de jogo recebido do cliente ID %d (socket %d)", clientId, clientSocket);
-                
-                sendGameToClient(clientSocket, clientId);
+
+                pthread_mutex_lock(&mutexProducerConsumerQueueFifo);
+
+                while(isQueueFull(&priorityQueue))
+                        pthread_cond_wait(&producerQueueFifoConditionVariable, &mutexProducerConsumerQueueFifo);
+
+                addItemToQueue(&priorityQueue , request);
+
+                pthread_cond_signal(&consumerQueueFifoConditionVariable);
+                pthread_mutex_unlock(&mutexProducerConsumerQueueFifo);
+
                 printf("A thread produtora %lu acabou de processar o pedido de código 1 do cliente %d\n" , pthread_self(), clientId);
                 writeLogf("../Servidor/log_servidor.txt", "Thread produtora %lu acabou de processar o pedido de código 1 do cliente %d", pthread_self(), clientId);
-                continue;
             }
             // Caso o código seja 2, o cliente está a enviar uma tentativa de solução
             else if(codeOfClientMessage == 2)
             {
-                clientRequest *request = malloc(sizeof(clientRequest));
-                request->socket = clientSocket;
-
                 // Obtem o restante da mensagem após a primeira vírgula
                 char *restOfClientMessage = strchr(messageFromClient, ',');
                 if(!restOfClientMessage){ 
@@ -159,6 +171,8 @@ void *ioHandler(void *arguments)
                 pthread_cond_signal(&consumerQueueFifoConditionVariable);
                 pthread_mutex_unlock(&mutexProducerConsumerQueueFifo);
             }
+            else
+                free(request);
         }
     }    
 
@@ -190,8 +204,10 @@ void *consumer(void *arguments)
         pthread_cond_signal(&producerQueueFifoConditionVariable);
         pthread_mutex_unlock(&mutexProducerConsumerQueueFifo);
 
+        if(request->requestType == 0)
+            handleSendGameLogic(request->socket , request->data.completeSolution.clientId);
         // Processa pedido parcial
-        if(request->requestType == 1)
+        else if(request->requestType == 1)
         {
             verifyClientPartialSolution(
                 request->socket, 

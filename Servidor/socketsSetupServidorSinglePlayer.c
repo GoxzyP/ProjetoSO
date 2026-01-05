@@ -34,6 +34,7 @@ int main(void)
     // Inicializa mutexes e variáveis de condição
     pthread_mutex_init(&mutexProducerConsumerQueueFifo, NULL);
     pthread_mutex_init(&mutexGameData, NULL);
+    pthread_mutex_init(&mutexMultiplayerRoom, NULL);
     pthread_cond_init(&producerQueueFifoConditionVariable, NULL);
     pthread_cond_init(&consumerQueueFifoConditionVariable, NULL);
 

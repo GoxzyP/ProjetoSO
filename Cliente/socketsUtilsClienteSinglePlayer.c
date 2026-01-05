@@ -106,12 +106,14 @@ int loadSudoku(sudokuCell sudoku[9][9] , char partialSolution[82] , int emptyPos
         pthread_mutex_init(&cell->mutex , NULL);
         cell->state = cell->value == 0 ? IDLE : FINISHED;
         cell->producer = 0;
+        cell->score = 0;
 
         if(cell->value == 0)
         {
             emptyPositions[emptyPositionsCount][0] = cellLine;
             emptyPositions[emptyPositionsCount][1] = cellColumn;
             emptyPositionsCount++;
+            cell->score = 9;
         }
 
         //Incrementa a coluna
@@ -391,7 +393,11 @@ void *consumer(void *arguments)
             clientStats.totalErros++;
             clientStats.totalJogadas++;
             if(cell->state != FINISHED)
+            {
                 cell->state = IDLE;
+                cell->score--;
+
+            }
             
             // Atualizar estatísticas em tempo real
             writeClientStats(&clientStats, dataInArguments->logPath, dataInArguments->clientId);
@@ -492,6 +498,18 @@ void inicializeGame(int socket , int gameId , char partialSolution[82], int clie
 
     printf("Todas as threads foram eliminadas corretamente\n");
     writeLogf(logPath, "Todas as threads foram eliminadas corretamente\n");
+
+    int totalScore = 0;
+
+    for(int row = 0 ; row < 9 ; row++)
+    {
+        for(int column = 0 ; column < 9 ; column++)
+        {
+            totalScore += sudoku[row][column].score; 
+        }
+    }
+
+    printf("Score -> %d" , totalScore);
 
     //Liberta a memórias que foi usada para os argumentos dos produtores e consumidores
     free(producerNeededArguments);

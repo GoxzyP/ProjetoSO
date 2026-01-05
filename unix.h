@@ -8,6 +8,8 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 
-#define UNIXSTR_PATH "/tmp/s.unixstr2145823_test"
+#define UNIXSTR_PATH "/tmp/s.unixstr2115123_test"
+#define MULTIPLAYER_MODE 0
+#define NUMBER_OF_PLAYERS_IN_A_ROOM 2
 
 #endif

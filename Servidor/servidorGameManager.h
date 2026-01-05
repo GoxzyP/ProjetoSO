@@ -24,11 +24,12 @@ typedef struct GameData
 extern gameData *gamesHashTable;
 // Declaração externa do mutex para proteger acesso à hash table
 extern pthread_mutex_t mutexGameData;
+extern pthread_mutex_t mutexMultiplayerRoom;
 
 // Função que lê os jogos do CSV e popula a hash table
 void readGamesFromCSV();
 // Função que envia um jogo aleatório para o cliente via socket
-void sendGameToClient(int socket, int clientId);
+void handleSendGameLogic(int socket, int clientId);
 // Função que verifica a solução parcial do cliente
 void verifyClientPartialSolution(int socket, int gameId, int row, int col, int value, int clientId);
 // Função que verifica a solução completa do cliente

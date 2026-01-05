@@ -39,6 +39,7 @@ typedef struct SudokuCell
 {
     int value;
     pthread_t producer;
+    int score;
     pthread_mutex_t mutex;
     enum cellState state;
 }sudokuCell;

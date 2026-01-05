@@ -38,7 +38,7 @@ int main(void)
     char logPath[256];
     snprintf(logPath, sizeof(logPath), "../Cliente/log_cliente%d.txt", clientId);
 
-    int partialSolutionMode = rand() % 2;
+    int partialSolutionMode = (MULTIPLAYER_MODE == 1) ? 1 : rand() % 2;
 
     while(1) 
     {
@@ -64,8 +64,6 @@ int main(void)
                clientId, clientStats.totalJogos, clientStats.totalAcertos, clientStats.totalErros);
         writeLogf(logPath, "Estatísticas atualizadas: Cliente %d, Jogos: %d, Acertos: %d, Erros: %d", 
                clientId, clientStats.totalJogos, clientStats.totalAcertos, clientStats.totalErros);
-        
-        break; // Sair após completar um jogo
     }
     
     close(serverSocket);
